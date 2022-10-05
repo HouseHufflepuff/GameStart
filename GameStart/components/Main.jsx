@@ -14,7 +14,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 // Screens
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
-import MapScreen3 from './MapScreen3';
+import MapScreen from './Map/MapScreen';
 import ProfileScreen from './ProfileScreen';
 import TradeScreen from './TradeScreen';
 
@@ -37,8 +37,12 @@ export function useGameStart() {
 }
 
 function Main({ navigation }) {
+  const [logoImg, setlogoImg] = useState();
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+
+  const staticImage = require('../assets/logo.png');
+  const staticImageW = require('../assets/logo-white.png');
 
   return (
     <GameStartContext.Provider
@@ -52,10 +56,10 @@ function Main({ navigation }) {
           {
             headerShown: false,
             tabBarShowLabel: false,
+            keyboardHidesTabBar: true,
             tabBarStyle: [
               {
                 position: 'absolute',
-                elevation: 1,
                 backgroundColor: '#181818',
                 height: 65,
               }
@@ -72,7 +76,7 @@ function Main({ navigation }) {
                   top: 5,
                   width: 30,
                   height: 30,
-                  color: focused ? 'white' : '#748c94'
+                  color: focused ? '#90E0EF' : '#748c94'
                 }} />
               </View>
             )
@@ -88,7 +92,7 @@ function Main({ navigation }) {
                   top: 5,
                   width: 30,
                   height: 30,
-                  color: focused ? 'white' : '#748c94'
+                  color: focused ? '#90E0EF' : '#748c94'
                 }} />
               </View>
             )
@@ -99,33 +103,33 @@ function Main({ navigation }) {
 
 
 
-        <Tab.Screen name={homeName}
+        <Tab.Screen name={homeName} component={HomeScreen}
           options={{
             tabBarIcon: ({ focused }) => (
+
               <View style={{
                 alignItems: 'center',
                 justifyContent: 'center',
 
               }}>
                 <Image
-                  source={require('../assets/logo.png')}
+                  source={focused ? staticImage : staticImageW}
                   resizeMode='contain'
                   style={{
-                    bottom: 15,
-                    width: 150,
-                    heigth: 140,
-                    color: focused ? 'white' : '#748c94',
+                    width: 100,
+                    heigth: 100,
+                    color: focused ? '#90E0EF' : '#748c94',
                   }}
                 />
               </View>
             )
           }}
         >
-          {(props) => <HomeScreen  {...props} location={location} setLocation={setLocation} />}
+
         </Tab.Screen>
 
 
-        <Tab.Screen name={mapName} component={MapScreen3}
+        <Tab.Screen name={mapName} component={MapScreen}
           options={{
             tabBarIcon: ({ focused }) => (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -133,7 +137,7 @@ function Main({ navigation }) {
                   top: 5,
                   width: 30,
                   height: 30,
-                  color: focused ? 'white' : '#748c94'
+                  color: focused ? '#90E0EF' : '#748c94'
                 }} />
               </View>
             )
@@ -148,7 +152,7 @@ function Main({ navigation }) {
                   top: 5,
                   width: 30,
                   height: 30,
-                  color: focused ? 'white' : '#748c94'
+                  color: focused ? '#90E0EF' : '#748c94'
                 }} />
               </View>
             )
