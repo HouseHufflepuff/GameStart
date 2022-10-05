@@ -15,9 +15,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use('/api', router);
 
-
-router.use()
-
 app.listen(8000, () => {
   console.log('server started on port 8000')
 });
