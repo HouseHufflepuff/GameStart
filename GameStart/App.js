@@ -1,9 +1,21 @@
+<<<<<<< HEAD
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import CreateAccount from './CreateAccount.js';
+=======
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Main from './components/Main.jsx';
 
-export default function App() {
+function App() {
+
+  const Stack = createNativeStackNavigator();
+>>>>>>> 740d3eba25fe2541ce94445fd57770987618faa7
+
   return (
+<<<<<<< HEAD
     <View style={styles.container}>
       <CreateAccount />
       <Text>Open up App.js to start working on your app!</Text>
@@ -20,3 +32,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+=======
+
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen options={{ headerShown: false }} name="Login" component={Main} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
+>>>>>>> 740d3eba25fe2541ce94445fd57770987618faa7
