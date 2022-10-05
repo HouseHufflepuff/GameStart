@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// import LinearGradient from 'react-native-linear-gradient';
-// import { Card, Icon } from "@rneui/themed";
 import { StatusBar } from 'expo-status-bar';
-import { FlatList, Image, Pressable, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import axios from 'axios';
 
 export default function Search() {
@@ -28,7 +26,7 @@ export default function Search() {
       })
       .then((response) => {
         setGames(response.data.results)
-        console.log('success!')
+        // console.log('success!')
       })
       .catch((err) => console.log(err))
     } else {
@@ -43,53 +41,56 @@ export default function Search() {
 
   const getPlatforms = (platforms) => {
     if(platforms) {
-      return platforms.map(p => {if(p.platform.name in consoles) {
-        return (<Image style={styles.consoleIcon} source={{uri: consoles[p.platform.name]}}/>)
+      return platforms.map((p, i) => {if(p.platform.name in consoles) {
+        return (<Image key={i} style={styles.consoleIcon} source={{uri: consoles[p.platform.name]}}/>)
       }})
     }
     return ''
   }
 
-  // console.log(games[0])
   return (
-    <SafeAreaView style={styles.container}>
-      <TextInput
-        style={styles.search}
-        placeholder='Search games'
-        onChangeText={newText => setText(newText)}
-        defaultValue={text}
-        clearButtonMode='while-editing'
-      ></TextInput>
-      { text.length > 0 &&
-        <FlatList
-          data={games}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) =>
-            <View style={styles.item}>
-              <Image style={styles.image} source={{uri: item.background_image}}/>
-              <View style={styles.description}>
-                <Text style={styles.title}>{item.name}</Text>
-                <Text>{`Release year: ${getYear(item.released)}`}</Text>
-                <View style={styles.consoles}>{getPlatforms(item.parent_platforms)}</View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+
+      <SafeAreaView style={styles.container}>
+        <TextInput
+          style={styles.search}
+          placeholder='Search games'
+          onChangeText={newText => setText(newText)}
+          defaultValue={text}
+          clearButtonMode='while-editing'
+        ></TextInput>
+        { text.length > 0 &&
+          <FlatList
+            data={games}
+            keyExtractor={(item) => item.id}
+            style={styles.flatlist}
+            renderItem={({ item }) =>
+            <TouchableOpacity>
+              <View style={styles.item}>
+                <Image style={styles.image} source={{uri: item.background_image}}/>
+                <View style={styles.description}>
+                  <Text style={styles.title}>{item.name}</Text>
+                  <Text>{`Release year: ${getYear(item.released)}`}</Text>
+                  <View style={styles.consoles}>{getPlatforms(item.parent_platforms)}</View>
+                </View>
               </View>
-            </View>
-          }
-        />
-      }
-      <StatusBar style="auto" />
-    </SafeAreaView>
+            </TouchableOpacity>
+            }
+          />
+        }
+        <StatusBar style="auto" />
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'white',
     alignItems: 'center',
-    justifyContent: 'start',
+    // backgroundColor: 'blue',
   },
   search: {
-    minHeight: 50,
+    height: 60,
     width: '90%',
     fontSize: 30,
     borderWidth: '1px',
@@ -99,23 +100,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20
   },
+  flatlist: {
+
+  },
   item: {
-    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-
-    // borderWidth: 1,
-    // borderColor: 'black',
-    // padding: 10,
-
     backgroundColor: '#90E0EF',
     borderRadius: 10,
     padding: 10,
     marginVertical: 2,
     marginHorizontal: 10,
-  },
-  top: {
-    // flexDirection: 'row'
   },
   image: {
     height: 100,
@@ -125,8 +120,6 @@ const styles = StyleSheet.create({
   },
   description: {
     width: '65%',
-    // borderColor: 'red',
-    // borderWidth: 1
   },
   title: {
     fontSize: 20,
