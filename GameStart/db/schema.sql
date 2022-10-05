@@ -1,43 +1,43 @@
 \c postgres;
 
+DROP DATABASE IF EXISTS GameStart;
+CREATE DATABASE GameStart;
 
-DROP DATABASE IF EXISTS gamestart;
-CREATE DATABASE gamestart;
-
-\c gamestart;
+\c GameStart;
 
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY NOT NULL,
-  first_name varchar(50) NOT NULL,
-  last_name varchar(50) NOT NULL,
-  username varchar(14) NOT NULL,
+  id PRIMARY KEY INT NOT NULL AUTO INT,
+  username varchar (14) NOT NULL UNIQUE,
   password varchar(14) NOT NULL,
-  games TEXT[],
-  consoles TEXT[],
-  address TEXT,
-  created_at TIMESTAMP DEFAULT NOW()
-);
+  email varchar(40) NOT NULL UNIQUE,
+  address varchar(100),
+  games TEXT[]
+)
 
-CREATE type current_status as enum ('pending', 'accepted', 'rejected');
-
+CREATE TYPE trade_status AS ENUM ('pending', 'accepted', 'rejected')
 CREATE TABLE trades (
-  id SERIAL PRIMARY KEY NOT NULL,
-  gameRecieve TEXT[],
-  gameSend TEXT[],
-  userRecieve varchar(14) NOT NULL,
-  userSend varchar(14),
-  trade_status current_status
-);
+  id PRIMARY KEY INT NOT NULL AUTO INT,
+  games_sent TEXT[],
+  games_recieved TEXT[],
+  sender varchar(14) NOT NULL,
+  receiever varchar(14) NOT NULL,
+  sent_date TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  status trade_status,
+  meet_up TEXT,
+  conv_id INT
+)
 
 CREATE TABLE messages (
-  id SERIAL PRIMARY KEY NOT NULL,
-  body TEXT,
-  username varchar(14),
-  conversationID INT,
-  created_at TIMESTAMP DEFAULT NOW()
-);
+  id PRIMARY KEY INT NOT NULL AUTO INT,
+  conversationID INT NOT NULL,
+  body TEXT NOT NULL,
+  user varchar(14) NOT NULL,
+  time_sent TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+)
 
 CREATE TABLE conversations (
-  id SERIAL PRIMARY KEY NOT NULL,
-  messagesID INT[]
-);
+  id PRIMARY KEY NOT NULL AUTO INT,
+  messages INT[]
+)
+
+
