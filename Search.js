@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
+// import LinearGradient from 'react-native-linear-gradient';
+// import { Card, Icon } from "@rneui/themed";
 import { StatusBar } from 'expo-status-bar';
-import { FlatList, Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Dimensions, FlatList, Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import axios from 'axios';
+
+let height = Dimensions.get('window').height; //full height
+
 
 export default function Search() {
   const [text, setText] = useState('');
   const [games, setGames] = useState([]);
+  const [selectedGameId, setSelectedGameId] = useState(null);
 
   const consoles = {
     'PC': 'https://cdn.freebiesupply.com/logos/large/2x/microsoft-windows-22-logo-png-transparent.png',
@@ -33,6 +39,10 @@ export default function Search() {
       setGames([])
     }
   }, [text])
+
+  useEffect(() => {
+    console.log(selectedGameId)
+  }, [selectedGameId])
 
   const getYear = (date) => {
     const newDate = new Date(date)
@@ -65,7 +75,7 @@ export default function Search() {
             keyExtractor={(item) => item.id}
             style={styles.flatlist}
             renderItem={({ item }) =>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => setSelectedGameId(item.id)}>
               <View style={styles.item}>
                 <Image style={styles.image} source={{uri: item.background_image}}/>
                 <View style={styles.description}>
