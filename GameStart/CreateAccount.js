@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground} from 'react-native';
 import axios from 'axios';
 
 export default function Register () {
@@ -48,7 +48,7 @@ export default function Register () {
 
     setLoading(true);
     //firebase auth (?)
-    axios.post('/api/users/register', data)
+    axios.post('http://localhost:8000/api/register', data)
     .then(() => {
       setTimeOut(() => {
         setLoading(false);
@@ -74,17 +74,164 @@ export default function Register () {
 
   return (
 
-    <View>
-      <TextInput id='first_name' placeholder='First Name' onChangeText={(name) => setFirstName(name)} />
-      <TextInput id='last_name' placeholder='Last Name' onChangeText={(lastName) => setLastName(lastName)} />
-      <TextInput id='username' placeholder='Username' onChangeText={(username) => setUsername(username)} />
-      <TextInput id='password' placeholder='password' onChangeText={(password) => setPassword(password)} />
-      <TextInput id='email' placeholder='email' onChangeText={(email) => setEmail(email)} />
-      <Text> By registering, you agree to GameStart's Terms of Service. </Text>
+    <View style={styles.container}>
+      <ImageBackground
+        style={styles.logo}
+        source={require('./icons/gamestart.png')}
+      />
+      <Text style={styles.statement}>
+        Join a community of gamers and streamers trading games to give life to second-hand games. Start trading games today!
+      </Text>
+      <View style={styles.guideContainer}>
+        <Text style={styles.firstNameGuide}>
+          First Name
+        </Text>
+        <Text style={styles.nameGuide}>
+          Last Name
+        </Text>
+      </View>
+      <View style={styles.guideContainer}>
+      <TextInput
+        style={styles.nameForms}
+        id='first_name'
+        placeholder='First'
+       placeholderTextColor="gray"
+        onChangeText={(name) => setFirstName(name)}
+      />
+      <TextInput
+        style={styles.nameForms}
+        id='last_name'
+        placeholder='Last'
+       placeholderTextColor="gray"
+        onChangeText={(lastName) => setLastName(lastName)}
+      />
+      </View>
+      <Text style={styles.formGuide}> Username </Text>
+      <TextInput
+        style={styles.forms}
+        id='username'
+        placeholder='Username'
+       placeholderTextColor="gray"
+        onChangeText={(username) => setUsername(username)}
+      />
+      <Text style={styles.formGuide}> Password </Text>
+      <TextInput
+        style={styles.forms}
+        id='password'
+        secureTextEntry="true"
+        placeholder='Password'
+       placeholderTextColor="gray"
+        onChangeText={(password) => setPassword(password)}
+      />
+      <Text style={styles.formGuide}> Email </Text>
+      <TextInput
+        style={styles.forms}
+        id='email'
+        placeholder='Email'
+       placeholderTextColor="gray"
+        onChangeText={(email) => setEmail(email)}
+      />
+      <Text style={styles.terms}>
+        By registering, you agree to GameStart's Terms of Service.
+      </Text>
       {loading
-      ? <Button title="Creating account..." />
-      : <Button title="Register" onPress={handleRegister} />
+      ? <Button
+      style={styles.registerBtn} title="Creating account..." />
+      : <Button
+      style={styles.registerBtn}
+      color='white' title="Register" onPress={handleRegister} />
       }
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    width: 400,
+    height: 400,
+    flexShrink: 1,
+    backgroundColor: 'black'
+  },
+  firstNameGuide: {
+    color: 'white',
+    alignSelf: 'flex-start',
+    flexGrow: .25
+  },
+  nameGuide: {
+    color: 'white',
+    alignSelf: 'flex-start',
+    marginLeft: 5,
+    flexGrow: .25
+  },
+  formGuide: {
+    color: 'white',
+    alignSelf: 'flex-start',
+    marginLeft: 70
+  },
+  statement: {
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    height: 120,
+    width: 380,
+    marginLeft: 20,
+    marginRight: 20,
+    color: 'white',
+    fontSize: 18
+  },
+  nameForms: {
+    marginBottom: 30,
+    fontSize: 18,
+    borderWidth: 1,
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius:10,
+    width: 150,
+    paddingLeft: 15,
+
+  },
+  forms: {
+    marginBottom: 30,
+    fontSize: 18,
+    borderWidth: 1,
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius:10,
+    width: 300,
+    paddingLeft: 15
+  },
+  guideContainer: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  terms: {
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    flexDirection: 'column',
+    height: 50,
+    width: 200,
+    color: 'white'
+  },
+  nameContainer: {
+    flexDirection: 'row',
+    width: 150
+  },
+  registerBtn: {
+    backgroundColor: '#pink',
+    borderRadius: 10,
+    borderColor: '#0077B6',
+    borderWidth: 1,
+    fontSize: 30
+  },
+  logo: {
+    marginTop: 15,
+    height: 250,
+    width: 400,
+    marginBottom: 10
+  }
+})

@@ -12,6 +12,8 @@ CREATE TABLE users (
   last_name varchar(50) NOT NULL,
   username varchar(14) NOT NULL,
   password varchar(14) NOT NULL,
+  email_address varchar(50) NOT NULL,
+  profile_picture TEXT,
   games TEXT[],
   consoles TEXT[],
   address TEXT,

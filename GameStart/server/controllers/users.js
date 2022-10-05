@@ -1,5 +1,3 @@
-
-
 module.exports = {
   insertUser: (req, res) => {
     console.log('hitting here')
