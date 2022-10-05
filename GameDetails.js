@@ -76,13 +76,18 @@ export default function GameDetails( { gameId } ) {
 
   return (
     <ScrollView>
-      <Image style={styles.image} source={{uri: game.background_image}}/>
-      <Text>{game.name}</Text>
-      <Text>{`Release year: ${getYear(game.released)}`}</Text>
-      <View style={styles.consoles}>{getPlatformIcons(game.parent_platforms)}</View>
-      <Text>{`Metacritic rating: ${getRating(game.metacritic)}`}</Text>
-      <Text>{`Genres: ${getGenres(game.genres)}`}</Text>
-      <Text>{`Platforms: ${getPlatforms(game.platforms)}`}</Text>
+      <View style={{position: 'relative'}}>
+        <Image style={styles.image} source={{uri: game.background_image}}/>
+        <Text style={styles.title}>{game.name}</Text>
+      </View>
+      <View style={styles.details}>
+        <Text style={{fontWeight: 'bold', marginBottom: 5,}}>Game Details:</Text>
+        <Text>{`Release year: ${getYear(game.released)}`}</Text>
+        <View style={styles.consoles}>{getPlatformIcons(game.parent_platforms)}</View>
+        <Text>{`Metacritic rating: ${getRating(game.metacritic)}`}</Text>
+        <Text>{`Genres: ${getGenres(game.genres)}`}</Text>
+        <Text>{`Platforms: ${getPlatforms(game.platforms)}`}</Text>
+      </View>
     </ScrollView>
 
   )
@@ -99,6 +104,22 @@ const styles = StyleSheet.create({
   image: {
     width: width,
     height: width,
+  },
+  title: {
+    position: 'absolute',
+    bottom: 40,
+    right: 0,
+    fontSize: 20,
+    padding: 10,
+    paddingRight: 20,
+    paddingLeft: 20,
+    color: '#90E0EF',
+    fontWeight: 'bold',
+    backgroundColor: '#03045E'
+  },
+  details: {
+    flex: 1,
+    padding: 30,
   },
   consoles: {
     flex: 1,

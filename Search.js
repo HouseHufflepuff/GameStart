@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 // import LinearGradient from 'react-native-linear-gradient';
 // import { Card, Icon } from "@rneui/themed";
 import { StatusBar } from 'expo-status-bar';
-import { Dimensions, FlatList, Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { FlatList, Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import axios from 'axios';
-
-let height = Dimensions.get('window').height; //full height
 
 
 export default function Search() {
@@ -32,17 +30,12 @@ export default function Search() {
       })
       .then((response) => {
         setGames(response.data.results)
-        // console.log('success!')
       })
       .catch((err) => console.log(err))
     } else {
       setGames([])
     }
   }, [text])
-
-  useEffect(() => {
-    console.log(selectedGameId)
-  }, [selectedGameId])
 
   const getYear = (date) => {
     const newDate = new Date(date)
@@ -73,7 +66,6 @@ export default function Search() {
           <FlatList
             data={games}
             keyExtractor={(item) => item.id}
-            style={styles.flatlist}
             renderItem={({ item }) =>
             <TouchableOpacity onPress={() => setSelectedGameId(item.id)}>
               <View style={styles.item}>
@@ -97,7 +89,6 @@ export default function Search() {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    // backgroundColor: 'blue',
   },
   search: {
     height: 60,
@@ -110,13 +101,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20
   },
-  flatlist: {
-
-  },
   item: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    backgroundColor: '#90E0EF',
+    borderColor: 'black',
+    borderWidth: 1,
     borderRadius: 10,
     padding: 10,
     marginVertical: 2,
