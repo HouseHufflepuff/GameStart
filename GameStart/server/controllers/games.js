@@ -8,7 +8,7 @@ module.exports = {
     if (req.query.hasOwnProperty('games')) {
       axios.get(`${process.env.API_BASE_URL}/games?key=${process.env.API_KEY}&search=${req.query.games}`)
       .then((games) => {
-        res.send(games);
+        res.send(games.data.results);
       })
       .catch((err) => {
         console.log('no game with title', err);
@@ -16,7 +16,7 @@ module.exports = {
     } else if (req.query.hasOwnProperty('genres')) {
       axios.get(`${process.env.API_BASE_URL}/games?key=${process.env.API_KEY}&genres=${req.query.genres}`)
       .then((games) => {
-        res.send(games);
+        res.send(games.data.results);
       })
       .catch((err) => {
         console.log('no game with genre', err)
@@ -24,11 +24,15 @@ module.exports = {
     } else {
       axios.get(`${process.env.API_BASE_URL}/games?key=${process.env.API_KEY}`)
       .then((games) => {
-        res.send(games);
+        res.send(games.data.results);
       })
       .catch((err) => {
         console.log(err)
       })
     }
+  },
+
+  getTradedGames: (req, res) => {
+
   }
 }

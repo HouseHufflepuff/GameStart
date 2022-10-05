@@ -8,17 +8,31 @@ export default function RegisterGames () {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/games/gamelist')
+    axios.get('http:192.168.0.207:8000/api/games/gamelist')
     .then((games) => {
-      setInitialBatch(games.results)
+      console.log(games, 'this is the games');
+      console.log('help')
+      setInitialBatch(games)
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err.response)
     })
   })
 
+  console.log(initialBatch)
   const handleSearch = (query) => {
-    setGamesList(initialBatch.filter(game => game.name.includes(query)))
+    axios.get('http://192.168.0.207:8000/api/games/gamelist', {
+      params: {
+        search: query
+      }
+    })
+      .then((games) => {
+        setGamesList(games.results)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    // setGamesList(initialBatch.filter(game => game.name.includes(query)))
   }
 
   const Item = ({item, onPress, textColor, backgroundColor}) => (
@@ -30,6 +44,7 @@ export default function RegisterGames () {
     </TouchableOpacity>
   );
 
+  console.log(gamesList)
   const renderItem = ({item}) => {
 
     const backgroundColor = '#03045E'
@@ -55,6 +70,7 @@ export default function RegisterGames () {
   //flatlist here
 
   return(
+
     <View style={styles.container}>
       <View>
         <Text style={styles.text}> Search for a game! </Text>
@@ -84,13 +100,14 @@ const styles = StyleSheet.create({
     flexWrap: 'no-wrap',
     width: '100%',
     height: '100%',
-    flexShrink: 1
+    flexShrink: 1,
+    backgroundColor: 'black'
   },
   header: {
     width: '100%',
     alignItems: 'center',
     marginTop: 20
-  }
+  },
   text: {
     width: '25%',
     height: '20%',

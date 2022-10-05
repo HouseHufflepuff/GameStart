@@ -152,8 +152,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'column',
     flexWrap: 'wrap',
-    width: 400,
-    height: 400,
+    width: '100%',
+    height: '100%',
     flexShrink: 1,
     backgroundColor: 'black'
   },

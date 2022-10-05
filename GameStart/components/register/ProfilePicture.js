@@ -52,16 +52,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    borderWidth: 5,
-    borderColor: 'pink'
+    backgroundColor: 'black'
 
   },
   imageContainer: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    borderWidth: 5,
-    borderColor: 'red',
     width: '100%',
     height: '80%',
     marginBottom: 10
@@ -76,7 +73,7 @@ const styles = StyleSheet.create({
   },
   cards: {
     borderWidth: 5,
-    borderColor: 'green',
+    borderColor: '#03045E',
     width: '28%',
     height: '22%',
     margin: 10

@@ -14,7 +14,7 @@ export default function PictureCard ({img, selectImage, currentImage}) {
 
   return (
     <TouchableOpacity style={styles.cards} onPress={() => selectImage(img.url, img.id)}>
-      <Image style={{width: '100%', height: '100%'}} source={{uri: img.url}}/>
+      <Image style={{width: '100%', height: '100%', backgroundColor: 'white'}} source={{uri: img.url}}/>
     </TouchableOpacity>
   )
 }
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   cards: {
     borderWidth: 5,
-    borderColor: 'green',
+    borderColor: '#00B4D8',
     width: '28%',
     height: '22%',
     margin: 10

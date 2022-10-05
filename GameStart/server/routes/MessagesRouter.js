@@ -1,3 +1,3 @@
 const Router = require('express').Router();
 
-module.exports = MessagesRouter;
+module.exports = Router;

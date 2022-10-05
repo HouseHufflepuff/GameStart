@@ -4,4 +4,4 @@ const {insertUser} = require('../controllers/users.js');
 Router.use('/register', insertUser);
 
 
-module.exports = UsersRouter;
+module.exports = Router;
