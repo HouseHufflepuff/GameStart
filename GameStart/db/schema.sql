@@ -12,21 +12,41 @@ CREATE TABLE users (
   last_name varchar(50) NOT NULL,
   username varchar(14) NOT NULL,
   password varchar(14) NOT NULL,
-  games TEXT[],
-  consoles TEXT[],
   address TEXT,
   created_at TIMESTAMP DEFAULT NOW()
 );
 
-CREATE type current_status as enum ('pending', 'accepted', 'rejected');
+CREATE TABLE games (
+  id SERIAL PRIMARY KEY NOT NULL,
+  ownerId INT NOT NULL,
+  gameId INT NOT NULL,
+  gameTitle VARCHAR(50),
+  photoURL VARCHAR(50),
+  gameCondition VARCHAR(50),
+  caseStatus VARCHAR(50),
+  listing VARCHAR(10)
+);
+
+CREATE TABLE consoles (
+  id SERIAL PRIMARY KEY NOT NULL,
+  ownerId INT NOT NULL references users(id),
+  console VARCHAR(50)
+);
+
+CREATE TABLE favorites (
+  id SERIAL PRIMARY KEY NOT NULL,
+  userId INT NOT NULL references users(id),
+  gameId INT NOT NULL references games(id),
+)
 
 CREATE TABLE trades (
   id SERIAL PRIMARY KEY NOT NULL,
-  gameRecieve TEXT[],
-  gameSend TEXT[],
-  userRecieve varchar(14) NOT NULL,
-  userSend varchar(14),
-  trade_status current_status
+  partyId INT NOT NULL,
+  partyGameId INT NOT NULL,
+  counterPartyId INT NOT NULL,
+  counterPartyGameId INT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  trade_status VARCHAR(15)
 );
 
 CREATE TABLE messages (
