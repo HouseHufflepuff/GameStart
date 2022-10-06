@@ -27,7 +27,7 @@ const getPlatformIcons = (platforms) => {
   return ''
 }
 
-export default function GameDetails( { gameId, callback } ) {
+export default function GameDetails( { gameId, callback, setView } ) {
   const [loading, setLoading] = useState(true)
   const [game, setGame] = useState({})
   const [image, setImage] = useState(true)
@@ -70,6 +70,11 @@ export default function GameDetails( { gameId, callback } ) {
                 uri: image ? game.background_image : game.background_image_additional
               }}/>
           </Pressable>
+          <TouchableOpacity onPress={() => setView('searchBar')}>
+            <View style={styles.button}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', fontColor: '#03045E'}}>Back to Search</Text>
+            </View>
+          </TouchableOpacity>
           {showTitle &&
             <View style={styles.title}>
               <Text style={styles.titleText}>{game.name}</Text>
@@ -95,7 +100,7 @@ export default function GameDetails( { gameId, callback } ) {
           <Text>{`Metacritic rating: ${game.metacritic ? game.metacritic+'%' : 'N/A'}`}</Text>
           <Text>{`Genres: ${game.genres ? game.genres.map(g => g.name).join(', ') : 'N/A'}`}</Text>
           <Text>{`Platforms: ${game.platforms ? game.platforms.map(p => p.platform.name).join(', ') : 'N/A'}`}</Text>
-          <Text>{`Publisher: ${game.publishers[0].name}`}</Text>
+          <Text>{`Publisher: ${game.publishers[0] ? game.publishers[0].name : 'N/A'}`}</Text>
           <Text>{`ESRB Rating: ${game.esrb_rating ? game.esrb_rating.name : 'N/A'}`}</Text>
 
         </View>
@@ -123,7 +128,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     // maxWidth: '90%',
     alignSelf: 'flex-start',
-    bottom: 20,
+    bottom: 80,
     right: 0,
     padding: 10,
     paddingRight: 20,
@@ -152,7 +157,7 @@ const styles = StyleSheet.create({
     // height: 40,
     // width: 100
     padding: 10,
-    paddingHorizontal: 50,
+    // paddingHorizontal: 50,
     backgroundColor: '#90E0EF',
     fontSize: 40,
     borderRadius: 10,

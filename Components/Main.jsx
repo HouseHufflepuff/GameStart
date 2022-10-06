@@ -14,7 +14,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 // Screens
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
-import Search from './Search/Search';
+import Search from './Search/Search.js';
 import MapScreen from './Map/MapScreen';
 import ProfileScreen from './ProfileScreen';
 import TradeScreen from './TradeScreen';
