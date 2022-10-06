@@ -6,7 +6,7 @@ const messagesRouter = require('./MessagesRouter.js');
 // const {insertUser} = require('../controllers/users.js');
 
 // Router.use('/users', UsersRouter);
-// Router.use('/games'. GamesRouter);
+Router.use('/games'. gamesRouter);
 // Router.use('/trades', TradesRouter);
 Router.use('/messages', messagesRouter);
 
