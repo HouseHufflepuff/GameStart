@@ -1,5 +1,5 @@
 require('dotenv').config();
-const {} = require('../models');
+const {} = require('../models/games');
 const axios = require('axios');
 
 module.exports = {

@@ -1,7 +1,7 @@
 const Router = require('express').Router();
 const {insertUser} = require('../controllers/users.js');
 
-Router.use('/register', insertUser);
+Router.use('/register', ()=>{});
 
 
-module.exports = UsersRouter;
+
