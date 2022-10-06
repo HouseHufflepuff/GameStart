@@ -11,7 +11,7 @@ import GameDetails from './GameDetails.js';
 import Search from './Search.js'
 
 function App() {
-  const[gameId, setGameId] = useState('325094')
+  const[gameId, setGameId] = useState('635220')
 
   // const Stack = createNativeStackNavigator();
 
