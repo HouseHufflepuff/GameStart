@@ -34,9 +34,6 @@ function HomeScreen({ navigation }) {
       return a.miles - b.miles;
     });
     setCloseGames(sortGames);
-
-    console.log(sorted[0].tradingCount);
-    console.log(sortGames[0].tradingCount);
   }, [])
 
 

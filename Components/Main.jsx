@@ -14,6 +14,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 // Screens
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
+import Search from './Search/Search';
 import MapScreen from './Map/MapScreen';
 import ProfileScreen from './ProfileScreen';
 import TradeScreen from './TradeScreen';
@@ -68,7 +69,7 @@ function Main({ navigation }) {
         }>
 
 
-        <Tab.Screen name={detailsName} component={DetailsScreen}
+        <Tab.Screen name={detailsName} component={Search}
           options={{
             tabBarIcon: ({ focused }) => (
               <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
