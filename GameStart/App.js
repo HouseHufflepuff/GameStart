@@ -13,7 +13,7 @@ function App() {
   // const Stack = createNativeStackNavigator();
 
   return (
-    <RegisterGames/>
+    <ProfilePicture/>
 
   //   <NavigationContainer>
   //     <Stack.Navigator screenOptions={{ headerShown: false }}>
