@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback} from 'react-native';
 import axios from 'axios';
 
 export default function Register () {
@@ -44,19 +44,19 @@ export default function Register () {
       email_address: email
     }
 
-    console.log(data);
-
     setLoading(true);
     //firebase auth (?)
-    axios.post('http://localhost:8000/api/register', data)
+    axios.post('http://192.168.0.147:8000/api/users/register', data)
     .then(() => {
+      console.log('hitting here')
       setTimeOut(() => {
         setLoading(false);
+        //nav to the console selections
       }, 500)
     })
     .catch((err) => {
       alert('error registering')
-      console.log(err)
+      console.log(err.response)
       setLoading(false);
     })
     //send form data to database/firebase to create account
@@ -73,8 +73,9 @@ export default function Register () {
 
 
   return (
-
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{alignItems: 'center'}}>
       <ImageBackground
         style={styles.logo}
         source={require('./icons/gamestart.png')}
@@ -90,47 +91,47 @@ export default function Register () {
           Last Name
         </Text>
       </View>
-      <View style={styles.guideContainer}>
-      <TextInput
-        style={styles.nameForms}
-        id='first_name'
-        placeholder='First'
-       placeholderTextColor="gray"
-        onChangeText={(name) => setFirstName(name)}
-      />
-      <TextInput
-        style={styles.nameForms}
-        id='last_name'
-        placeholder='Last'
-       placeholderTextColor="gray"
-        onChangeText={(lastName) => setLastName(lastName)}
-      />
-      </View>
-      <Text style={styles.formGuide}> Username </Text>
-      <TextInput
-        style={styles.forms}
-        id='username'
-        placeholder='Username'
-       placeholderTextColor="gray"
-        onChangeText={(username) => setUsername(username)}
-      />
-      <Text style={styles.formGuide}> Password </Text>
-      <TextInput
-        style={styles.forms}
-        id='password'
-        secureTextEntry="true"
-        placeholder='Password'
-       placeholderTextColor="gray"
-        onChangeText={(password) => setPassword(password)}
-      />
-      <Text style={styles.formGuide}> Email </Text>
-      <TextInput
-        style={styles.forms}
-        id='email'
-        placeholder='Email'
-       placeholderTextColor="gray"
-        onChangeText={(email) => setEmail(email)}
-      />
+        <View style={styles.guideContainer}>
+        <TextInput
+          style={styles.nameForms}
+          id='first_name'
+          placeholder='First'
+          placeholderTextColor="gray"
+          onChangeText={(name) => setFirstName(name)}
+        />
+        <TextInput
+          style={styles.nameForms}
+          id='last_name'
+          placeholder='Last'
+        placeholderTextColor="gray"
+          onChangeText={(lastName) => setLastName(lastName)}
+        />
+        </View>
+        <Text style={styles.formGuide}> Username </Text>
+        <TextInput
+          style={styles.forms}
+          id='username'
+          placeholder='Username'
+        placeholderTextColor="gray"
+          onChangeText={(username) => setUsername(username)}
+        />
+        <Text style={styles.formGuide}> Password </Text>
+        <TextInput
+          style={styles.forms}
+          id='password'
+          secureTextEntry="true"
+          placeholder='Password'
+        placeholderTextColor="gray"
+          onChangeText={(password) => setPassword(password)}
+        />
+        <Text style={styles.formGuide}> Email </Text>
+        <TextInput
+          style={styles.forms}
+          id='email'
+          placeholder='Email'
+        placeholderTextColor="gray"
+          onChangeText={(email) => setEmail(email)}
+        />
       <Text style={styles.terms}>
         By registering, you agree to GameStart's Terms of Service.
       </Text>
@@ -141,7 +142,9 @@ export default function Register () {
       style={styles.registerBtn}
       color='white' title="Register" onPress={handleRegister} />
       }
-    </View>
+      </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   )
 }
 
