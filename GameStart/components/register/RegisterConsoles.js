@@ -28,7 +28,20 @@ export default function RegisterConsoles () {
     })
   }
 
-  const submitConsoles = (e) => {
+  const submitConsoles = (consoles, userID) => {
+    consoles.forEach(system => {
+      axios.post('http://localhost:8000/api/users/consoles', {
+        system: system,
+        userID: userID
+      })
+      .then(() => {
+        //handle the submission and move onto the next page after loading
+        console.log('success')
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
+    })
     //format data
     //get ready for send
   }
@@ -43,7 +56,7 @@ export default function RegisterConsoles () {
         <CardTiles system="NintendoSwitch" list={list.NintendoSwitch}addConsole={addConsole} removeConsole={removeConsole}/>
         <CardTiles system="Pc" list={list.Pc} addConsole={addConsole} removeConsole={removeConsole}/>
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => submitConsoles(consoles, 1)}>
         <Text>
           Proceed
         </Text>

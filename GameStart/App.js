@@ -7,6 +7,7 @@ import CreateAccount from './components/register/CreateAccount.js';
 import RegisterConsoles from './components/register/RegisterConsoles.js';
 import ProfilePicture from './components/register/ProfilePicture.js';
 import RegisterGames from './components/register/RegisterGames.js';
+import SetLocation from './components/register/SetLocation.js';
 
 function App() {
 
