@@ -20,9 +20,8 @@ function App() {
     //     <Stack.Screen options={{ headerShown: false }} name="Login" component={Main} />
     //   </Stack.Navigator>
     // </NavigationContainer>
-    <RegisterGames/>
+    // <RegisterGames/>
   );
 }
 
 export default App;
-npm

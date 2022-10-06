@@ -8,7 +8,7 @@ import { TradeList, TradeView, TradeDetails, TradeHistory } from './TradeScreens
 const TradeStack = createStackNavigator();
 
 export default () => (
-  <NavigationContainer >
+  <NavigationContainer independent={true}>
     <TradeStack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#121212' } }}>
       <TradeStack.Screen
         name="TradeList"

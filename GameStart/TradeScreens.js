@@ -202,9 +202,10 @@ export const TradeView = ({ navigation, route }) => {
         </Card>
       </View>
       <View style={styles.decision}>
-          {tradeStatus === 'incoming' ?
+          {tradeGroup === 'incoming' ?
           <React.Fragment>
           <Button containerStyle={styles.decisionItem} title="Accept" color='secondary'/>
+          <Icon name='scale-balance'/>
           <Button containerStyle={styles.decisionItem} title="Deny" color='error'/></React.Fragment> :
           <Button containerStyle={styles.decisionItem} title="Cancel" color='error'/> }
       </View>
