@@ -1,92 +1,89 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, FlatList} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, FlatList, SafeAreaView} from 'react-native';
 import axios from 'axios';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
+
+//MOST LIKELY NOT USING
 export default function RegisterGames () {
   const [gamesList, setGamesList] = useState([]);
-  const [initialBatch, setInitialBatch] = useState([]);
   const [games, setGames] = useState([]);
 
-  useEffect(() => {
-    axios.get('http:192.168.0.207:8000/api/games/gamelist')
-    .then((games) => {
-      console.log(games, 'this is the games');
-      console.log('help')
-      setInitialBatch(games)
-    })
-    .catch((err) => {
-      console.log(err.response)
-    })
-  })
+  const API_KEY = 'da02a6537a9b4428b7fa21d5df695e98'
+  const API_BASE_URL = 'https://api.rawg.io/api'
 
-  console.log(initialBatch)
+
   const handleSearch = (query) => {
-    axios.get('http://192.168.0.207:8000/api/games/gamelist', {
-      params: {
-        search: query
-      }
-    })
-      .then((games) => {
-        setGamesList(games.results)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    // setGamesList(initialBatch.filter(game => game.name.includes(query)))
+    if (query.length > 2) {
+      console.log(query)
+      axios.get(`${API_BASE_URL}/games?key=${API_KEY}&search=${query}&page_size=10`)
+        .then((games) => {
+          console.log(games.data.results)
+          let container = [];
+          games.data.results.map(game => {
+            let gameData = {
+              game: game.name,
+              id: game.id,
+            }
+            container.push(gameData)
+          })
+          setGamesList(container)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
+
+  const addGame = (game) => {
+    setGames(prev => [...prev, game])
+
+  }
+
+  console.log(gamesList)
 
   const Item = ({item, onPress, textColor, backgroundColor}) => (
     <TouchableOpacity
      onPress={onPress}>
       <Text style={{textColor}}>
-        {item.title}
+        {item.game}
       </Text>
     </TouchableOpacity>
   );
 
-  console.log(gamesList)
   const renderItem = ({item}) => {
 
-    const backgroundColor = '#03045E'
+    const backgroundColor = games.includes(item.name)? 'pink' : '#03045E'
     const textColor = 'white'
 
     return(
       <Item
         item={item}
-        onPress={() => setLocation(item.address)}
+        onPress={() => addGame(item.name)}
         backgroundColor={{backgroundColor}}
         textColor={{textColor}}
       />
     )
   }
 
-//breakdown of this component:
-//users can search for a game to add (optional)
-  //search through the games
-    //select a game and you can add game for listing
-    //optional
-    //if game has been added, add a "Game has been added message"
-  //continue on
-  //flatlist here
 
   return(
 
-    <View style={styles.container}>
-      <View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
         <Text style={styles.text}> Search for a game! </Text>
-        <TextInput style={styles.forms}> </TextInput>
+        <TextInput style={styles.forms} onChangeText={(query) => handleSearch(query)}> </TextInput>
       </View>
-      <View>
+      <View style={styles.listContainer}>
         <FlatList
          data={gamesList}
          renderItem={renderItem}
-         keyExtractor={(key) => key.id}
-         extraData={gamesList}
+         keyExtractor={(item) => item.id}
+         extraData={games}
         />
       </View>
       <Button title="Next"/>
-    </View>
-
+    </SafeAreaView>
   )
 }
 
@@ -101,17 +98,28 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     flexShrink: 1,
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    borderWidth: 5,
+    borderColor: 'pink'
   },
   header: {
+    display: 'flex',
     width: '100%',
     alignItems: 'center',
-    marginTop: 20
+    marginTop: '30%',
+    height: '10%',
+    borderWidth: 5,
+    borderColor: 'green',
+    textAlign: 'center'
   },
   text: {
-    width: '25%',
-    height: '20%',
-    color: 'white'
+    width: '100%',
+    height: '40%',
+    marginTop: 0,
+    color: 'white',
+    borderWidth: 5,
+    borderColor: 'red',
+    textAlign: 'center'
   },
   forms: {
     marginBottom: 30,
@@ -122,5 +130,17 @@ const styles = StyleSheet.create({
     borderRadius:10,
     width: 300,
     paddingLeft: 15
+  },
+  listContainer: {
+    width: '100%',
+    height: '60%',
+    borderWidth: 5,
+    borderColor: 'blue'
+  },
+  inputContainer: {
+    flex: 1,
+    padding: 10,
+    paddingTop: 100,
+    backgroundColor: 'black',
   }
 })

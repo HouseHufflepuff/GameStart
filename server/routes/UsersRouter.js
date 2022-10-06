@@ -1,7 +1,15 @@
-const Router = require('express').Router();
-const {insertUser} = require('../controllers/users.js');
+const usersRouter = require('express').Router();
 
-Router.use('/register', insertUser);
+const {insertAddress, insertUser, insertConsoles, changeProfilePic, getTradeCounter} = require('../controllers/users.js');
 
+usersRouter.post('/register', insertUser);
 
-module.exports = Router;
+usersRouter.put('/address', insertAddress);
+
+usersRouter.post('/consoles', insertConsoles);
+
+usersRouter.put('/profilepic', changeProfilePic);
+
+usersRouter.get('/trades', getTradeCounter);
+
+module.exports = usersRouter;
