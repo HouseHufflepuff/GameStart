@@ -1,6 +1,6 @@
 const usersRouter = require('express').Router();
 
-const {insertAddress, insertUser, insertConsoles, changeProfilePic, getTradeCounter} = require('../controllers/users.js');
+const { insertAddress, insertUser, insertConsoles, changeProfilePic, getTradeCounter } = require('../controllers/users.js');
 
 usersRouter.post('/register', insertUser);
 
