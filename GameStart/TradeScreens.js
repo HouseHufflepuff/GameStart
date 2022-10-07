@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'react-native';
-import { StyleSheet, SafeAreaView, Text, View, TouchableWithoutFeedback, FlatList } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, View, TouchableWithoutFeedback, FlatList, ScrollView, TouchableOpacity } from 'react-native';
 import { ListItem, Avatar, Card, Button, Icon } from '@rneui/themed';
 import axios from 'axios';
 
@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: '#121212',
     color: 'white',
-    flex: 1,
   },
 
   noItems: {
@@ -111,7 +110,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#252525',
     borderWidth: 0,
     color: '#FFF'
-  }
+  },
+
+  detailsCard: {
+    flex: 6,
+    backgroundColor: '#252525',
+    borderWidth: 0,
+    color: '#FFF'
+  },
 });
 
 export const TradeList = ({ navigation }) => {
@@ -119,24 +125,27 @@ export const TradeList = ({ navigation }) => {
   const [incomingTrades, setIncomingTrades] = useState([]);
   const [outgoingTrades, setOutgoingTrades] = useState([]);
 
-  // Need to connect to database and refine data to use from get request/post request
+  // need to define user who logged in
   useEffect(() => {
-    setIncomingTrades([{id: 1, title: 'GTA6', condition: 'new', case: 'new', status: 'Trading', photoURL: '/Users/tonykang/Hack Reactor SEI/GameStart/GameStart/assets/cory.jpeg'},
-      {id: 2, title: 'GTA5', condition: 'old', case: 'poor', status: 'Pending Accept', photoURL: '/Users/tonykang/Hack Reactor SEI/GameStart/GameStart/assets/cory.jpeg' }])
-    setOutgoingTrades([{id: 3, title: 'HALO9', condition: 'new', case: 'new', photoURL: '/Users/tonykang/Hack Reactor SEI/GameStart/GameStart/assets/cory.jpeg'},
-      {id: 4, title: 'HALO10', condition: 'old', case: 'poor', photoURL: '/Users/tonykang/Hack Reactor SEI/GameStart/GameStart/assets/cory.jpeg' }])
+    axios.get(`http://localhost:8000/api/trades/2`)
+      .then((data) => {
+        setIncomingTrades(data.data.incoming)
+        setOutgoingTrades(data.data.outgoing)
+      })
   }, [])
 
   const renderItem = ({ item }) => (
-    <ListItem bottomDivider containerStyle={styles.item} onPress={() => navigation.navigate('TradeView')}>
-      <Avatar source={{uri: item.photoURL}} size={'large'} />
+    <TouchableOpacity>
+    <ListItem bottomDivider containerStyle={styles.item} onPress={() => navigation.navigate('TradeView', {data: item, group: trades})}>
+      <Avatar source={{uri: item.theirphotourl}} size={'large'} />
       <ListItem.Content>
-        {trades === 'incoming' ? <Text style={styles.item}>User: {item.id}</Text> : <Text style={styles.item}>Offering: {item.title}</Text>}
-        {trades === 'incoming' ? <Text style={styles.item}>Offering: Cory in the House</Text> : <Text style={styles.item}>To User: {item.id}</Text>}
-        {trades === 'incoming' ? <Text style={styles.item}>For: {item.title}</Text> : <Text style={styles.item}>For: Cory in the House</Text>}
-        {trades === 'incoming' ? <Text style={styles.item}>Status: {item.status}</Text> : <Text style={styles.item}>Status: {item.status}</Text>}
+        {trades === 'incoming' ? <Text style={styles.item}>User: {item.theirusername}</Text> : <Text style={styles.item}>Offering: {item.mygametitle}</Text>}
+        {trades === 'incoming' ? <Text style={styles.item}>Offering: {item.theirgametitle}</Text> : <Text style={styles.item}>To User: {item.theirusername}</Text>}
+        {trades === 'incoming' ? <Text style={styles.item}>For: {item.mygametitle}</Text> : <Text style={styles.item}>For: {item.theirgametitle}</Text>}
+        {trades === 'incoming' ? <Text style={styles.item}>Status: {item.theirgamecondition}</Text> : <Text style={styles.item}>Status: {item.theirgamecondition}</Text>}
       </ListItem.Content>
     </ListItem>
+    </TouchableOpacity>
   );
 
   return (
@@ -159,14 +168,14 @@ export const TradeList = ({ navigation }) => {
         <FlatList
           data={incomingTrades}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id+item.theirgametitle+item.myid}
         /> : <Text style={styles.noItems}>You have no incoming offers</Text> :
         outgoingTrades.length ?
         <FlatList
         data={outgoingTrades}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      /> : <Text style={styles.noItems}>Tap for details</Text>}
+        keyExtractor={(item) => item.id + item.theirgametitle +item.theirid}
+      /> : <Text style={styles.noItems}>You have no outgoing offers</Text>}
       </View>
       <View style={styles.navigationBar}>
         <Text>Navigation Bar</Text>
@@ -178,25 +187,27 @@ export const TradeList = ({ navigation }) => {
 
 export const TradeView = ({ navigation, route }) => {
   const [tradeData, setTradeData] = useState([]);
-  const [tradeGroup, setTradeGroup] = useState('incoming')
+  const [tradeGroup, setTradeGroup] = useState(route.params.group)
 
   useEffect(() => {
-
+    setTradeData(route.params.data)
+    setTradeGroup(route.params.group)
   }, [])
 
   return (
     <View style={styles.container}>
       <View style={styles.tradingItem}>
-      <Card containerStyle={styles.tradeCard} wrapperStyle={styles.tradeCard}>
-          <Card.Title style={{color: 'white'}}>THEIR: Cory in the House</Card.Title>
+      <Card containerStyle={styles.tradeCard}>
+          <Card.Title style={{color: 'white'}}>THEIR GAME: {tradeData.theirgametitle}</Card.Title>
           <Card.Divider color='white'/>
           <Card.Image
             style={{ padding: 0 }}
             source={{
-              uri:
-                'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+              uri: tradeData.theirphotourl
             }}
-            onPress={() => navigation.navigate('TradeDetails', {id: 'test'})}
+            onPress={() => navigation.navigate('TradeDetails', {id: tradeData.theirgameid, gametitle: tradeData.theirgametitle,
+              photourl: tradeData.theirphotourl, profilepic: tradeData.theirprofilepic, gamecondition: tradeData.theirgamecondition,
+              casestatus: tradeData.theircasestatus, username: tradeData.theirusername})}
           />
           <Text style={{color: 'white', alignSelf: 'center', paddingTop: 10}}>Tap for details</Text>
         </Card>
@@ -204,22 +215,23 @@ export const TradeView = ({ navigation, route }) => {
       <View style={styles.decision}>
           {tradeGroup === 'incoming' ?
           <React.Fragment>
-          <Button containerStyle={styles.decisionItem} title="Accept" color='secondary'/>
-          <Icon name='scale-balance'/>
-          <Button containerStyle={styles.decisionItem} title="Deny" color='error'/></React.Fragment> :
+          <Button containerStyle={styles.decisionItem} title="Accept" color='#00B4d8'/>
+          <Button containerStyle={styles.decisionItem} title="Deny" color='error'/>
+          </React.Fragment> :
           <Button containerStyle={styles.decisionItem} title="Cancel" color='error'/> }
       </View>
       <View style={styles.tradingItem}>
-      <Card containerStyle={styles.tradeCard} wrapperStyle={styles.tradeCard}>
-          <Card.Title style={{color: 'white'}}>YOUR: GTA 6</Card.Title>
+      <Card containerStyle={styles.tradeCard}>
+          <Card.Title style={{color: 'white'}}>YOUR GAME: {tradeData.mygametitle}</Card.Title>
           <Card.Divider color='white'/>
           <Card.Image
             style={{ padding: 0 }}
             source={{
-              uri:
-                'https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg',
+              uri: tradeData.myphotourl
             }}
-            onPress={() => navigation.navigate('TradeDetails', {id: 'test'})}
+            onPress={() => navigation.navigate('TradeDetails', {id: tradeData.mygameid, gametitle: tradeData.mygametitle,
+              photourl: tradeData.myphotourl, profilepic: tradeData.myprofilepic, gamecondition: tradeData.mygamecondition,
+              casestatus: tradeData.mycasestatus, username: tradeData.myusername})}
           />
           <Text style={{color: 'white', alignSelf: 'center', paddingTop: 10}}>Tap for details</Text>
         </Card>
@@ -235,12 +247,51 @@ export const TradeDetails = ({ navigation, route }) => {
   const [gameData, setGameData] = useState([]);
 
   useEffect(() => {
-    setGameData()
+    setGameData(route.params)
   }, [])
 
   return (
     <View style={styles.container}>
-      <Text style={{color: 'white'}}>{route.params.id}</Text>
+        <Card containerStyle={styles.detailsCard} wrapperStyle={styles.detailsCard}>
+          <Card.Title style={{ marginBottom: 10, color: 'white', alignSelf: 'center' }}>{gameData.gametitle}</Card.Title>
+          <Card.Image
+            style={{ padding: 0, height: 355 }}
+            source={{uri: gameData.photourl }}
+          />
+          <Text style={{ marginBottom: 10, marginTop: 10, color: 'white', alignSelf: 'center' }}>
+              Game Condition: {gameData.gamecondition}
+          </Text>
+          <Text style={{  marginBottom: 10, marginTop: 10, color: 'white', alignSelf: 'center' }}>
+              Case Condition: {gameData.casestatus}
+          </Text>
+          <Card.Divider />
+          <Button
+            icon={
+              <Icon
+                name="code"
+                color="#ffffff"
+                iconStyle={{ marginRight: 10 }}
+              />
+            }
+            buttonStyle={{
+              borderRadius: 0,
+              marginLeft: 0,
+              marginRight: 0,
+              marginBottom: 0,
+            }}
+            title="View Trader Profile"
+          />
+         <Avatar
+            containerStyle={{marginTop: 10, alignSelf: 'center', borderColor: 'white', borderWidth: 1}}
+            size={80}
+            rounded
+            source={{uri: gameData.profilepic}}
+            key={gameData.id}
+            />
+        </Card>
+        <View style={styles.navigationBar}>
+        <Text>Navigation Bar</Text>
+      </View>
     </View>
   )
 }
@@ -250,20 +301,27 @@ export const TradeHistory = ({ navigation, route }) => {
 
   // Need to connect to database and refine data to use from get request
   useEffect(() => {
-    setTradeData([{id: 1, title: 'GTA6', condition: 'new', case: 'new', status: 'Trading', photoURL: '/Users/tonykang/Hack Reactor SEI/GameStart/GameStart/assets/cory.jpeg'},
-    {id: 2, title: 'GTA5', condition: 'old', case: 'poor', status: 'Pending Offer', photoURL: '/Users/tonykang/Hack Reactor SEI/GameStart/GameStart/assets/cory.jpeg' },
-    {id: 3, title: 'HALO9', condition: 'new', case: 'new', photoURL: '/Users/tonykang/Hack Reactor SEI/GameStart/GameStart/assets/cory.jpeg'},
-    {id: 4, title: 'HALO10', condition: 'old', case: 'poor', photoURL: '/Users/tonykang/Hack Reactor SEI/GameStart/GameStart/assets/cory.jpeg'}])
+    axios.get(`http://localhost:8000/api/trades/2`)
+      .then((data) => {
+        let history = [...data.data.incoming, ...data.data.outgoing];
+        history.filter(trades => {
+          if ((trades.trade_status.toLowerCase() === 'completed') &&
+            (trades.myid === 2)) {
+              return trades
+            }
+        });
+        setTradeData(history)
+      })
   }, [])
 
   const renderItem = ({ item }) => (
     <ListItem bottomDivider containerStyle={styles.item}>
-    <Avatar source={{uri: item.photoURL}} size={'large'} />
+    <Avatar source={{uri: item.theirphotourl}} size={'large'} />
     <ListItem.Content>
-      {<Text style={styles.item}>User: Gene Lo</Text>}
-      {<Text style={styles.item}>Traded: Cory in the House</Text>}
-      {<Text style={styles.item}>For: HALO 2</Text>}
-      {<Text style={styles.item}>Trade Date: Some Date</Text>}
+      {<Text style={styles.item}>User: {item.theirusername}</Text>}
+      {<Text style={styles.item}>Traded: {item.mygametitle}</Text>}
+      {<Text style={styles.item}>For Your: {item.theirgametitle}</Text>}
+      {<Text style={styles.item}>Traded: {item.created_at.toString().slice(0, 10)}</Text>}
     </ListItem.Content>
   </ListItem>
   );
@@ -273,7 +331,7 @@ export const TradeHistory = ({ navigation, route }) => {
     <FlatList
       data={tradeData}
       renderItem={renderItem}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.myid + item.theirgametitle + item.theirid + item.id}
     />
   </View>
   )

@@ -13,18 +13,21 @@ CREATE TABLE users (
   username varchar(14) NOT NULL,
   password varchar(14) NOT NULL,
   address TEXT,
+  email varchar(50),
+  fiyabase_authkey varchar(50),
+  profilepic varchar(150),
   created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE games (
   id SERIAL PRIMARY KEY NOT NULL,
-  ownerId INT NOT NULL,
+  ownerId INT NOT NULL references users(id),
   gameId INT NOT NULL,
   gameTitle VARCHAR(50),
   photoURL VARCHAR(50),
   gameCondition VARCHAR(50),
   caseStatus VARCHAR(50),
-  listing VARCHAR(10)
+  listingStatus VARCHAR(10)
 );
 
 CREATE TABLE consoles (
@@ -41,10 +44,10 @@ CREATE TABLE favorites (
 
 CREATE TABLE trades (
   id SERIAL PRIMARY KEY NOT NULL,
-  partyId INT NOT NULL,
-  partyGameId INT NOT NULL,
-  counterPartyId INT NOT NULL,
-  counterPartyGameId INT NOT NULL,
+  partyId INT NOT NULL references users(id),
+  partyGameId INT NOT NULL references games(id),
+  counterPartyId INT NOT NULL references users(id),
+  counterPartyGameId INT NOT NULL references games(id),
   created_at TIMESTAMP DEFAULT NOW(),
   trade_status VARCHAR(15)
 );
@@ -52,14 +55,15 @@ CREATE TABLE trades (
 CREATE TABLE messages (
   id SERIAL PRIMARY KEY NOT NULL,
   body TEXT,
+  userId INT references users(id),
   username varchar(14),
-  conversationID INT,
+  conversationID INT references conversations(id),
   created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE conversations (
   id SERIAL PRIMARY KEY NOT NULL,
-  messagesID INT[]
+  tradeId INT references trades(id)
 );
 
 
