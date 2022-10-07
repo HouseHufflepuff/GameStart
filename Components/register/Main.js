@@ -6,7 +6,7 @@ import RegisterConsoles from './RegisterConsoles.js';
 import SetLocation from './SetLocation.js';
 import AccountComplete from './AccountComplete.js'
 import {NavigationContainer} from '@react-navigation/native'
-
+import Login from '/Users/dg/rfp2207/GameStart/LoginStuff/loginComponents/Login.js'
 
 export default function MyStack({navigation}) {
 
@@ -20,6 +20,7 @@ export default function MyStack({navigation}) {
           height: '0%'
         }
       }}>
+
       <Stack.Screen name="account-info" component={CreateAccount}/>
       <Stack.Screen name="register-consoles" component={RegisterConsoles} />
       <Stack.Screen name="location" component={SetLocation} />

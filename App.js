@@ -10,27 +10,32 @@ import RegisterGames from './Components/register/RegisterGames.js';
 import SetLocation from './Components/register/SetLocation.js';
 import CreateStack from './Components/register/Main.js';
 import Login from './LoginStuff/loginComponents/Login.js';
+import MyStack from '/Users/dg/rfp2207/GameStart/Components/register/Main.js'
+import { useAuth } from './LoginStuff/loginUtils/useAuth.js';
 
 function App() {
+
+  const { user } = useAuth();
+
+
   const [isLogin, setIsLogin] = useState(true);
+
 
   const Stack = createNativeStackNavigator();
 
   return (
-    <>
-      <NavigationContainer>
-        <CreateStack />
-     </NavigationContainer>
-      {/* {isLogin && < Login />}
 
-      {
-        !isLogin && <NavigationContainer>
+
+
+
+ <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen options={{ headerShown: false }} name="Login" component={Main} />
+          <Stack.Screen name="login" component={Login}/>
+            <Stack.Screen name="main" component={Main} />
+            <Stack.Screen name='register' component={CreateStack} />
           </Stack.Navigator>
         </NavigationContainer>
-      } */}
-    </>
+
   )
 }
 

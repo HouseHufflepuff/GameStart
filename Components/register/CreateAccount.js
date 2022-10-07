@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
+import { auth } from '../../LoginStuff/loginUtils/firebase'
+import {signInWithEmailAndPassword, updateProfile, getAuth, signInWithPopup,signInWithRedirect, GoogleAuthProvider, createUserWithEmailAndPassword} from 'firebase/auth'
 
 export default function Register ({navigation}) {
 
@@ -47,8 +49,21 @@ export default function Register ({navigation}) {
       last_name: lastName,
       username: user,
       password: pass,
-      email_address: email
+      email_address: email,
+      fiyabase_authkey: null
+
     }
+    handleSignUp(data.email_address, data.password)
+
+      data.fiyabase_authkey = user.uid;
+      axios.post('http://localhost:8000/api/users/register', data)
+      .then(() => navigation.navigate('register-consoles', {userID: user.uid}))
+
+
+    .catch((err) => {
+      alert('error registering')
+      console.log(err)
+    })
 
     // setLoading(true);
     //firebase auth (?)
@@ -71,6 +86,7 @@ export default function Register ({navigation}) {
     //   setLoading(false);
     // })
 
+
   }
     //what are states? (setState{user: user, password: password, email: email, consoles: consoles, }), {isLoading},
     //5 step process ?
@@ -80,6 +96,18 @@ export default function Register ({navigation}) {
         //next set consoles (two icons xbox and ps?) -> loading transition
           //any games you want to go ahead and add for listing (optional) -> send data to db
           //finish "quest complete!"
+
+const handleSignUp =  (email, pass) => {
+    createUserWithEmailAndPassword(auth, email, pass)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      // navigation.navigate('register-consoles', {userID: user.uid})
+      console.log(user)
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};
 
 
   return (
@@ -155,7 +183,7 @@ export default function Register ({navigation}) {
       style={styles.registerBtn} title="Creating account..." />
       : <Button
       style={styles.registerBtn}
-      color='white' title="Register" onPress={handleRegister} />
+      color='white' title="Register" onPress={handleRegister} /> //Darryl changed this
       }
       </View>
       </TouchableWithoutFeedback>
