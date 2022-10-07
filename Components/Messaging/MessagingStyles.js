@@ -3,18 +3,22 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: '#181818'
   },
   styleSent: {
     padding: '1%',
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   sentText: {
-    borderRadius : 5,
-    backgroundColor: '#90e0ef',
+    borderRadius: 10,
+    overflow: 'hidden',
+    backgroundColor: '#0077B6',
     alignSelf : 'flex-end',
     fontSize : 20,
-    padding: '1%',
+    padding: 5,
     maxWidth: '70%',
+    color: 'white'
   },
   sentTimestamp: {
     color:'grey',
@@ -22,23 +26,29 @@ const styles = StyleSheet.create({
     paddingBottom: 0
   },
   styleRecieved: {
-    padding: '1%'
+    padding: '1%',
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   recievedText: {
-    borderRadius : 5,
-    backgroundColor: '#00b4d8',
+    borderRadius: 10,
+    overflow: 'hidden',
+    backgroundColor: '#454545',
     alignSelf: "flex-start",
     fontSize : 20,
-    padding: '1%',
+    padding: 5,
     maxWidth: '70%',
+    color: 'white'
   },
   recievedTimestamp: {
     color:'grey',
     alignSelf:'flex-start'
   },
   styleHeader: {
-    backgroundColor: 'black',
+    backgroundColor: '#181818',
     height: '10%',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   headerText : {
     color: "white",

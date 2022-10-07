@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import {
   View, Button, Text, StyleSheet, Image, ScrollView, SectionList,
-  SafeAreaView, Alert, TouchableOpacity,
+  SafeAreaView, Alert, TouchableOpacity, StatusBar
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,7 +16,11 @@ import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import Search from './Search/Search.js';
 import MapScreen from './Map/MapScreen';
+
 // import ProfileScreen from './ProfileScreen';
+
+import UserProfile from '../LoginStuff/loginComponents/UserProfile.js';
+
 import Trade from './Trades/TradeStack.js';
 import ProfileScreen from '/Users/dg/rfp2207/GameStart/LoginStuff/loginComponents/UserProfile.js'
 
@@ -43,8 +47,8 @@ function Main({ navigation }) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
-  const staticImage = require('../assets/logo.png');
-  const staticImageW = require('../assets/logo-white.png');
+  const staticImage = require('../assets/colorlogo.png');
+  const staticImageW = require('../assets/bwlogo.png');
 
   return (
     <GameStartContext.Provider
@@ -63,7 +67,7 @@ function Main({ navigation }) {
               {
                 position: 'absolute',
                 backgroundColor: '#181818',
-                height: 65
+                height: 85
               }
             ],
           }
@@ -146,7 +150,7 @@ function Main({ navigation }) {
           }}
         />
 
-        <Tab.Screen name={profileName} component={ProfileScreen}
+        <Tab.Screen name={profileName} component={UserProfile}
           options={{
             tabBarIcon: ({ focused }) => (
               <View style={{ alignItems: 'center', justifyContent: 'center', alignSelf: 'center' }}>

@@ -9,7 +9,7 @@ export default function RegisterConsoles ({navigation, route}) {
   const {userID} = route.params;
   const [list, setList] = useState({Xbox: false, Playstation: false, NintendoSwitch: false, Pc: false});
 
-  const systemImg = [{system: 'Xbox', url: 'https://i.ibb.co/m6m40rj/xbox-logo.png'}, {system: 'Playstation', url: 'https://i.ibb.co/myLWzfJ/Play-Station-Logo-wine.png'}, {system: 'NintendoSwitch', url: 'https://i.ibb.co/pZdYnzh/8ad56e93021d1d5a33af4a54f7ab1e3f.jpg'}, {system: 'Pc', url: 'https://i.ibb.co/sRDyNYV/PC.png'}];
+  const systemImg = [{system: 'Xbox', url: 'https://www.freepnglogos.com/uploads/xbox-one-logo-vector-24.png'}, {system: 'Playstation', url: 'https://i.ibb.co/myLWzfJ/Play-Station-Logo-wine.png'}, {system: 'NintendoSwitch', url: 'https://i.ibb.co/pZdYnzh/8ad56e93021d1d5a33af4a54f7ab1e3f.jpg'}, {system: 'Pc', url: 'https://www.pngall.com/wp-content/uploads/2/Windows-Logo-PNG-Transparent-HD-Photo.png'}];
 
   const addConsole = (system) => {
     setConsoles(prev => [...prev, system])
@@ -51,7 +51,7 @@ export default function RegisterConsoles ({navigation, route}) {
         colors={['black', '#03045E', 'black']}
         start={{x: 0, y: 0.5}}
         end={{x: 1, y: 1}}>
-      <ImageBackground source={require('./icons/gamestart.png')} imageStyle={{opacity: 0.5, height: '70%', width: '100%', justifyContent: 'center'}}>
+      <ImageBackground source={require('./icons/gamestart.png')} imageStyle={{opacity: 0.25, height: '70%', width: '100%', justifyContent: 'center'}}>
       <Text style={styles.statement}> Choose your equipment! </Text>
       <View style={styles.cardContainer}>
         {systemImg.map((image, index) => {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   button: {
     color: 'white',
     borderWidth: 2,
-    borderRadius: 30,
+    borderRadius: 5,
     width: '40%',
     height: '7%',
     marginBottom: '-35%',

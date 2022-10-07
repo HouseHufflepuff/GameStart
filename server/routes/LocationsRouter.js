@@ -1,8 +1,9 @@
 const Router = require('express').Router();
 const {
-  getLocationsData,
+  getLocations,
+  getLocationsGames
 } = require('../controllers/locations.js');
 
-Router.get('/', getLocationsData);
+Router.get('/', getLocations);
 
 module.exports = Router;

@@ -11,6 +11,7 @@ import {
   Dimensions,
   Platform,
   Button,
+  StatusBar
 } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, CalloutSubview } from 'react-native-maps';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -21,15 +22,16 @@ import { users } from './mapHelpers/users';
 import MapStyle from './mapHelpers/mapStyle';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Modal from 'react-native-modal';
+import axios from 'axios';
 
 const { width, height } = Dimensions.get("window");
-const CARD_HEIGHT = 200;
+const CARD_HEIGHT = 250;
 const CARD_WIDTH = width * 0.6;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 export default function MapScreen3() {
-  const [usersData, setUsersData] = useState(users);
-  const [currentUsers, setCurrentUsers] = useState(users);
+  const [usersData, setUsersData] = useState();
+  const [currentUsers, setCurrentUsers] = useState();
   const [modalData, setModalData] = useState({
     title: '',
     user: '',
@@ -37,15 +39,34 @@ export default function MapScreen3() {
     img: '',
   });
 
+  useEffect(() => {
+    getUsersData();
+  }, [])
+
+
+
   const [modalVisible, setModalVisible] = useState(false);
 
   const [region, setRegion] = useState({
-    latitude: 37.78825,
-    longitude: -122.4324,
+    latitude: 33.750769,
+    longitude: -117.825262,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   })
 
+
+
+  const getUsersData = async () => {
+    try {
+      let response = await axios.get('http://13.57.240.106:8000/api/locations');
+      if (response.data) console.log('yes');
+      setCurrentUsers(response.data);
+      setUsersData(response.data);
+      return;
+    } catch (error) {
+      console.log('err', error);
+    }
+  }
 
   const [mapState, setMapState] = useState({
     categories: [
@@ -65,6 +86,16 @@ export default function MapScreen3() {
         icon: <MaterialCommunityIcons style={styles.chipsIcon} name="nintendo-switch" size={15} />,
       },
       {
+        name: 'Nintendo Wii U',
+        consoleIcon: 'nintendo-wiiu',
+        icon: <MaterialCommunityIcons style={styles.chipsIcon} name="nintendo-wiiu" size={15} />,
+      },
+      {
+        name: 'Nintendo DS',
+        consoleIcon: 'nintendo-game-boy',
+        icon: <MaterialCommunityIcons style={styles.chipsIcon} name="nintendo-game-boy" size={15} />,
+      },
+      {
         name: 'All consoles',
         consoleIcon: 'back',
         icon: <AntDesign style={styles.chipsIcon} name="back" size={15} />,
@@ -82,7 +113,7 @@ export default function MapScreen3() {
     if (consoleName === 'back') {
       setCurrentUsers(usersData);
     } else {
-      let filter = usersData.filter((item) => item.console === consoleName);
+      let filter = usersData.filter((item) => item.consoleicon === consoleName);
       setCurrentUsers(filter);
     }
   }
@@ -92,10 +123,13 @@ export default function MapScreen3() {
   const _map = useRef(null);
   const _scrollView = useRef(null);
 
-  const toggleModal = (title, user, console, img) => {
+  const toggleModal = (title, state, name, lastname, user, console, img) => {
 
     setModalData({
       title,
+      state,
+      name,
+      lastname,
       user,
       console,
       img,
@@ -106,6 +140,8 @@ export default function MapScreen3() {
 
   };
 
+
+  let findDuplicates = [];
 
 
   return (
@@ -119,73 +155,78 @@ export default function MapScreen3() {
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
         showsMyLocationButton={true}
-        region={region}
+        initialRegion={region}
       >
 
-
-
-
         {/* Markers in map */}
-        {currentUsers.map((item, index) => {
-          return (
-            <Marker
-              key={index}
-              coordinate={item.coordinate}
-              pinColor='green'
-              onPress={() => toggleModal(item.title, item.user, item.console, item.img)}
-            >
+        {currentUsers &&
+          currentUsers.map((item, index) => {
+            if (findDuplicates.includes(item.longitude)) {
+              return;
+            } else {
+              findDuplicates.push(item.longitude);
+              return (
+                <Marker
+                  key={index}
+                  coordinate={{ latitude: item.latitude, longitude: item.longitude }}
+                  pinColor='green'
+                  onPress={() => toggleModal(item.gametitle, item.gamecondition, item.first_name, item.last_name, item.username, item.consoleicon, item.photourl)}
+                >
+
+                  <View style={{ backgroundColor: "green", padding: 10, borderRadius: '5%' }}>
+                    <Text style={{ color: 'white' }}>{item.gametitle}</Text>
+                    <Text style={{ color: '#D3D3D3', textAlign: 'center' }}>{item.gamecondition === null ? 'Fair' : item.gamecondition}</Text>
 
 
 
-
-              <View style={{ backgroundColor: "green", padding: 10, borderRadius: '5%' }}>
-                <Text style={{ color: 'white' }}>{item.title}</Text>
-                <Text style={{ color: '#D3D3D3', textAlign: 'center' }}>{item.state}</Text>
-
-
-
-                <Modal animationType={'slide'} visible={modalVisible} transparent={true} onRequestClose={() => { setModalVisible(false) }}>
-                  <TouchableOpacity
-                    style={styles.container}
-                    activeOpacity={1}
-                    onPressOut={() => { setModalVisible(false) }}
-                  >
-                    <View style={styles.modalContainer}>
-                      <View style={styles.card}>
-                        <Image
-                          source={{ uri: modalData.img }}
-                          style={styles.cardImage}
-                          resizeMode='cover' />
-                        <View style={styles.textContent}>
-                          <Text numberOfLines={1} style={styles.cardTitle}>{modalData.title}</Text>
-                          <Text numberOfLines={1} style={styles.cardDescription}>{modalData.user}</Text>
-                          <MaterialCommunityIcons style={styles.chipsIcon} name={modalData.console} size={18} />
-                          <View style={styles.button}>
-                            <TouchableOpacity
-                              onPress={() => { }}
-                              style={[styles.tradeContainer, {
-                                borderColor: 'green',
-                                borderWidth: 1
-                              }]}>
-                              <Text style={[styles.tradeText, {
-                                color: 'green'
-                              }]}>Trade Now</Text>
-                            </TouchableOpacity>
+                    <Modal animationType={'slide'} visible={modalVisible} transparent={true} onRequestClose={() => { setModalVisible(false) }}>
+                      <TouchableOpacity
+                        style={styles.container}
+                        activeOpacity={1}
+                        onPressOut={() => { setModalVisible(false) }}
+                      >
+                        <View style={styles.modalContainer}>
+                          <View style={styles.card}>
+                            <Image
+                              source={{ uri: modalData.img }}
+                              style={styles.cardImage}
+                              resizeMode='cover' />
+                            <View style={styles.textContent}>
+                              <Text numberOfLines={1} style={styles.cardTitle}>{modalData.title}</Text>
+                              <Text numberOfLines={1} style={styles.cardDescription}>{modalData.name} {modalData.lastname} "{modalData.user}"</Text>
+                              <MaterialCommunityIcons style={styles.chipsIcon} name={modalData.console} size={18} />
+                              <View style={styles.button}>
+                                <TouchableOpacity
+                                  onPress={() => { }}
+                                  style={[styles.tradeContainer, {
+                                    borderColor: 'green',
+                                    borderWidth: 1
+                                  }]}>
+                                  <Text style={[styles.tradeText, {
+                                    color: 'green'
+                                  }]}>Trade Now</Text>
+                                </TouchableOpacity>
+                              </View>
+                            </View>
                           </View>
                         </View>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                </Modal>
+                      </TouchableOpacity>
+                    </Modal>
+                  </View>
+                </Marker>
 
-              </View>
-
-
+              )
 
 
-            </Marker>
-          )
-        })}
+            }
+
+
+          })
+
+        }
+
+
+
 
       </MapView>
 
@@ -221,6 +262,7 @@ export default function MapScreen3() {
       </ScrollView>
 
 
+      <StatusBar barStyle={'light-content'}/>
 
     </View >
   )
@@ -229,11 +271,11 @@ export default function MapScreen3() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 30,
+    marginBottom: 40,
   },
   searchBox: {
     position: 'absolute',
-    marginTop: 40,
+    marginTop: 60,
     flexDirection: "row",
     backgroundColor: '#fff',
     width: '90%',
@@ -248,7 +290,7 @@ const styles = StyleSheet.create({
   },
   chipsScrollView: {
     position: 'absolute',
-    top: 90,
+    top: 110,
     paddingHorizontal: 10
   },
   chipsIcon: {
