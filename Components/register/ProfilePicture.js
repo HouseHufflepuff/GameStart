@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, ImageBackground, SafeAreaView, Image} from 'react-native';
 import PictureCard from './PictureCard.js';
+import {LinearGradient} from 'expo-linear-gradient'
+import axios from 'axios';
 
 export default function ProfilePicture ({authID}) {
   const [imageURL, setImageURL] = useState('');
   const [currentImage, setCurrentImage] = useState(0);
 
   const profiles = [
-    {id: 1, url: 'https://pngimg.com/uploads/call_of_duty/call_of_duty_PNG75.png'},
-    {id: 2, url: 'https://i.pinimg.com/originals/b3/19/84/b31984e724e190774d309ce2a0b2802c.png'},
-    {id: 3, url: 'https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt804eabffbf15dc51/5f4defe95acde4265bb2da77/Champion_garen_HP.png'},
-    {id: 4, url: 'https://image.pngaaa.com/930/1381930-middle.png'},
-    {id: 5, url: 'https://www.clipartmax.com/png/middle/127-1274380_gamer-girl-by-saski-chan-gamer-girl-png.png'},
-    {id: 6, url: 'https://e7.pngegg.com/pngimages/932/280/png-clipart-maplestory-video-games-nexon-character-maplestory-2-bunny-girl-game-computer-wallpaper-thumbnail.png'},
-    {id: 7, url: 'https://e7.pngegg.com/pngimages/233/259/png-clipart-maplestory-dog-mammal-canidae-carnivora-maple-game-white-thumbnail.png'},
-    {id: 8, url: 'https://spng.pngfind.com/pngs/s/159-1593204_gta-5-render-franklin-from-gta-v-hd.png'},
-    {id: 9, url: 'https://w7.pngwing.com/pngs/426/131/png-transparent-the-legend-of-zelda-the-wind-waker-link-the-legend-of-zelda-breath-of-the-wild-the-legend-of-zelda-spirit-tracks-princess-zelda-chibi-mammal-carnivoran-chibi.png'},
-    {id: 10, url: 'https://www.kindpng.com/picc/m/3-36382_small-mario-png-transparent-png.png'},
-    {id: 11, url: 'https://image.pngaaa.com/656/905656-middle.png'},
-    {id: 12, url: 'https://www.citypng.com/public/uploads/preview/-41603420202wiew9viqhz.png'}
+    {id: 1, url: 'https://i.ibb.co/tspt9x6/animal-cross.png'},
+    {id: 2, url: 'https://i.ibb.co/0t4L2Bg/animal-cross2.png'},
+    {id: 3, url: 'https://i.ibb.co/tLcctHf/ash.png'},
+    {id: 4, url: 'https://i.ibb.co/r6yKNMt/master-chief.png'},
+    {id: 5, url: 'https://i.ibb.co/d6WWmGB/cod.png'},
+    {id: 6, url: 'https://i.ibb.co/YX6VnRM/deadpool.png'},
+    {id: 7, url: 'https://i.ibb.co/gR7QPfq/draven.png'},
+    {id: 8, url: 'https://i.ibb.co/r577B91/garen.png'},
+    {id: 9, url: 'https://i.ibb.co/VwcF13g/john-wall.png'},
+    {id: 10, url: 'https://i.ibb.co/80mvdxr/My-project.png'},
+    {id: 11, url: 'https://i.ibb.co/3Tqy0t3/link.png'},
+    {id: 12, url: 'https://i.ibb.co/5R3gcwT/mario.png'}
   ]
 
 
@@ -26,6 +28,22 @@ export default function ProfilePicture ({authID}) {
     // const imageObj = data.filter(image => id === image.id)
     setImageURL(url);
     setCurrentImage(id)
+  }
+
+  const submitImage = (imageURL, userID) => {
+    //set loading toggle
+    axios.put('http://localhost:8000/api/users/profilepic', {
+      imageURL: imageURL,
+      userID: userID
+    })
+    .then(() => {
+      //toggle loading to done
+      //change view to next step
+      console.log('success')
+    })
+    .catch((err) => {
+      console.log('fail', err.response)
+    })
   }
 
   return(
@@ -41,7 +59,16 @@ export default function ProfilePicture ({authID}) {
     })}
       </View>
       {currentImage !== 0
-      ? <Button title="Choose Image"></Button>
+       ? <LinearGradient
+          colors={['#00b4d8', '#03045E', 'black']}
+          start={{x: 0, y: 0.5}}
+          end={{x: 1, y: 1}}
+          style={styles.button}
+        >
+          <TouchableOpacity style={styles.button} onPress={() => submitImage(imageURL, 1)}>
+              <Text style={{color: 'white', textAlign: 'center', fontWeight: '600', fontSize: 25, marginTop: 20}}> Choose Image </Text>
+          </TouchableOpacity>
+        </LinearGradient>
       : null}
     </SafeAreaView>
   )
@@ -52,7 +79,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    backgroundColor: 'black'
+    backgroundColor: 'linear-gradient(90deg, rgba(0,0,0,1) 9%, rgba(2,69,139,1) 70%, rgba(0,180,216,1) 100%)'
 
   },
   imageContainer: {
@@ -66,10 +93,13 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    height: '10%',
+    height: '9%',
     marginTop: '10%',
     fontSize: 25,
-    fontWeight: '500'
+    fontWeight: '800',
+    textShadowColor: '#90E0EF',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 4
   },
   cards: {
     borderWidth: 5,
@@ -83,9 +113,12 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   button: {
-    width: '100%',
-    height: '20%',
-    borderWidth: 5,
-    borderColor: 'blue'
+    width: '120%',
+    height: '40%',
+    marginBottom: 10,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'grey'
   }
 })
