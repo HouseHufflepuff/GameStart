@@ -1,6 +1,6 @@
 import React from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from '../firebase.js'
+import { auth } from './firebase.js'
 
 
 

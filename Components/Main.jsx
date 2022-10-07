@@ -16,8 +16,9 @@ import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import Search from './Search/Search.js';
 import MapScreen from './Map/MapScreen';
-import ProfileScreen from './ProfileScreen';
+// import ProfileScreen from './ProfileScreen';
 import Trade from './Trades/TradeStack.js';
+import ProfileScreen from '/Users/dg/rfp2207/GameStart/LoginStuff/loginComponents/UserProfile.js'
 
 //Screen names
 const homeName = "Home";

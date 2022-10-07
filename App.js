@@ -12,27 +12,25 @@ import CreateStack from './Components/register/Main.js';
 // import TradeModule from './Components/Trades/TradeStack.js';
 import Login from './LoginStuff/loginComponents/Login.js';
 import MyStack from '/Users/dg/rfp2207/GameStart/Components/register/Main.js'
+import { useAuth } from './LoginStuff/loginUtils/useAuth.js';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const { user } = useAuth();
+
+  const [isLogin, setIsLogin] = useState(false);
 
   const Stack = createNativeStackNavigator();
 
   return (
-    <>
-      <NavigationContainer>
-        <CreateStack />
-     </NavigationContainer>
-      {/* {isLogin && < Mystack />} */}
 
-      {
-        !isLogin && <NavigationContainer>
+ <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen options={{ headerShown: false }} name="Login" component={Main} />
+          <Stack.Screen name="login" component={Login}/>
+            <Stack.Screen name="main" component={Main} />
+            <Stack.Screen name='register' component={CreateStack} />
           </Stack.Navigator>
         </NavigationContainer>
-      }
-    </>
+
   )
 }
 

@@ -1,14 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image, TouchableWithoutFeedback, Keyboard, SafeAreaView, ImageBackground, Button } from 'react-native';
-import logo from './assets/gamestartneon2.png'
-import { auth } from './firebase'
+
+import { auth } from '../loginUtils/firebase.js'
 import {signInWithEmailAndPassword, updateProfile, signOut} from 'firebase/auth'
 import React, {useState} from 'react'
-import { useAuth } from './loginUtils/useAuth.js';
+import { useAuth } from '../loginUtils/useAuth.js';
 
 
 
-export default function UserProfile() {
+export default function UserProfile({navigation}) {
   const { user } = useAuth();
   //const id = user.uid
   // const photo = user.photoURL
@@ -18,7 +18,10 @@ export default function UserProfile() {
   const [description, setDescription] = useState('') //placeholder
 
   //add button and submit to send description to db
-
+const handleLogout = function () {
+  signOut(auth)
+  navigation.navigate('login')
+}
 
   return (
     <View style={styles.container}>
@@ -38,7 +41,7 @@ export default function UserProfile() {
     <View style={styles.buttonContainer}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => signOut(auth)}
+        onPress={handleLogout}
       >
         <Text style={styles.buttonText}>Sign Out</Text>
       </TouchableOpacity>

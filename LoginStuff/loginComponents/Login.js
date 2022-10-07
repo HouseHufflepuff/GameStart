@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image, TouchableWithoutFeedback, Keyboard, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image, TouchableWithoutFeedback, Keyboard, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
-// import logo from '.../assets/favicon.png'
+import logo from '../../assets/logo.png'
 import apple from '../../assets/apple_login.png'
 import google from '../../assets/google_login.png'
 import fb from '../../assets/facebook_login.png'
@@ -24,7 +24,7 @@ export default function Login( {navigation}) {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      alert('Welcome, ', user.email)
+      navigation.navigate('main')
     })
     .catch((error) => {
       alert(error.message)
@@ -43,13 +43,16 @@ export default function Login( {navigation}) {
 
 
   return (
+
+
     <KeyboardAvoidingView
     style={styles.container}
     behavior="padding"
   >
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+
       <SafeAreaView style={styles.inputContainer}>
-  {/* <Image source={logo}/> */}
+   <Image source={logo} style={styles.logo}/>
 
     <View >
       <TextInput
@@ -96,9 +99,10 @@ export default function Login( {navigation}) {
 
 <View style={{marginTop:20, marginBottom:20}}>
 <Text style={{textAlign: 'center', color: '#999999'}}>Don't have an account?
-<Text style={styles.textLink} onPress={() => navigation.navigate('account-info')}> Sign up</Text>
+<Text style={styles.textLink} onPress={() => navigation.navigate('register')}> Sign up</Text>
 </Text>
 </View>
+
 </SafeAreaView>
 </TouchableWithoutFeedback>
 
@@ -117,7 +121,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 2,
     width: '60%'
   },
   input: {
@@ -173,5 +177,11 @@ const styles = StyleSheet.create({
   },
   icons:{
     marginLeft: 5
+  },
+  logo: {
+    marginTop: 15,
+    height: 250,
+    width: 400,
+    marginBottom: 10
   }
 })

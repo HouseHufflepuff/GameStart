@@ -20,7 +20,7 @@ export default function MyStack({navigation}) {
           height: '0%'
         }
       }}>
-      <Stack.Screen name="login" component={Login}/>
+
       <Stack.Screen name="account-info" component={CreateAccount}/>
       <Stack.Screen name="register-consoles" component={RegisterConsoles} />
       <Stack.Screen name="location" component={SetLocation} />

@@ -49,30 +49,19 @@ export default function Register ({navigation}) {
       last_name: lastName,
       username: user,
       password: pass,
-      email_address: email
+      email_address: email,
+      fiyabase_authkey: null
+
     }
+    handleSignUp(data.email_address, data.password)
 
-    setLoading(true);
-    //firebase auth (?) handleSignUp(data.email, data.pass)
-    axios.post('http://13.57.240.106:8000/api/users/register', data)
-    .then(() => {
-      axios.get(`http://13.57.240.106.8000/api/users/:${user}`)
-      .then((id) => {
-        setUserID(id)
-        console.log('hitting here')
+      data.fiyabase_authkey = user.uid;
+      axios.post('http://localhost:8000/api/users/register', data)
+      .then(() => navigation.navigate('register-consoles', {userID: user.uid}))
 
-        setTimeout(() => {
-          setLoading(false);
-          console.log('set time out done')
-
-          navigation.navigate('register-consoles', {userID: userID})
-        }, 500)
-      })
-    })
     .catch((err) => {
       alert('error registering')
-      console.log(err.response)
-      setLoading(false);
+      console.log(err)
     })
 
   }
@@ -89,7 +78,7 @@ const handleSignUp =  (email, pass) => {
     createUserWithEmailAndPassword(auth, email, pass)
     .then((userCredential) => {
       const user = userCredential.user;
-      navigation.navigate('register-consoles', {userID: user.uid})
+      // navigation.navigate('register-consoles', {userID: user.uid})
       console.log(user)
     })
     .catch((error) => {
@@ -171,7 +160,7 @@ const handleSignUp =  (email, pass) => {
       style={styles.registerBtn} title="Creating account..." />
       : <Button
       style={styles.registerBtn}
-      color='white' title="Register" onPress={() => handleSignUp(email,pass) } /> //Darryl changed this
+      color='white' title="Register" onPress={handleRegister} /> //Darryl changed this
       }
       </View>
       </TouchableWithoutFeedback>
