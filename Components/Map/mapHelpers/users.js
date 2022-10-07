@@ -1,10 +1,10 @@
 export const users = [
   {
-    title: 'TLOZ Breath of the Wild',
+    title: 'Halo 4',
     user: 'Nick',
-    console: 'nintendo-switch',
+    console: 'microsoft-xbox',
     state: 'like new',
-    img: 'https://upload.wikimedia.org/wikipedia/en/thumb/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg/220px-The_Legend_of_Zelda_Breath_of_the_Wild.jpg',
+    img: 'https://media.rawg.io/media/games/efd/efdc57a6d16ddf185e275c3cf065ac50.jpg',
     coordinate: {
       latitude: 37.783242,
       longitude: -122.443055,
@@ -13,11 +13,11 @@ export const users = [
     miles: 0,
   },
   {
-    title: 'God of War Ragnarök',
+    title: 'Cooking Mama',
     user: 'John',
-    console: 'sony-playstation',
-    state: 'used',
-    img: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg/220px-God_of_War_Ragnar%C3%B6k_cover.jpg',
+    console: 'nintendo-game-boy',
+    state: 'Fair',
+    img: 'https://media.rawg.io/media/screenshots/bdd/bddc2b764f5d6cdc2c7fb4c506dab824.jpg',
     coordinate: {
       latitude: 37.758837,
       longitude: -122.417534,
@@ -104,11 +104,11 @@ export const users = [
     miles: 0,
   },
   {
-    title: 'Forza Horizon 5',
+    title: 'Cory In The House',
     user: 'Verstappen',
-    console: 'microsoft-xbox',
-    state: 'used',
-    img: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/86/Forza_Horizon_5_cover_art.jpg/220px-Forza_Horizon_5_cover_art.jpg',
+    console: 'nintendo-game-boy',
+    state: 'Excellent',
+    img: 'https://m.media-amazon.com/images/I/51Fs+alNNOL._SX342_.jpg',
     coordinate: {
       latitude: 37.802194,
       longitude: -122.439625,
