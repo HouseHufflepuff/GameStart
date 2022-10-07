@@ -46,20 +46,20 @@ export default function Register ({navigation}) {
     }
 
     setLoading(true);
-    axios.post('http://192.168.0.147:8000/api/users/register', data)
-    .then(() => {
+    // axios.post('http://192.168.0.147:8000/api/users/register', data)
+    // .then(() => {
       console.log('hitting here')
       setTimeout(() => {
         setLoading(false);
         console.log('set time out done')
         navigation.navigate('register-consoles')
       }, 500)
-    })
-    .catch((err) => {
-      alert('error registering')
-      console.log(err.response)
-      setLoading(false);
-    })
+    // })
+    // .catch((err) => {
+    //   alert('error registering')
+    //   console.log(err.response)
+    //   setLoading(false);
+    // })
 
   }
     //what are states? (setState{user: user, password: password, email: email, consoles: consoles, }), {isLoading},
@@ -75,6 +75,7 @@ export default function Register ({navigation}) {
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
        <LinearGradient
+        style={{width: '100%'}}
         colors={['black', '#03045E', 'black']}
         start={{x: 0, y: 0.5}}
         end={{x: 1, y: 1}}>

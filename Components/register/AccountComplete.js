@@ -22,8 +22,7 @@ export default function AccountComplete ({navigation}) {
           colors={['#03045E', 'green', 'black']}
           start={{x: 0, y: 0.5}}
           end={{x: 1, y: 1}}
-          style={styles.button}
-        >
+          style={styles.button}>
           <Text style={{color: 'white', textAlign: 'center', fontWeight: '600', fontSize: 25, marginTop: 15}}> Dive into GameStart </Text>
         <TouchableOpacity style={styles.button}>
         </TouchableOpacity>

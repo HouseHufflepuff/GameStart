@@ -13,3 +13,5 @@ usersRouter.put('/profilepic', changeProfilePic);
 usersRouter.get('/tradecount', getTradeCounter);
 
 module.exports = usersRouter;
+
+//tradecount

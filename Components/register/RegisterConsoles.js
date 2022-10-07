@@ -27,20 +27,20 @@ export default function RegisterConsoles ({navigation}) {
   }
 
   const submitConsoles = (consoles, userID) => {
-    consoles.forEach(system => {
-      axios.post('http://localhost:8000/api/users/consoles', {
-        system: system,
-        userID: userID
-      })
-      .then(() => {
+    // consoles.forEach(system => {
+    //   axios.post('http://localhost:8000/api/users/consoles', {
+    //     system: system,
+    //     userID: userID
+    //   })
+    //   .then(() => {
         //handle the submission and move onto the next page after loading
         console.log('success')
         navigation.navigate('location')
-      })
-      .catch((err) => {
-        console.log(err.response)
-      })
-    })
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.response)
+    //   })
+    // })
   }
 
 
@@ -53,9 +53,9 @@ export default function RegisterConsoles ({navigation}) {
       <ImageBackground source={require('./icons/gamestart.png')} imageStyle={{opacity: 0.5, height: '70%', width: '100%', justifyContent: 'center'}}>
       <Text style={styles.statement}> Choose your equipment! </Text>
       <View style={styles.cardContainer}>
-        {systemImg.map(image => {
+        {systemImg.map((image, index) => {
           return(
-          <CardTiles system={image.system} url={image.url} list={list} addConsole={addConsole} removeConsole={removeConsole}/>
+          <CardTiles system={image.system} key={index} url={image.url} list={list} addConsole={addConsole} removeConsole={removeConsole}/>
           )
         })}
       </View>
