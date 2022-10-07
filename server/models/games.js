@@ -27,7 +27,7 @@ module.exports = {
   },
 
   postGame: (ownerid, gameid, gametitle, photourl) => {
-    const queryStr = "INSERT INTO games (ownerid, gameid, gametitle, photourl, consoleid) VALUES ($1, $2, $3, $4, (select id from consoles where ownerid = $1));";
+    const queryStr = "INSERT INTO games (ownerid, gameid, gametitle, photourl, consoleid) VALUES ($1, $2, $3, $4, (select id from consoles where ownerid = $1 LIMIT 1));";
     return pool.query(queryStr, [ownerid, gameid, gametitle, photourl])
       .then(() => {
         return;

@@ -18,10 +18,10 @@ function App() {
 
   return (
     <>
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <CreateStack />
-     </NavigationContainer>
-      {/* {isLogin && < Login />}
+     </NavigationContainer> */}
+      {isLogin && < Login />}
 
       {
         !isLogin && <NavigationContainer>
@@ -29,7 +29,7 @@ function App() {
             <Stack.Screen options={{ headerShown: false }} name="Login" component={Main} />
           </Stack.Navigator>
         </NavigationContainer>
-      } */}
+      }
     </>
   )
 }
