@@ -4,7 +4,7 @@ import PictureCard from './PictureCard.js';
 import {LinearGradient} from 'expo-linear-gradient'
 import axios from 'axios';
 
-export default function ProfilePicture ({authID}) {
+export default function ProfilePicture ({navigation}) {
   const [imageURL, setImageURL] = useState('');
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -32,22 +32,26 @@ export default function ProfilePicture ({authID}) {
 
   const submitImage = (imageURL, userID) => {
     //set loading toggle
-    axios.put('http://localhost:8000/api/users/profilepic', {
-      imageURL: imageURL,
-      userID: userID
-    })
-    .then(() => {
-      //toggle loading to done
-      //change view to next step
+    // axios.put('http://localhost:8000/api/users/profilepic', {
+    //   imageURL: imageURL,
+    //   userID: userID
+    // })
+    // .then(() => {
       console.log('success')
-    })
-    .catch((err) => {
-      console.log('fail', err.response)
-    })
+      navigation.navigate('complete')
+    // })
+    // .catch((err) => {
+    //   console.log('fail', err.response)
+    // })
   }
 
   return(
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+       <LinearGradient
+        style={{width: '100%', height: '100%', borderWidth: 1, borderColor: 'pink'}}
+        colors={['black', '#03045E', 'black']}
+        start={{x: 0, y: 0.5}}
+        end={{x: 1, y: 1}}>
       <Text style={styles.text}>
         Select your hero!
       </Text>
@@ -59,27 +63,23 @@ export default function ProfilePicture ({authID}) {
     })}
       </View>
       {currentImage !== 0
-       ? <LinearGradient
-          colors={['#00b4d8', '#03045E', 'black']}
-          start={{x: 0, y: 0.5}}
-          end={{x: 1, y: 1}}
-          style={styles.button}
-        >
-          <TouchableOpacity style={styles.button} onPress={() => submitImage(imageURL, 1)}>
-              <Text style={{color: 'white', textAlign: 'center', fontWeight: '600', fontSize: 25, marginTop: 20}}> Choose Image </Text>
-          </TouchableOpacity>
-        </LinearGradient>
+       ? <TouchableOpacity style={styles.button} onPress={() => submitImage(imageURL, 1)}>
+          <Text style={{color: 'white', textAlign: 'center', fontWeight: '600', fontSize: 25, marginTop: 4}}> Choose Image </Text>
+        </TouchableOpacity>
       : null}
-    </SafeAreaView>
+      </LinearGradient>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    padding: 10,
+    paddingTop: 100,
     width: '100%',
     height: '100%',
-    alignItems: 'center',
-    backgroundColor: 'linear-gradient(90deg, rgba(0,0,0,1) 9%, rgba(2,69,139,1) 70%, rgba(0,180,216,1) 100%)'
+    backgroundColor: 'black',
 
   },
   imageContainer: {
@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
-    height: '80%',
-    marginBottom: 10
+    height: '78%',
 
   },
   text: {
     color: 'white',
-    height: '9%',
-    marginTop: '10%',
+    height: '5%',
+    marginTop: '9%',
+    textAlign: 'center',
     fontSize: 25,
     fontWeight: '800',
     textShadowColor: '#90E0EF',
@@ -113,12 +113,13 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   button: {
-    width: '120%',
-    height: '40%',
-    marginBottom: 10,
-    alignItems: 'center',
+    width: '50%',
+    height: '5%',
+    marginTop: '5%',
+    alignSelf: 'center',
+    borderRadius: 50,
     borderWidth: 1,
-    borderRadius: 5,
-    borderColor: 'grey'
+    borderColor: 'pink',
+    backgroundColor: '#0077B6'
   }
 })

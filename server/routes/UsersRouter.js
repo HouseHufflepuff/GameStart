@@ -10,6 +10,8 @@ usersRouter.post('/consoles', insertConsoles);
 
 usersRouter.put('/profilepic', changeProfilePic);
 
-usersRouter.get('/trades', getTradeCounter);
+usersRouter.get('/tradecount', getTradeCounter);
 
 module.exports = usersRouter;
+
+//tradecount

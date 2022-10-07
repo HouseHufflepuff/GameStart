@@ -6,8 +6,6 @@ gamesRouter.get('/gamelist', getGames)
 
 gamesRouter.get('/userID', getGamesFromUser)
 
-gamesRouter.get('/:game', getGamesFromTrades)
-
 gamesRouter.get('/traded', getGamesFromTrades)
 
 gamesRouter.post('/post', addGame)
