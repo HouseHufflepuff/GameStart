@@ -25,24 +25,23 @@ export default function ProfilePicture ({navigation}) {
 
 
   const selectImage = (url, id) => {
-    // const imageObj = data.filter(image => id === image.id)
+
     setImageURL(url);
     setCurrentImage(id)
   }
 
   const submitImage = (imageURL, userID) => {
-    //set loading toggle
-    // axios.put('http://localhost:8000/api/users/profilepic', {
-    //   imageURL: imageURL,
-    //   userID: userID
-    // })
-    // .then(() => {
+    axios.put('http://13.57.240.106:8000/api/users/profilepic', {
+      imageURL: imageURL,
+      userID: userID
+    })
+    .then(() => {
       console.log('success')
       navigation.navigate('complete')
-    // })
-    // .catch((err) => {
-    //   console.log('fail', err.response)
-    // })
+    })
+    .catch((err) => {
+      console.log('fail', err.response)
+    })
   }
 
   return(
