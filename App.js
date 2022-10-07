@@ -19,15 +19,9 @@ function App() {
 
   return (
     <>
-<<<<<<< HEAD
-    {/* <NavigationContainer>
-      <CreateStack />
-    </NavigationContainer> */}
-=======
       {/* <NavigationContainer>
         <CreateStack />
      </NavigationContainer> */}
->>>>>>> 53ae8e4894087944d85bbe9d81d89d0d7a01ed5c
       {isLogin && < Login />}
 
       {
