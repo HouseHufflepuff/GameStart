@@ -27,20 +27,19 @@ export default function RegisterConsoles ({navigation}) {
   }
 
   const submitConsoles = (consoles, userID) => {
-    // consoles.forEach(system => {
-    //   axios.post('http://localhost:8000/api/users/consoles', {
-    //     system: system,
-    //     userID: userID
-    //   })
-    //   .then(() => {
-        //handle the submission and move onto the next page after loading
+    consoles.forEach(system => {
+      axios.post('http://13.57.240.106:8000/api/users/consoles', {
+        system: system,
+        userID: userID
+      })
+      .then(() => {
         console.log('success')
         navigation.navigate('location')
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.response)
-    //   })
-    // })
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
+    })
   }
 
 

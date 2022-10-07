@@ -19,7 +19,7 @@ module.exports = {
 
   createUser: (userInfo) => {
     //query to insert new user
-    console.log(userInfo)
+    console.log(userInfo, 'this is user info')
     const queryStr = `INSERT INTO users (first_name, last_name, username, password, email) VALUES ($1, $2, $3, $4, $5)`
     const {first_name, last_name, username, password, email_address} = userInfo
     return pool.query(queryStr, [first_name, last_name, username, password, email_address])

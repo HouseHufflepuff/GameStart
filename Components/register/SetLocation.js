@@ -11,18 +11,17 @@ export default function SetLocation ({navigation}) {
   const GOOGLE_KEY = 'AIzaSyBX1mVE77vY6fsEYU__Pe2M83qKooIOhuk';
 
   const submitLocation = (address, userID) => {
-    // //toggle loading...
-    // axios.put('http://localhost:8000/users/api/address', {
-    //   address: address,
-    //   userID: userID
-    // })
-    // .then(() => {
+    axios.put('http://13.57.240.106:8000/users/api/address', {
+      address: address,
+      userID: userID
+    })
+    .then(() => {
       console.log('success')
       navigation.navigate('profile-picture')
-    // })
-    // .catch((err) => {
-    //   console.log(err.response)
-    // })
+    })
+    .catch((err) => {
+      console.log(err.response)
+    })
   }
 
   const zipCodeSplit = (address) => {

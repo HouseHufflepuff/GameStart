@@ -20,7 +20,6 @@ export default function Register ({navigation}) {
   }
 
   const handleRegister = (e) => {
-    console.log(firstName, lastName, user, pass, email);
 
     if (!validate(email)) {
       alert('The email provided is not valid. Please insert valid email');
@@ -47,7 +46,7 @@ export default function Register ({navigation}) {
 
     setLoading(true);
     //firebase auth (?)
-    axios.post('http://localhost:8000/api/users/register', data)
+    axios.post('http://13.57.240.106:8000/api/users/register', data)
     .then(() => {
       console.log('hitting here')
       setTimeout(() => {

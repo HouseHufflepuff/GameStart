@@ -28,12 +28,13 @@ module.exports = {
     console.log(req.body, 'this is req body')
     //requires body params {first_name: val, last_name: val, username: val, password: val, email_address: val}
     const userObj = req.body;
+    console.log(userObj)
     createUser(userObj)
       .then(() => {
         res.sendStatus(201);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err, 'this is err');
       })
   },
 

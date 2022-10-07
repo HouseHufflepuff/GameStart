@@ -4,7 +4,7 @@ const axios = require('axios');
 
 module.exports = {
 
-  getGames: (req, res) => {
+  getGamesRawg: (req, res) => {
     if (req.query.hasOwnProperty('games')) {
       axios.get(`${process.env.API_BASE_URL}/games?key=${process.env.API_KEY}&search=${req.query.games}`)
       .then((games) => {
@@ -63,8 +63,10 @@ module.exports = {
 
   addGame: (req, res) => {
     //requires body w/ following keys and values assigned to that key
-    const {ownerid, gameid, game_title, photoURL, game_condition, case_status, listing_status} = req.body
-    postGame(ownerid, gameid, game_title, photoURL, game_condition, case_status, listing_status)
+    //break down game object into smaller parts
+    //what is game object
+    const {ownerid, id, name, background_image} = req.body
+    postGame(ownerid, id, name, background_image)
       .then(() => {
         res.sendStatus(201);
       })
