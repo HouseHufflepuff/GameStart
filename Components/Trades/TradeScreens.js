@@ -125,10 +125,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const updateList = () => {
-
-}
-
 export const TradeList = ({ navigation }) => {
   const [trades, setTrades] = useState('incoming');
   const [incomingTrades, setIncomingTrades] = useState([]);
@@ -217,6 +213,26 @@ export const TradeView = ({ navigation, route }) => {
     setTradeGroup(route.params.group)
   }, [])
 
+  const openMessaging = async (conversationId=null) => {
+    if(conversationId === null){
+      conversationId = await axios.get(`http://localhost:8000/api/messages/conversations/id/${tradeData.id}`)
+      console.log('ALAJSDF:LKASJDF:ALJSDF:LAJDSFL:AJS:JDFL');
+      console.log(conversationId);
+    }
+    console.log('FFFFFFFFFFFFFFFFFFF');
+    console.log(tradeData)
+    console.log(conversationId);
+    navigation.navigate('Messaging', {conversationId: conversationId, user: tradeData.myusername, otherUser : tradeData.theirusername, profilepic: tradeData.theirprofilepic});
+  };
+
+  const createConversation = () => {
+     axios.post('http://localhost:8000/api/messages/conversations', {tradeId : tradeData.id})
+     .then((response) => {
+      console.log(response.data.id);
+      openMessaging(response.data.id)
+     });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.tradingItem}>
@@ -238,7 +254,8 @@ export const TradeView = ({ navigation, route }) => {
       <View style={styles.decision}>
           {tradeStatus === 'accepted' ?
           <React.Fragment>
-            <Button containerStyle={styles.decisionItem} title="Message" color='#00B4d8'/>
+            <Button containerStyle={styles.decisionItem} title="Message" color='#00B4d8'
+            onPress={() => navigation.navigate('Messaging', {data: tradeData})}/>
             <Button
               containerStyle={styles.decisionItem}
               title="Cancel"
@@ -253,7 +270,14 @@ export const TradeView = ({ navigation, route }) => {
           :
           tradeGroup === 'incoming' ?
           <React.Fragment>
-            <Button containerStyle={styles.decisionItem} title="Accept" color='#00B4d8'/>
+            <Button containerStyle={styles.decisionItem} title="Accept" color='#00B4d8'
+              onPress={() => {
+                axios.put('http://localhost:8000/api/trades', {tradeId: tradeData.id, status: 'accepted'})
+                  .then(() => {
+                    navigation.navigate('Messaging', {data: tradeData})
+                  });
+              }}
+            />
             <Button
               containerStyle={styles.decisionItem}
               title="Deny"
@@ -272,7 +296,9 @@ export const TradeView = ({ navigation, route }) => {
             onPress={() => {
               axios.put('http://localhost:8000/api/trades', {tradeId: tradeData.id, status: 'cancelled'})
                 .then(() => {
-                  {navigation.pop()}
+                  navigation.navigate('TradeDetails', {id: tradeData.mygameid, gametitle: tradeData.mygametitle,
+                    photourl: tradeData.myphotourl, profilepic: tradeData.myprofilepic, gamecondition: tradeData.mygamecondition,
+                    casestatus: tradeData.mycasestatus, username: tradeData.myusername})
                 });
             }}/>
           }
@@ -334,6 +360,7 @@ export const TradeDetails = ({ navigation, route }) => {
          <Avatar
             containerStyle={{marginTop: 20, alignSelf: 'center', borderColor: 'white', borderWidth: 1}}
             size={120}
+            rounded
             source={{uri: gameData.profilepic}}
             key={gameData.id}
             />

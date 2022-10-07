@@ -50,26 +50,26 @@ export default function Register ({navigation}) {
       email_address: email
     }
 
-    setLoading(true);
+    // setLoading(true);
     //firebase auth (?)
-    axios.post('http://13.57.240.106:8000/api/users/register', data)
-    .then(() => {
-      axios.get(`http://13.57.240.106.8000/api/users/:${user}`)
-      .then((id) => {
-        setUserID(id)
-        console.log('hitting here')
-        setTimeout(() => {
-          setLoading(false);
-          console.log('set time out done')
+    // axios.post('http://13.57.240.106:8000/api/users/register', data)
+    // .then(() => {
+    //   axios.get(`http://13.57.240.106.8000/api/users/:${user}`)
+    //   .then((id) => {
+    //     setUserID(id)
+    //     console.log('hitting here')
+    //     setTimeout(() => {
+    //       setLoading(false);
+    //       console.log('set time out done')
           navigation.navigate('register-consoles', {userID: userID})
-        }, 500)
-      })
-    })
-    .catch((err) => {
-      alert('error registering')
-      console.log(err.response)
-      setLoading(false);
-    })
+    //     }, 500)
+    //   })
+    // })
+    // .catch((err) => {
+    //   alert('error registering')
+    //   console.log(err.response)
+    //   setLoading(false);
+    // })
 
   }
     //what are states? (setState{user: user, password: password, email: email, consoles: consoles, }), {isLoading},
@@ -84,11 +84,11 @@ export default function Register ({navigation}) {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-       <LinearGradient
+       {/* <LinearGradient
         style={{width: '100%'}}
-        colors={['black', '#03045E', 'black']}
-        start={{x: 0, y: 0.5}}
-        end={{x: 1, y: 1}}>
+        colors={['rgba(3,4,94,1)', 'rgba(0,119,182,1)', 'rgba(0,180,216,1)', 'rgba(40,192,222,1)', 'rgba(97,209,231,1)', 'rgba(202,240,248,1)']}
+        start={{x: .25, y: 0.5}}
+        end={{x: 0, y: 0}}> */}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{alignItems: 'center'}}>
       <ImageBackground
@@ -159,7 +159,7 @@ export default function Register ({navigation}) {
       }
       </View>
       </TouchableWithoutFeedback>
-      </LinearGradient>
+      {/* </LinearGradient> */}
     </KeyboardAvoidingView>
   )
 }
@@ -174,8 +174,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     flexShrink: 1,
-    backgroundColor: 'black'
+    backgroundColor: '#121212'
   },
+
   firstNameGuide: {
     color: 'white',
     alignSelf: 'flex-start',
@@ -197,8 +198,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 120,
     width: 380,
-    textAlign: 'center',
+    textAlign: 'justify',
     color: 'white',
+    padding: 15,
     fontSize: 18
   },
   nameForms: {

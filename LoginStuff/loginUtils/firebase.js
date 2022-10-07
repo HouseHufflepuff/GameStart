@@ -19,7 +19,8 @@ const firebaseConfig = {
   storageBucket: "gamestart-7e50b.appspot.com",
   messagingSenderId: "507998609222",
   appId: "1:507998609222:web:339df22d35f8f8bec3cf47"
-};
+   };
+
 
 
 // Initialize Firebase

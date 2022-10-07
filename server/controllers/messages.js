@@ -14,9 +14,21 @@ module.exports.postMessage = (req, res) => {
 };
 
 module.exports.getConversation = (req, res) => {
+  console.log('hi')
   models.getConversation(req.params.conversationId)
   .then((response) => {
-    res.status(200);
+    res.send(response);
+  })
+  .catch((err) => {
+    res.status(500);
+    res.send(err);
+  })
+};
+
+module.exports.getConvoId = (req, res) => {
+  console.log(req.params.tradeId)
+  models.getConversationId(req.params.tradeId)
+  .then((response) => {
     res.send(response);
   })
   .catch((err) => {

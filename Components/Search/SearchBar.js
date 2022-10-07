@@ -102,7 +102,7 @@ export default function SearchBar( { console, callback } ) {
         ></TextInput>
         { text.length > 0 &&
           <FlatList
-            style={{marginTop: 20, width: '100%'}}
+            style={{marginTop: 20, width: '100%', backgroundColor:'#181818'}}
             data={games}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) =>
@@ -119,7 +119,7 @@ export default function SearchBar( { console, callback } ) {
             }
           />
         }
-        <StatusBar style="auto" />
+      <StatusBar barStyle={'light-content'}/>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
@@ -154,9 +154,9 @@ const styles = StyleSheet.create({
     right: 10,
     width: '90%',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 2,
     borderColor: 'white',
-    backgroundColor: '#121212',
+    backgroundColor: '#29446b',
     marginVertical: 10,
     marginHorizontal: 10,
   },

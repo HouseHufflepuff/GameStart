@@ -5,6 +5,7 @@ const { getGames, postGames, putGames } = require('./controllers/gamesController
 const { insertAddress, insertUser, insertConsoles, changeProfilePic, getTradeCounter, getUser, getUserProfile } = require('./controllers/users.js');
 const { getGamesRawg, getGamesFromUser, getGamesFromTrades, addGame, getAllGames } = require('./controllers/games.js');
 const { postFavorites, getFavoriteGames } = require('./controllers/favorites.js');
+const controller = require('./controllers/messages.js');
 
 // USERS
 router.post('/users/register', insertUser);
@@ -36,16 +37,17 @@ router.put('/trades', putTrades)
 // LOCATION
 router.use('/locations', getLocations);
 router.get('/locations/games', getLocationsGames);
+
 // MESSAGES
+
+router.post('/messages', controller.postMessage);
+router.get('/messages/:tradeId', controller.getConvoId)
+router.get('/messages/conversations/:conversationId', controller.getConversation);
 
 // FAVORITES
 router.post('/favorites', postFavorites)
 router.get('/favorites', getFavoriteGames)
 
 // CONSOLES
-
-
-// LOCATIONS
-// router.get('/locations', getLocationsData)
 
 module.exports = router
