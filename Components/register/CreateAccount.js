@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
 
-export default function Register () {
+export default function Register ({navigation}) {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -44,22 +45,22 @@ export default function Register () {
       email_address: email
     }
 
-    console.log(data);
-
     setLoading(true);
     //firebase auth (?)
-    axios.post('http://localhost:8000/api/register', data)
+    axios.post('http://localhost:8000/api/users/register', data)
     .then(() => {
-      setTimeOut(() => {
+      console.log('hitting here')
+      setTimeout(() => {
         setLoading(false);
+        console.log('set time out done')
+        navigation.navigate('register-consoles')
       }, 500)
     })
     .catch((err) => {
       alert('error registering')
-      console.log(err)
+      console.log(err.response)
       setLoading(false);
     })
-    //send form data to database/firebase to create account
 
   }
     //what are states? (setState{user: user, password: password, email: email, consoles: consoles, }), {isLoading},
@@ -73,8 +74,14 @@ export default function Register () {
 
 
   return (
-
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+       <LinearGradient
+        style={{width: '100%'}}
+        colors={['black', '#03045E', 'black']}
+        start={{x: 0, y: 0.5}}
+        end={{x: 1, y: 1}}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{alignItems: 'center'}}>
       <ImageBackground
         style={styles.logo}
         source={require('./icons/gamestart.png')}
@@ -90,47 +97,47 @@ export default function Register () {
           Last Name
         </Text>
       </View>
-      <View style={styles.guideContainer}>
-      <TextInput
-        style={styles.nameForms}
-        id='first_name'
-        placeholder='First'
-       placeholderTextColor="gray"
-        onChangeText={(name) => setFirstName(name)}
-      />
-      <TextInput
-        style={styles.nameForms}
-        id='last_name'
-        placeholder='Last'
-       placeholderTextColor="gray"
-        onChangeText={(lastName) => setLastName(lastName)}
-      />
-      </View>
-      <Text style={styles.formGuide}> Username </Text>
-      <TextInput
-        style={styles.forms}
-        id='username'
-        placeholder='Username'
-       placeholderTextColor="gray"
-        onChangeText={(username) => setUsername(username)}
-      />
-      <Text style={styles.formGuide}> Password </Text>
-      <TextInput
-        style={styles.forms}
-        id='password'
-        secureTextEntry="true"
-        placeholder='Password'
-       placeholderTextColor="gray"
-        onChangeText={(password) => setPassword(password)}
-      />
-      <Text style={styles.formGuide}> Email </Text>
-      <TextInput
-        style={styles.forms}
-        id='email'
-        placeholder='Email'
-       placeholderTextColor="gray"
-        onChangeText={(email) => setEmail(email)}
-      />
+        <View style={styles.guideContainer}>
+        <TextInput
+          style={styles.nameForms}
+          id='first_name'
+          placeholder='First'
+          placeholderTextColor="gray"
+          onChangeText={(name) => setFirstName(name)}
+        />
+        <TextInput
+          style={styles.nameForms}
+          id='last_name'
+          placeholder='Last'
+        placeholderTextColor="gray"
+          onChangeText={(lastName) => setLastName(lastName)}
+        />
+        </View>
+        <Text style={styles.formGuide}> Username </Text>
+        <TextInput
+          style={styles.forms}
+          id='username'
+          placeholder='Username'
+        placeholderTextColor="gray"
+          onChangeText={(username) => setUsername(username)}
+        />
+        <Text style={styles.formGuide}> Password </Text>
+        <TextInput
+          style={styles.forms}
+          id='password'
+          secureTextEntry="true"
+          placeholder='Password'
+        placeholderTextColor="gray"
+          onChangeText={(password) => setPassword(password)}
+        />
+        <Text style={styles.formGuide}> Email </Text>
+        <TextInput
+          style={styles.forms}
+          id='email'
+          placeholder='Email'
+        placeholderTextColor="gray"
+          onChangeText={(email) => setEmail(email)}
+        />
       <Text style={styles.terms}>
         By registering, you agree to GameStart's Terms of Service.
       </Text>
@@ -141,7 +148,10 @@ export default function Register () {
       style={styles.registerBtn}
       color='white' title="Register" onPress={handleRegister} />
       }
-    </View>
+      </View>
+      </TouchableWithoutFeedback>
+      </LinearGradient>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -160,12 +170,11 @@ const styles = StyleSheet.create({
   firstNameGuide: {
     color: 'white',
     alignSelf: 'flex-start',
-    flexGrow: .25
   },
   nameGuide: {
     color: 'white',
     alignSelf: 'flex-start',
-    marginLeft: 5,
+    marginLeft: '18%',
     flexGrow: .25
   },
   formGuide: {
@@ -179,8 +188,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 120,
     width: 380,
-    marginLeft: 20,
-    marginRight: 20,
+    textAlign: 'center',
     color: 'white',
     fontSize: 18
   },

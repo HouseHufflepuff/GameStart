@@ -1,3 +1,8 @@
-const Router = require('express').Router();
+const messagesRouter = require('express').Router();
+const controller = require('../controllers/messages.js');
 
-module.exports = Router;
+messagesRouter.post('/', controller.postMessage);
+
+messagesRouter.get('/conversations/:conversationId', controller.getConversation);
+
+module.exports = messagesRouter;

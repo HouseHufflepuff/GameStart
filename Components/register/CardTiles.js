@@ -1,49 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, TouchableOpacity, ImageBackground} from 'react-native';
 
-export default function CardTiles ({system, addConsole, removeConsole, list}) {
+export default function CardTiles ({system, url, addConsole, removeConsole, list}) {
 
-  //need to fix consoles images
-  if (list) {
+  if (list[system]) {
     return (
-      <TouchableOpacity id="xbox" style={styles.card} onPress={() => removeConsole(system)}>
-      <Text style={styles.text}>
-        {system} ✓
-      </Text>
+      <TouchableOpacity style={styles.selectedCard} onPress={() => removeConsole(system)}>
       <ImageBackground
         style={styles.image}
-        source={require(`./icons/Xbox.png`)}
+        imageStyle={{borderRadius: 50}}
+        source={{uri: url}}
       />
     </TouchableOpacity>
     )
+  } else {
+    return(
+      <TouchableOpacity style={styles.card} onPress={() => addConsole(system)}>
+        <ImageBackground
+          style={styles.image}
+          imageStyle={{borderRadius: 50}}
+          source={{uri: url}}
+        />
+      </TouchableOpacity>
+    )
+  }
   }
 
 
 
-  return(
-    <TouchableOpacity id="xbox" style={styles.card} onPress={() => addConsole(system)}>
-      <Text style={styles.text}>
-        {system}
-      </Text>
-      <ImageBackground
-        style={styles.image}
-        source={require(`./icons/Xbox.png`)}
-      />
-    </TouchableOpacity>
-  )
-}
 
 const styles = StyleSheet.create({
   card: {
     borderWidth: 1,
-    borderColor: 'white',
-    width: 175,
-    height: 200,
-    borderWidth: 1,
-    borderColor: '#90E0EF',
-    borderRadius: 20,
+    borderColor: '#0077b6',
+    width: '45%',
+    height: '30%',
+    borderRadius: 50,
     alignItems: 'center',
     margin: 10,
+    backgroundColor: 'white'
   },
   text: {
     color: 'white',
@@ -54,7 +49,16 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     height: '100%',
-    width: '100%',
-
+    width: '100%'
+  },
+  selectedCard: {
+    borderWidth: 3,
+    borderColor: 'red',
+    width: '45%',
+    height: '30%',
+    borderRadius: 50,
+    alignItems: 'center',
+    margin: 10,
+    backgroundColor: 'white'
   }
 })

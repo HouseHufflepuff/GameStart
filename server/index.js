@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
-const router = require('./routes/router.js');
-const pool = require('./connection.js');
+const router = require('./routes');
 const cors = require('cors');
 const morgan = require('morgan');
 require('dotenv').config();
@@ -20,5 +19,3 @@ app.use('/api', router);
 app.listen(8000, () => {
   console.log('server started on port 8000')
 });
-
-pool.connect();
