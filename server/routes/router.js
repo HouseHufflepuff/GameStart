@@ -11,5 +11,3 @@ Router.use('/messages', messagesRouter);
 
 
 module.exports = Router;
-
-//users/tradecount
