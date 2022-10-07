@@ -17,7 +17,7 @@ import DetailsScreen from './DetailsScreen';
 import Search from './Search/Search.js';
 import MapScreen from './Map/MapScreen';
 import ProfileScreen from './ProfileScreen';
-import TradeScreen from './TradeScreen';
+import Trade from '../TradeStack.js';
 
 //Screen names
 const homeName = "Home";
@@ -85,7 +85,7 @@ function Main({ navigation }) {
         />
 
 
-        <Tab.Screen name={tradeName} component={TradeScreen}
+        <Tab.Screen name={tradeName} component={Trade}
           options={{
             tabBarIcon: ({ focused }) => (
               <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

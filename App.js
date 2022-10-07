@@ -7,6 +7,7 @@ import CreateAccount from './Components/register/CreateAccount.js';
 import RegisterConsoles from './Components/register/RegisterConsoles.js';
 import ProfilePicture from './Components/register/ProfilePicture.js';
 import RegisterGames from './Components/register/RegisterGames.js';
+import TradeModule from './TradeStack.js';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
