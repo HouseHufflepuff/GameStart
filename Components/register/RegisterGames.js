@@ -5,6 +5,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 
 
 //MOST LIKELY NOT USING
+//DO NOT USE DIS
 export default function RegisterGames () {
   const [gamesList, setGamesList] = useState([]);
   const [games, setGames] = useState([]);
@@ -35,43 +36,21 @@ export default function RegisterGames () {
     }
   }
 
-  const addGame = (game) => {
-    setGames(prev => [...prev, game])
-
+  const addGame = (gameObj) => {
+    axios.post('http://13.57.240.106:8000/api/games/post', gameObj)
+      .then(() => {
+        res.sendStatus(201)
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
   }
-
-  console.log(gamesList)
-
-  const Item = ({item, onPress, textColor, backgroundColor}) => (
-    <TouchableOpacity
-     onPress={onPress}>
-      <Text style={{textColor}}>
-        {item.game}
-      </Text>
-    </TouchableOpacity>
-  );
-
-  const renderItem = ({item}) => {
-
-    const backgroundColor = games.includes(item.name)? 'pink' : '#03045E'
-    const textColor = 'white'
-
-    return(
-      <Item
-        item={item}
-        onPress={() => addGame(item.name)}
-        backgroundColor={{backgroundColor}}
-        textColor={{textColor}}
-      />
-    )
-  }
-
 
   return(
 
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.text}> Search for a game! </Text>
+        <Text style={styles.text}> Add a game! </Text>
         <TextInput style={styles.forms} onChangeText={(query) => handleSearch(query)}> </TextInput>
       </View>
       <View style={styles.listContainer}>
@@ -87,6 +66,7 @@ export default function RegisterGames () {
   )
 }
 
+//getGame
 
 const styles = StyleSheet.create({
   container: {

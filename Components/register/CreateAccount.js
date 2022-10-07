@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
 
-export default function Register () {
+export default function Register ({navigation}) {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -19,7 +20,6 @@ export default function Register () {
   }
 
   const handleRegister = (e) => {
-    console.log(firstName, lastName, user, pass, email);
 
     if (!validate(email)) {
       alert('The email provided is not valid. Please insert valid email');
@@ -46,12 +46,13 @@ export default function Register () {
 
     setLoading(true);
     //firebase auth (?)
-    axios.post('http://localhost:8000/api/users/register', data)
+    axios.post('http://13.57.240.106:8000/api/users/register', data)
     .then(() => {
       console.log('hitting here')
-      setTimeOut(() => {
+      setTimeout(() => {
         setLoading(false);
-        //nav to the console selections
+        console.log('set time out done')
+        navigation.navigate('register-consoles')
       }, 500)
     })
     .catch((err) => {
@@ -59,7 +60,6 @@ export default function Register () {
       console.log(err.response)
       setLoading(false);
     })
-    //send form data to database/firebase to create account
 
   }
     //what are states? (setState{user: user, password: password, email: email, consoles: consoles, }), {isLoading},
@@ -74,6 +74,11 @@ export default function Register () {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+       <LinearGradient
+        style={{width: '100%'}}
+        colors={['black', '#03045E', 'black']}
+        start={{x: 0, y: 0.5}}
+        end={{x: 1, y: 1}}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{alignItems: 'center'}}>
       <ImageBackground
@@ -144,6 +149,7 @@ export default function Register () {
       }
       </View>
       </TouchableWithoutFeedback>
+      </LinearGradient>
     </KeyboardAvoidingView>
   )
 }
@@ -163,12 +169,11 @@ const styles = StyleSheet.create({
   firstNameGuide: {
     color: 'white',
     alignSelf: 'flex-start',
-    flexGrow: .25
   },
   nameGuide: {
     color: 'white',
     alignSelf: 'flex-start',
-    marginLeft: 5,
+    marginLeft: '18%',
     flexGrow: .25
   },
   formGuide: {
@@ -182,8 +187,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 120,
     width: 380,
-    marginLeft: 20,
-    marginRight: 20,
+    textAlign: 'center',
     color: 'white',
     fontSize: 18
   },

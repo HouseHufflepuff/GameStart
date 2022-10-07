@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { users } from './Map/mapHelpers/users.js';
 import { getDistance, isPointWithinRadius } from 'geolib';
+import axios from 'axios';
 import * as Location from 'expo-location';
 import GameCard from './Map/GameCard.jsx';
 import TrendyCard from './Map/TrendyCard.jsx';
@@ -21,6 +22,27 @@ function HomeScreen({ navigation }) {
   const [kilometers, setKilometers] = useState(5);
 
   useEffect(() => {
+
+
+    axios.get('https://localhost:8000/api/locations',
+      {
+        headers: {
+          "Content-type": "Application/json",
+        }
+      }
+    ).then((data) => {
+      console.log(data.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+
+    // axios.get('https://localhost:8000/api/locations')
+    //   .then((data) => {
+    //     console.log(data.data);
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   })
+
     getMiles();
 
     let sorted = users.slice();
@@ -36,7 +58,6 @@ function HomeScreen({ navigation }) {
     setCloseGames(sortGames);
   }, [])
 
-
   const getMiles = () => {
 
     users.forEach((item) => {
@@ -47,6 +68,21 @@ function HomeScreen({ navigation }) {
       data = (data * 0.000621371192).toFixed(2);
       item.miles = data;
     })
+  }
+
+  const getUsersData = async () => {
+
+    try {
+      let response = await
+
+        console.log(response.data)
+    } catch (error) {
+      console.log('err', error);
+    }
+
+
+
+
   }
 
   useEffect(() => {

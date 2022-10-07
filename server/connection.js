@@ -1,6 +1,6 @@
 const path = require('path')
-require('dotenv').config({path: path.resolve(__dirname, '../.env')});
-const {Pool} = require("pg")
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+const { Pool } = require("pg")
 
 const config = {
   user: process.env.PGUSER,

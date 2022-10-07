@@ -6,7 +6,8 @@ module.exports = {
 
   updateAddress: (address, userID) => {
     //query to update user address
-    const queryStr = `UPDATE users SET address = $1 WHERE fiyabase_authkey = $2`
+    console.log(address, userID)
+    const queryStr = `UPDATE users SET address = $1 WHERE id = $2`
     return pool.query(queryStr, [address, userID])
       .then(() => {
         return;
@@ -18,6 +19,7 @@ module.exports = {
 
   createUser: (userInfo) => {
     //query to insert new user
+    console.log(userInfo, 'this is user info')
     const queryStr = `INSERT INTO users (first_name, last_name, username, password, email) VALUES ($1, $2, $3, $4, $5)`
     const {first_name, last_name, username, password, email_address} = userInfo
     return pool.query(queryStr, [first_name, last_name, username, password, email_address])
@@ -55,12 +57,15 @@ module.exports = {
   },
 
   getTradeAmount: (userID) => {
+    //working
     //query to return total amount of trades successful
-    const queryStr = 'SELECT * FROM trades WHERE trade_status = completed AND (partyid = $1 or counterpartyid = $1)';
+    const queryStr = "SELECT * FROM games WHERE listingstatus = 'Traded' AND ownerid = $1";
+    console.log(queryStr);
     return pool.query(queryStr, [userID])
       .then((trades) => {
+        console.log(trades);
         //return the total amount of trades
-        return trades.rows.length
+        return trades.rows
       })
       .catch((err) => {
         console.log(err, 'getTradeAmount')

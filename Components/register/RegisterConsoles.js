@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, ImageBackground} from 'react-native';
 import axios from 'axios';
+import { LinearGradient } from 'expo-linear-gradient';
 import CardTiles from './CardTiles.js';
 
-export default function RegisterConsoles () {
+export default function RegisterConsoles ({navigation}) {
   const [consoles, setConsoles] = useState([]);
   const [list, setList] = useState({Xbox: false, Playstation: false, NintendoSwitch: false, Pc: false});
-  const [isLoading, setLoading] = useState(false);
 
-  console.log(consoles);
-  console.log(list);
-
+  const systemImg = [{system: 'Xbox', url: 'https://i.ibb.co/m6m40rj/xbox-logo.png'}, {system: 'Playstation', url: 'https://i.ibb.co/myLWzfJ/Play-Station-Logo-wine.png'}, {system: 'NintendoSwitch', url: 'https://i.ibb.co/pZdYnzh/8ad56e93021d1d5a33af4a54f7ab1e3f.jpg'}, {system: 'Pc', url: 'https://i.ibb.co/sRDyNYV/PC.png'}];
 
   const addConsole = (system) => {
     setConsoles(prev => [...prev, system])
@@ -30,37 +28,43 @@ export default function RegisterConsoles () {
 
   const submitConsoles = (consoles, userID) => {
     consoles.forEach(system => {
-      axios.post('http://localhost:8000/api/users/consoles', {
+      axios.post('http://13.57.240.106:8000/api/users/consoles', {
         system: system,
         userID: userID
       })
       .then(() => {
-        //handle the submission and move onto the next page after loading
         console.log('success')
+        navigation.navigate('location')
       })
       .catch((err) => {
         console.log(err.response)
       })
     })
-    //format data
-    //get ready for send
   }
 
 
   return(
-    <View style={styles.container}>
+    <View style={styles.container} >
+      <LinearGradient
+        colors={['black', '#03045E', 'black']}
+        start={{x: 0, y: 0.5}}
+        end={{x: 1, y: 1}}>
+      <ImageBackground source={require('./icons/gamestart.png')} imageStyle={{opacity: 0.5, height: '70%', width: '100%', justifyContent: 'center'}}>
       <Text style={styles.statement}> Choose your equipment! </Text>
       <View style={styles.cardContainer}>
-        <CardTiles system="Xbox" list={list.Xbox}addConsole={addConsole} removeConsole={removeConsole}/>
-        <CardTiles system="Playstation" list={list.Playstation}addConsole={addConsole} removeConsole={removeConsole}/>
-        <CardTiles system="NintendoSwitch" list={list.NintendoSwitch}addConsole={addConsole} removeConsole={removeConsole}/>
-        <CardTiles system="Pc" list={list.Pc} addConsole={addConsole} removeConsole={removeConsole}/>
+        {systemImg.map((image, index) => {
+          return(
+          <CardTiles system={image.system} key={index} url={image.url} list={list} addConsole={addConsole} removeConsole={removeConsole}/>
+          )
+        })}
       </View>
-      <TouchableOpacity style={styles.button} onPress={() => submitConsoles(consoles, 1)}>
-        <Text>
+      <TouchableOpacity style={styles.button} onPress={() => submitConsoles(consoles, 5)}>
+        <Text style={{marginTop: '2%',textAlign: 'center', fontSize: 30, fontWeight: '500', color: 'white'}}>
           Proceed
         </Text>
       </TouchableOpacity>
+      </ImageBackground>
+      </LinearGradient>
     </View>
 
   )
@@ -75,11 +79,15 @@ const styles = StyleSheet.create({
 
   },
   statement: {
-    marginTop: 100,
+    marginTop: '30%',
     color: 'white',
     alignSelf: 'center',
-    fontSize: 20,
-    height: '10%'
+    fontSize: 25,
+    height: '15%',
+    textShadowColor: '#90E0EF',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 4,
+    fontWeight: '500'
   },
   container: {
     flexDirection: 'column',
@@ -91,12 +99,13 @@ const styles = StyleSheet.create({
   },
   button: {
     color: 'white',
-    borderWidth: 25,
-    borderRadius: 10,
-    borderColor: '#00B4D8',
-    width: '100%',
-    height: '5%',
-    marginBottom: 10
+    borderWidth: 2,
+    borderRadius: 30,
+    width: '40%',
+    height: '7%',
+    marginBottom: '-35%',
+    backgroundColor: '#0077B6',
+    alignSelf: 'center'
   }
 
 })

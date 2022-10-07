@@ -1,8 +1,17 @@
 const { updateAddress, createUser, addConsoles, updateProfilePicture, getTradeAmount } = require('../models/users.js')
 
 module.exports = {
+<<<<<<< HEAD
+  getUsers: (req, res) => {
+    console.log('get here')
+    const params = req.body;
+    console.log(params);
+  },
+=======
   insertAddress: (req, res) => {
+    //should work
     //requires body params {address: address, userID: userID}
+    console.log(req.body);
     const {address, userID} = req.body;
     updateAddress(address, userID)
       .then(() => {
@@ -14,15 +23,18 @@ module.exports = {
       })
   },
 
-  insertUser: async (req, res) => {
+>>>>>>> de0c967312bc31bbd75604985007652fd347ba5f
+  insertUser: (req, res) => {
+    console.log(req.body, 'this is req body')
     //requires body params {first_name: val, last_name: val, username: val, password: val, email_address: val}
     const userObj = req.body;
+    console.log(userObj)
     createUser(userObj)
       .then(() => {
         res.sendStatus(201);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err, 'this is err');
       })
   },
 
@@ -54,9 +66,11 @@ module.exports = {
 
   getTradeCounter: (req, res) => {
     //requires query params of {userID: val}
+    console.log('hitting here')
     const {userID} = req.query;
     getTradeAmount(userID)
       .then((tradeCount) => {
+        console.log(tradeCount)
         res.send(tradeCount);
       })
       .catch((err) => {
