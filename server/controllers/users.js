@@ -1,13 +1,6 @@
 const { updateAddress, createUser, addConsoles, updateProfilePicture, getTradeAmount } = require('../models/users.js')
 
 module.exports = {
-<<<<<<< HEAD
-  getUsers: (req, res) => {
-    console.log('get here')
-    const params = req.body;
-    console.log(params);
-  },
-=======
   insertAddress: (req, res) => {
     //should work
     //requires body params {address: address, userID: userID}
@@ -23,7 +16,6 @@ module.exports = {
       })
   },
 
->>>>>>> de0c967312bc31bbd75604985007652fd347ba5f
   insertUser: (req, res) => {
     console.log(req.body, 'this is req body')
     //requires body params {first_name: val, last_name: val, username: val, password: val, email_address: val}

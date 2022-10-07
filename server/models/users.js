@@ -70,5 +70,16 @@ module.exports = {
       .catch((err) => {
         console.log(err, 'getTradeAmount')
       })
+  },
+
+  getUserID: (username) => {
+    const queryStr = "Select id from users where username = $1;";
+    return pool.query(queryStr, [username])
+      .then((id) => {
+        return id.rows;
+      })
+      .catch((err) => {
+        console.log(err.response);
+      })
   }
 }
