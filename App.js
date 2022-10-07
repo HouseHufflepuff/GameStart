@@ -9,7 +9,7 @@ import ProfilePicture from './Components/register/ProfilePicture.js';
 import RegisterGames from './Components/register/RegisterGames.js';
 import SetLocation from './Components/register/SetLocation.js';
 import CreateStack from './Components/register/Main.js';
-import TradeModule from './TradeStack.js';
+// import TradeModule from './Components/Trades/TradeStack.js';
 import Login from './LoginStuff/loginComponents/Login.js';
 
 function App() {
@@ -19,10 +19,10 @@ function App() {
 
   return (
     <>
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <CreateStack />
-     </NavigationContainer>
-      {/* {isLogin && < Login />}
+     </NavigationContainer> */}
+      {isLogin && < Login />}
 
       {
         !isLogin && <NavigationContainer>
@@ -30,7 +30,7 @@ function App() {
             <Stack.Screen options={{ headerShown: false }} name="Login" component={Main} />
           </Stack.Navigator>
         </NavigationContainer>
-      } */}
+      }
     </>
   )
 }

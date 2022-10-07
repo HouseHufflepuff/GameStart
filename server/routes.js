@@ -45,6 +45,6 @@ router.get('/favorites', getFavoriteGames)
 
 
 // LOCATIONS
-router.get('/locations', getLocationsData)
+// router.get('/locations', getLocationsData)
 
 module.exports = router
