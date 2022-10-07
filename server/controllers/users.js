@@ -1,4 +1,4 @@
-const { updateAddress, createUser, addConsoles, updateProfilePicture, getTradeAmount, getUserID } = require('../models/users.js')
+const { updateAddress, createUser, addConsoles, updateProfilePicture, getTradeAmount, getUserID, getProfileData } = require('../models/users.js')
 
 module.exports = {
   insertAddress: (req, res) => {
@@ -76,6 +76,18 @@ module.exports = {
     getUserID(username)
       .then((id) => {
         res.send(id);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      })
+  },
+
+  getUserProfile: (req, res) => {
+    const {userID} = req.params
+    getProfileData(userID)
+      .then((data) => {
+        console.log(data)
+        res.send(data);
       })
       .catch((err) => {
         console.log(err.response);

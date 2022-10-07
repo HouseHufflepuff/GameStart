@@ -82,5 +82,28 @@ module.exports = {
       .catch((err) => {
         console.log(err.response);
       })
+  },
+  getProfileData: (userID) => {
+    //users table has firstname, lastname, username, address, email, profilepic
+
+    //only required to get profile picture + be able to set description + trades made
+    const queryStr = "Select profilepic, description, array(select id from trades where partygameid = $1 or counterpartygameid = $1) as user_trades from users where id = $1"
+    //returns profile pic url for user, description if exists, and array of all trade ids to get length of trades (includes all trades, even pending)
+    /*
+    data looks like
+    [{
+      profilepic: url,
+      description: null / string,
+      user_trades: [id, id, id...id]
+    }]
+    */
+    return pool.query(queryStr, [userID])
+      .then((data) => {
+        //returns just the results of query
+        return data.rows;
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
   }
 }
