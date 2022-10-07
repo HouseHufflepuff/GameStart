@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { getLocations, getLocationsGames } = require('./controllers/locations');
 const { getTrades, postTrades, putTrades } = require('./controllers/tradesController');
 const { getGames, postGames, putGames } = require('./controllers/gamesController');
-const { insertAddress, insertUser, insertConsoles, changeProfilePic, getTradeCounter, getUser } = require('./controllers/users.js');
+const { insertAddress, insertUser, insertConsoles, changeProfilePic, getTradeCounter, getUser, getUserProfile } = require('./controllers/users.js');
 const { getGamesRawg, getGamesFromUser, getGamesFromTrades, addGame, getAllGames } = require('./controllers/games.js');
 const { postFavorites, getFavoriteGames } = require('./controllers/favorites.js');
 
@@ -13,6 +13,7 @@ router.post('/users/consoles', insertConsoles);
 router.put('/users/profilepic', changeProfilePic);
 router.get('/users/tradecount', getTradeCounter);
 router.get('/users/:username', getUser)
+router.get('/users/:userID', getUserProfile)
 // GAMES
 router.get('/games/gamelist', getGamesRawg)
 router.get('/games/userID', getGamesFromUser)
@@ -29,7 +30,7 @@ router.put('/games/gameid', putGames)
 router.get('/trades', getTrades)
 router.get('/trades:userId', getTrades)
 router.get('/trades/:userId', getTrades)
-router.post('/trades', postGames)
+router.post('/trades', postGames) //should be postTrade?
 router.put('/trades', putTrades)
 
 // LOCATION
