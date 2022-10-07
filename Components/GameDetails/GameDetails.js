@@ -179,7 +179,7 @@ export default function GameDetails( { gameId, callback, setView } ) {
           }
         </View>
         <View style={styles.buttonsBar} onStartShouldSetResponder={() => true} >
-          <TouchableOpacity onPress={() => addGame(game, 11)}>
+          <TouchableOpacity onPress={() => addGame(game, 2)}>
             <LinearGradient style={styles.button} start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#CAF0F8', '#90e0EF', '#00B4D8', '#0077B6', '#03045E' ]}>
               <Text style={{fontSize: 20, fontWeight: 'bold', fontColor: '#03045E'}}>Post Game +</Text>
             </LinearGradient>
