@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { getTrades, postTrades, putTrades } = require('./controllers/tradesController');
 const { getGames, postGames, putGames } = require('./controllers/gamesController');
+const { getLocationsData } = require('./controllers/locations');
+const { getRoughCompassDirection } = require('geolib');
 
 // USERS
 
@@ -17,6 +19,10 @@ router.get('/trades:userId', getTrades)
 router.get('/trades/:userId', getTrades)
 router.post('/trades')
 router.put('/trades')
+
+
+// LOCATION
+router.use('/locations', getLocationsData);
 
 // MESSAGES
 
