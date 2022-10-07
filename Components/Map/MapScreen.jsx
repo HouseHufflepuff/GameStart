@@ -19,6 +19,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { users } from './mapHelpers/users';
 import MapStyle from './mapHelpers/mapStyle';
+import DropDownPicker from 'react-native-dropdown-picker';
 import Modal from 'react-native-modal';
 
 const { width, height } = Dimensions.get("window");

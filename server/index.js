@@ -3,11 +3,12 @@ const app = express();
 const router = require('./routes');
 const cors = require('cors');
 const morgan = require('morgan');
+require('dotenv').config();
 
-const corsOptions ={
-  origin:'*',
-  credentials:true,
-  optionSuccessStatus:200,
+const corsOptions = {
+  origin: '*',
+  credentials: true,
+  optionSuccessStatus: 200,
 }
 
 app.use(cors(corsOptions));
