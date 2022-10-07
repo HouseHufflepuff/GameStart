@@ -10,18 +10,19 @@ import RegisterGames from './Components/register/RegisterGames.js';
 import SetLocation from './Components/register/SetLocation.js';
 import CreateStack from './Components/register/Main.js';
 import TradeModule from './TradeStack.js';
+import Login from '/Users/dg/rfp2207/GameStart/LoginStuff/loginComponents/Login.js'
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   // const Stack = createNativeStackNavigator();
 
   return (
-    //  <>
-    <NavigationContainer>
-      <CreateStack />
-    </NavigationContainer>
-       /* {isLogin && <RegisterGames />}
+    <>
+    {/* // <NavigationContainer>
+    //   <CreateStack />
+    // </NavigationContainer> */}
+       {isLogin && < Login />}
 
       {
         !isLogin && <NavigationContainer>
@@ -30,7 +31,7 @@ function App() {
           </Stack.Navigator>
         </NavigationContainer>
       }
-    </> */
+    </>
   )
 }
 
