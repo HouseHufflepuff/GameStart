@@ -4,7 +4,10 @@ import { StyleSheet, SafeAreaView, Text, View, TouchableWithoutFeedback, FlatLis
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TradeList, TradeView, TradeDetails, TradeHistory } from './TradeScreens.js';
-import Messaging from '../Messaging/Messaging.jsx'
+import Messaging from '../Messaging/Messaging.jsx';
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 const TradeStack = createStackNavigator();
 

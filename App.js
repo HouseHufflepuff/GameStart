@@ -10,18 +10,21 @@ import RegisterGames from './Components/register/RegisterGames.js';
 import SetLocation from './Components/register/SetLocation.js';
 import CreateStack from './Components/register/Main.js';
 import Login from './LoginStuff/loginComponents/Login.js';
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   const Stack = createNativeStackNavigator();
 
   return (
     <>
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <CreateStack />
-     </NavigationContainer>
-      {/* {isLogin && < Login />}
+     </NavigationContainer> */}
+      {isLogin && < Login />}
 
       {
         !isLogin && <NavigationContainer>
@@ -29,7 +32,7 @@ function App() {
             <Stack.Screen options={{ headerShown: false }} name="Login" component={Main} />
           </Stack.Navigator>
         </NavigationContainer>
-      } */}
+      }
     </>
   )
 }
