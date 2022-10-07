@@ -40,10 +40,9 @@ router.get('/locations/games', getLocationsGames);
 // FAVORITES
 router.post('/favorites', postFavorites)
 router.get('/favorites', getFavoriteGames)
+
 // CONSOLES
 
-// LOCATIONS
-router.get('/locations', getLocationsData)
 
 // LOCATIONS
 router.get('/locations', getLocationsData)
