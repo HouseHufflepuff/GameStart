@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getLocationsData } = require('./controllers/locations');
+const { getLocations, getLocationsGames } = require('./controllers/locations');
 const { getTrades, postTrades, putTrades } = require('./controllers/tradesController');
 const { getGames, postGames, putGames } = require('./controllers/gamesController');
 const { insertAddress, insertUser, insertConsoles, changeProfilePic, getTradeCounter } = require('./controllers/users.js');
@@ -33,7 +33,8 @@ router.put('/trades')
 
 
 // LOCATION
-router.use('/locations', getLocationsData);
+router.get('/locations', getLocations);
+router.get('/locations/games', getLocationsGames);
 
 // MESSAGES
 

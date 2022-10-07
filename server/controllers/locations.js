@@ -6,21 +6,27 @@ const LT = require('../models/locations.js');
 
 let { address } = require('../models/locations.js');
 
-const getLocationsData = async (req, res) => {
-
-
+const getLocations = async (req, res) => {
   try {
     let response = await LT.users();
-    let responseGames = await LT.games();
-    console.log(responseGames.rows);
-    res.send(responseGames.rows);
+    res.send(response.rows);
   } catch (error) {
     console.log(error);
     res.status(400).json(error);
   }
-
-
 }
+
+const getLocationsGames = async (req, res) => {
+  try {
+    let response = await LT.games();
+    res.send(response.rows);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
+}
+
+
 
 const getGeoLocation = async (value) => {
   let location = value.coordinate;
@@ -35,5 +41,6 @@ const getGeoLocation = async (value) => {
 }
 
 module.exports = {
-  getLocationsData,
+  getLocations,
+  getLocationsGames,
 }
