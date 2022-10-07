@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback, StatusBar} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
 
@@ -84,11 +84,11 @@ export default function Register ({navigation}) {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-       <LinearGradient
+       {/* <LinearGradient
         style={{width: '100%'}}
-        colors={['black', '#03045E', 'black']}
-        start={{x: 0, y: 0.5}}
-        end={{x: 1, y: 1}}>
+        colors={['rgba(3,4,94,1)', 'rgba(0,119,182,1)', 'rgba(0,180,216,1)', 'rgba(40,192,222,1)', 'rgba(97,209,231,1)', 'rgba(202,240,248,1)']}
+        start={{x: .25, y: 0.5}}
+        end={{x: 0, y: 0}}> */}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{alignItems: 'center'}}>
       <ImageBackground
@@ -159,7 +159,8 @@ export default function Register ({navigation}) {
       }
       </View>
       </TouchableWithoutFeedback>
-      </LinearGradient>
+      {/* </LinearGradient> */}
+      <StatusBar barStyle={'light-content'}/>
     </KeyboardAvoidingView>
   )
 }
@@ -174,8 +175,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     flexShrink: 1,
-    backgroundColor: 'black'
+    backgroundColor: '#121212'
   },
+
   firstNameGuide: {
     color: 'white',
     alignSelf: 'flex-start',
@@ -196,9 +198,9 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     height: 120,
-    width: 380,
-    textAlign: 'center',
+    textAlign: 'justify',
     color: 'white',
+    padding: 25,
     fontSize: 18
   },
   nameForms: {

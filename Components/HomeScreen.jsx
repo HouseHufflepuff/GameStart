@@ -66,7 +66,7 @@ function HomeScreen({ navigation }) {
     try {
       let response = await axios.get('http://13.57.240.106:8000/api/locations');
 
-      console.log(response.data)
+      // console.log(response.data)
     } catch (error) {
       console.log('err', error);
     }

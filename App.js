@@ -9,7 +9,6 @@ import ProfilePicture from './Components/register/ProfilePicture.js';
 import RegisterGames from './Components/register/RegisterGames.js';
 import SetLocation from './Components/register/SetLocation.js';
 import CreateStack from './Components/register/Main.js';
-import TradeModule from './TradeStack.js';
 import Login from './LoginStuff/loginComponents/Login.js';
 
 function App() {
