@@ -63,8 +63,10 @@ module.exports = {
 
   addGame: (req, res) => {
     //requires body w/ following keys and values assigned to that key
-    const {ownerid, gameid, game_title, photoURL, game_condition, case_status, listing_status} = req.body
-    postGame(ownerid, gameid, game_title, photoURL, game_condition, case_status, listing_status)
+    //break down game object into smaller parts
+    //what is game object
+    const {ownerid, gameid, game_title, photourl} = req.body
+    postGame(ownerid, gameid, game_title, photourl)
       .then(() => {
         res.sendStatus(201);
       })
