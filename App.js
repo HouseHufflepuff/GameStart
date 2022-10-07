@@ -11,18 +11,19 @@ import SetLocation from './Components/register/SetLocation.js';
 import CreateStack from './Components/register/Main.js';
 // import TradeModule from './Components/Trades/TradeStack.js';
 import Login from './LoginStuff/loginComponents/Login.js';
+import MyStack from '/Users/dg/rfp2207/GameStart/Components/register/Main.js'
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   const Stack = createNativeStackNavigator();
 
   return (
     <>
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <CreateStack />
-     </NavigationContainer> */}
-      {isLogin && < Login />}
+     </NavigationContainer>
+      {/* {isLogin && < Mystack />} */}
 
       {
         !isLogin && <NavigationContainer>

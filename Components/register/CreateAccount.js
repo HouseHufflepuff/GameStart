@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
+import { auth } from '../../LoginStuff/loginUtils/firebase'
+import {signInWithEmailAndPassword, updateProfile, getAuth, signInWithPopup,signInWithRedirect, GoogleAuthProvider, createUserWithEmailAndPassword} from 'firebase/auth'
 
 export default function Register ({navigation}) {
 
@@ -51,16 +53,18 @@ export default function Register ({navigation}) {
     }
 
     setLoading(true);
-    //firebase auth (?)
+    //firebase auth (?) handleSignUp(data.email, data.pass)
     axios.post('http://13.57.240.106:8000/api/users/register', data)
     .then(() => {
       axios.get(`http://13.57.240.106.8000/api/users/:${user}`)
       .then((id) => {
         setUserID(id)
         console.log('hitting here')
+
         setTimeout(() => {
           setLoading(false);
           console.log('set time out done')
+
           navigation.navigate('register-consoles', {userID: userID})
         }, 500)
       })
@@ -80,6 +84,18 @@ export default function Register ({navigation}) {
         //next set consoles (two icons xbox and ps?) -> loading transition
           //any games you want to go ahead and add for listing (optional) -> send data to db
           //finish "quest complete!"
+
+const handleSignUp =  (email, pass) => {
+    createUserWithEmailAndPassword(auth, email, pass)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      navigation.navigate('register-consoles', {userID: user.uid})
+      console.log(user)
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};
 
 
   return (
@@ -155,7 +171,7 @@ export default function Register ({navigation}) {
       style={styles.registerBtn} title="Creating account..." />
       : <Button
       style={styles.registerBtn}
-      color='white' title="Register" onPress={handleRegister} />
+      color='white' title="Register" onPress={() => handleSignUp(email,pass) } /> //Darryl changed this
       }
       </View>
       </TouchableWithoutFeedback>

@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Profile from './UserProfile.js';
 import Login from './Login.js';
 
+
 const Stack = createNativeStackNavigator();
 
 export default function AuthStack() {
