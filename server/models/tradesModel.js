@@ -30,7 +30,7 @@ WHERE myself.ownerid = ${userId};`);
 
 const saveTrade = (partyGameId, counterPartyGameId, tradeStatus) => pool.query(`INSERT INTO trades (partyId, partyGameId, counterPartyId, counterPartyGameId, created_at, trade_status) VALUES (${partyGameId}, ${counterPartyGameId}, ${tradeStatus}`);
 
-const updateTradeStatus = (tradeId, tradeStatus) => pool.query(`UPDATE trades SET trade_status = ${tradeStatus} WHERE id = ${tradeId}`)
+const updateTradeStatus = (tradeId, tradeStatus) => pool.query(`UPDATE trades SET trade_status = '${tradeStatus}' WHERE id = ${tradeId}`)
 
 module.exports.getIncomingTrades = getIncomingTrades;
 module.exports.getOutgoingTrades = getOutgoingTrades;

@@ -29,9 +29,8 @@ router.put('/games/gameid', putGames)
 router.get('/trades', getTrades)
 router.get('/trades:userId', getTrades)
 router.get('/trades/:userId', getTrades)
-// router.post('/trades')
-// router.put('/trades')
-
+router.post('/trades', postGames)
+router.put('/trades', putTrades)
 
 // LOCATION
 router.use('/locations', getLocations);
@@ -41,6 +40,11 @@ router.get('/locations/games', getLocationsGames);
 // FAVORITES
 router.post('/favorites', postFavorites)
 router.get('/favorites', getFavoriteGames)
+
 // CONSOLES
+
+
+// LOCATIONS
+router.get('/locations', getLocationsData)
 
 module.exports = router

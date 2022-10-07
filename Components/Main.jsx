@@ -17,7 +17,7 @@ import DetailsScreen from './DetailsScreen';
 import Search from './Search/Search.js';
 import MapScreen from './Map/MapScreen';
 import ProfileScreen from './ProfileScreen';
-import Trade from '../TradeStack.js';
+import Trade from './Trades/TradeStack.js';
 
 //Screen names
 const homeName = "Home";
@@ -62,7 +62,7 @@ function Main({ navigation }) {
               {
                 position: 'absolute',
                 backgroundColor: '#181818',
-                height: 65,
+                height: 65
               }
             ],
           }
