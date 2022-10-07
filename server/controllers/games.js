@@ -4,7 +4,7 @@ const axios = require('axios');
 
 module.exports = {
 
-  getGames: (req, res) => {
+  getGamesRawg: (req, res) => {
     if (req.query.hasOwnProperty('games')) {
       axios.get(`${process.env.API_BASE_URL}/games?key=${process.env.API_KEY}&search=${req.query.games}`)
       .then((games) => {
@@ -34,12 +34,12 @@ module.exports = {
 
   getGamesFromUser: (req, res) => {
     //requires a param w/ userID key and ID value
+    //tested
     const {userID} = req.query;
-    console.log('hitting here')
-    console.log(userID)
     getUsersGames(userID)
       .then((games) => {
-        res.send(games.rows);
+        console.log(games, 'this is games')
+        res.send(games);
       })
       .catch((err) => {
         console.log('error getGamesFromUser')
@@ -49,10 +49,11 @@ module.exports = {
 
   getGamesFromTrades: (req, res) => {
     //requires a query param with key game and title value
-    const {game} = req.params;
+    //EXACT MATCH
+    const {game} = req.query;
     getTradedGames(game)
       .then((games) => {
-        res.send(games.data);
+        res.send(games);
       })
       .catch((err) => {
         console.log('error getGamesFromTrades')
@@ -62,8 +63,10 @@ module.exports = {
 
   addGame: (req, res) => {
     //requires body w/ following keys and values assigned to that key
-    const {ownerid, gameid, game_title, photoURL, game_condition, case_status, listing_status} = req.body
-    postGame(ownerid, gameid, game_title, photoURL, game_condition, case_status, listing_status)
+    //break down game object into smaller parts
+    //what is game object
+    const {ownerid, id, name, background_image} = req.body
+    postGame(ownerid, id, name, background_image)
       .then(() => {
         res.sendStatus(201);
       })
@@ -72,8 +75,8 @@ module.exports = {
       })
   },
 
+  //working
   getAllGames: (req, res) => {
-    console.log('hitting here')
     getAll()
       .then((games) => {
         res.send(games);

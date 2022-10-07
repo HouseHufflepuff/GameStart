@@ -15,8 +15,10 @@ module.exports = {
 
   getTradedGames: (game) => {
     const queryStr = 'SELECT * FROM games WHERE gametitle = $1';
+    console.log(game)
     return pool.query(queryStr, [game])
       .then((games) => {
+        console.log(games);
         return games.rows;
       })
       .catch((err) => {
@@ -24,9 +26,9 @@ module.exports = {
       })
   },
 
-  postGame: () => {
-    const queryStr = "INSERT INTO games (ownerid, gameid, gametitle, photourl, gamecondition, casestatus, listingstatus) VALUES (2, 5, 'title', 'imageurl', 'good', 'bad', 'rejected');";
-    return pool.query(queryStr)
+  postGame: (ownerid, gameid, gametitle, photourl) => {
+    const queryStr = "INSERT INTO games (ownerid, gameid, gametitle, photourl, consoleid) VALUES ($1, $2, $3, $4, (select id from consoles where ownerid = $1));";
+    return pool.query(queryStr, [ownerid, gameid, gametitle, photourl])
       .then(() => {
         return;
       })
@@ -40,7 +42,8 @@ module.exports = {
     const queryStr = 'Select * from games';
     return pool.query(queryStr)
       .then((games) => {
-        return games;
+        console.log(games)
+        return games.rows;
       })
       .catch((err) => {
         console.log(err)
