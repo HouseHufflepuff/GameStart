@@ -36,6 +36,11 @@ export default function RegisterGames () {
     }
   }
 
+  const favoriteItem = (gameID) => {
+    axios.post('')
+  }
+
+
   const addGame = (gameObj) => {
     axios.post('http://13.57.240.106:8000/api/games/post', gameObj)
       .then(() => {
