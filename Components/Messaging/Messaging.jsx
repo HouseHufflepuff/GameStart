@@ -9,7 +9,7 @@ import Message from './Message.jsx';
 import styles from './MessagingStyles.js';
 import io from 'socket.io-client';
 
-export default function Messaging({conversationId=1, username='othertest', otherUser='test'}) {
+export default function Messaging({conversationId, user, otherUser}) {
   const conversationMessages = useRef([]);
   const [conversation, setConversation] = useState(conversationMessages.current);
 
@@ -46,8 +46,8 @@ export default function Messaging({conversationId=1, username='othertest', other
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
         <Header otherUser={otherUser}/>
-        <Conversation conversation={conversation} username={username}/>
-        <ChatInput conversationId={conversationId} username={username}/>
+        <Conversation conversation={conversation} username={user.username}/>
+        <ChatInput conversationId={conversationId} username={user.username}/>
       </SafeAreaView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
   headerText : {
     color: "white",
     textAlign: "center",
-    marginTop : "8%",
     fontSize : 20,
+    topMargin : '2%'
   }
 });
 

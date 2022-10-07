@@ -16,6 +16,9 @@ export default function Conversation({conversation, username}) {
         renderItem={renderMessage}
         keyExtractor={item => item.id}
         inverted
+        contentContainerStyle={{
+          flexGrow: 1, justifyContent: 'flex-end',
+        }}
       />
   </View>
   )
