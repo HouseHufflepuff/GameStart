@@ -50,8 +50,9 @@ export default function Register ({navigation, routes}) {
     //firebase auth (?)
     axios.post('http://13.57.240.106:8000/api/users/register', data)
     .then(() => {
-      axios.get('htttp://13.57.240.106.8000/api/users/', params: {username: user})
-      .then(() => {
+      axios.get('htttp://13.57.240.106.8000/api/users/', {params: {username: user}})
+      .then((id) => {
+        setUserID(id)
         console.log('hitting here')
         setTimeout(() => {
           setLoading(false);
