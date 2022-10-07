@@ -18,11 +18,11 @@ function App() {
   // const Stack = createNativeStackNavigator();
 
   return (
-    //  <>
-    <NavigationContainer>
-      <CreateStack />
-    </NavigationContainer>
-       /* {isLogin && <RegisterGames />}
+    <>
+    {/* // <NavigationContainer>
+    //   <CreateStack />
+    // </NavigationContainer> */}
+       {isLogin && < Login />}
 
       {
         !isLogin && <NavigationContainer>
@@ -31,7 +31,7 @@ function App() {
           </Stack.Navigator>
         </NavigationContainer>
       }
-    </> */
+    </>
   )
 }
 
