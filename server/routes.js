@@ -1,9 +1,10 @@
 const router = require('express').Router();
+const { getLocationsData } = require('./controllers/locations');
 const { getTrades, postTrades, putTrades } = require('./controllers/tradesController');
 const { getGames, postGames, putGames } = require('./controllers/gamesController');
-const {insertAddress, insertUser, insertConsoles, changeProfilePic, getTradeCounter} = require('./controllers/users.js');
-const {getGamesRawg, getGamesFromUser, getGamesFromTrades, addGame, getAllGames} = require('./controllers/games.js');
-const {postFavorites, getFavoriteGames} = require('./controllers/favorites.js');
+const { insertAddress, insertUser, insertConsoles, changeProfilePic, getTradeCounter } = require('./controllers/users.js');
+const { getGamesRawg, getGamesFromUser, getGamesFromTrades, addGame, getAllGames } = require('./controllers/games.js');
+const { postFavorites, getFavoriteGames } = require('./controllers/favorites.js');
 
 // USERS
 router.post('/users/register', insertUser);
@@ -29,6 +30,10 @@ router.get('/trades:userId', getTrades)
 router.get('/trades/:userId', getTrades)
 router.post('/trades')
 router.put('/trades')
+
+
+// LOCATION
+router.use('/locations', getLocationsData);
 
 // MESSAGES
 
