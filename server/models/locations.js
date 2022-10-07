@@ -3,8 +3,8 @@ const pool = require('../connection.js');
 module.exports = {
   users: (params) => {
 
-    let queryString = `SELECT users.id, users.first_name, users.last_name, users.username, games.gametitle, games.photourl, games.gamecondition, games.listingstatus,
-    consoles.console, locations.longitude, locations.latitude
+    let queryString = `SELECT users.id, users.first_name, users.last_name, users.username, games.gameid, games.gametitle, games.photourl, games.gamecondition, games.listingstatus,
+    consoles.console, consoles.consoleicon, locations.longitude, locations.latitude
                       FROM users INNER JOIN games
                       ON users.id = games.ownerid AND games.listingstatus = 'Listed'
                       INNER JOIN consoles
@@ -16,7 +16,7 @@ module.exports = {
     return pool.query(queryString);
   },
   games: (params) => {
-    let queryString = `select games.gametitle, count(*) from games where games.listingstatus = 'Traded' group by games.gametitle`
+    let queryString = `select games.gametitle, count(*), games.photourl from games where games.listingstatus = 'Traded' group by games.gametitle, games.photourl`;
     return pool.query(queryString);
   }
 }
