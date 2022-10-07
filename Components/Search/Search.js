@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import GameDetails from '../GameDetails/GameDetails.js';
 import SearchBar from './SearchBar.js'
@@ -20,7 +21,7 @@ function Search() {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#121212'}}>
         {display[view]}
       </View>
     </TouchableWithoutFeedback>
