@@ -5,7 +5,7 @@ import { getDistance, isPointWithinRadius } from 'geolib';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-function TrendyCard({ title, img, console, state, count }) {
+function TrendyCard({ title, img, count }) {
 
 
   return (
@@ -14,8 +14,6 @@ function TrendyCard({ title, img, console, state, count }) {
         <Image style={styles.imageStyle} source={{ uri: img }} resizeMode='cover' />
         <View style={styles.infoStyle}>
           <Text style={styles.titleStyle}>{title}</Text>
-          <Icon style={styles.iconStyle} color='white' name={console} />
-          <Text style={styles.stateStyle}>{state}</Text>
           <Text style={styles.bold}> <Text style={styles.countStyle}>{count}</Text> times has been traded</Text>
         </View>
       </View>

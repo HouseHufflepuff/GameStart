@@ -5,7 +5,7 @@ import { getDistance, isPointWithinRadius } from 'geolib';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-function GameCard({ title, img, console, state, coordinate, miles }) {
+function GameCard({ title, img, console, state, latitude, longitude, miles }) {
 
   useEffect(() => {
   }, [])
