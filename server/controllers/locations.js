@@ -1,3 +1,4 @@
+require('dotenv').config();
 const pool = require('../connection.js');
 const axios = require('axios');
 const LT = require('../models/locations.js');
@@ -23,7 +24,7 @@ const getLocationsData = async (req, res) => {
 
 const getGeoLocation = async (value) => {
   let location = value.coordinate;
-  const API_KEY = 'AIzaSyB1ofUAgDtm_9Br5XW4m511mCpETlvxqH8';
+  const API_KEY = process.env.GOOGLE_API;
 
   let response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${API_KEY}`);
 
