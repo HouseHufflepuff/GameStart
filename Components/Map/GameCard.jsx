@@ -13,7 +13,7 @@ function GameCard({ title, img, console, state, latitude, longitude, miles }) {
 
 
   return (
-    <View style={styles.cardContainer}>
+    <View style={styles.cardContainer} onStartShouldSetResponder={() => true}>
       <View>
         <Image style={styles.imageStyle} source={{ uri: img }} resizeMode='cover' />
         <View style={styles.infoStyle}>

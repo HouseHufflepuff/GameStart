@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 // import { Card, Icon } from "@rneui/themed";
 import { StatusBar } from 'expo-status-bar';
 import { FlatList, Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 
 const consoles = {
@@ -13,9 +13,9 @@ const consoles = {
   // 'Nintendo': 'https://www.freepnglogos.com/uploads/nintendo-logo-png/file-micrologo-nintendo-n-logo-circle-18.png',
   // 'iOS': 'https://alchemyimmersive.com/wp-content/uploads/sites/4/2020/04/apple-logo-transparent.png',
   // 'Android': 'https://cdn.freebiesupply.com/logos/large/2x/android-logo-png-transparent.png',
-  // 'PlayStation': <MaterialCommunityIcons name="sony-playstation" size={18} />,
-  // 'Xbox': <MaterialCommunityIcons name="microsoft-xbox" size={15} />,
-  // 'Nintendo': <MaterialCommunityIcons name="nintendo-switch" size={15} />,
+  'PlayStation': <MaterialCommunityIcons color='white' name="sony-playstation" size={20} />,
+  'Xbox': <MaterialCommunityIcons color='white' name="microsoft-xbox" size={20} />,
+  'Nintendo': <MaterialCommunityIcons color='white' name="nintendo-switch" size={20} />,
 }
 
 const consoleCodes = {
@@ -111,8 +111,8 @@ export default function SearchBar( { console, callback } ) {
                 <Image style={styles.image} source={{uri: item.background_image}}/>
                 <View style={styles.description}>
                   <Text style={styles.title}>{item.name}</Text>
-                  <Text>{`Release year: ${getYear(item.released)}`}</Text>
-                  {/* <View style={styles.consoles}>{getPlatforms(item.parent_platforms)}</View> */}
+                  <Text style={{color: 'white'}}>{`Release year: ${getYear(item.released)}`}</Text>
+                  <View style={styles.consoles}>{getPlatforms(item.parent_platforms)}</View>
                 </View>
               </View>
             </TouchableOpacity>
