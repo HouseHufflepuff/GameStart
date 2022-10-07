@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 
 import GameDetails from '../GameDetails/GameDetails.js';
 import SearchBar from './SearchBar.js'
@@ -19,9 +19,11 @@ function Search() {
   }
 
   return (
-    <View>
-      {display[view]}
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={{flex: 1}}>
+        {display[view]}
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 

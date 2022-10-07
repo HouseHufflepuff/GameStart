@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import axios from 'axios';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import Feather from 'react-native-vector-icons/Feather';
 
 let width = Dimensions.get('window').width; //full width
 
@@ -52,16 +54,16 @@ export default function GameDetails( { gameId, callback, setView } ) {
   }
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={{position: 'relative'}}>
+    <SafeAreaView >
+      <ScrollView >
+        <View style={{position: 'relative'}} onStartShouldSetResponder={() => true} >
           <Pressable
             onPress={() => {
               setImage(!image)
-              setShowTitle(true)
+              // setShowTitle(true)
             }}
             onLongPress={() => setShowTitle(false)}
-            // onPressOut={() => setShowTitle(true)}
+            onPressOut={() => setShowTitle(true)}
           >
             <Image
               style={styles.image}
@@ -70,11 +72,26 @@ export default function GameDetails( { gameId, callback, setView } ) {
                 uri: image ? game.background_image : game.background_image_additional
               }}/>
           </Pressable>
-          <TouchableOpacity onPress={() => setView('searchBar')}>
-            <View style={styles.button}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', fontColor: '#03045E'}}>Back to Search</Text>
-            </View>
-          </TouchableOpacity>
+          {showTitle &&
+            <TouchableOpacity style={styles.backButton} onPress={() => setView('searchBar')}>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                <Feather
+                  name='chevron-left'
+                  size={22}
+                  style={{
+                    color: '#90E0EF'
+                  }}
+                />
+                <Fontisto
+                  name='search'
+                  size={22}
+                  style={{
+                    marginLeft: 5,
+                    color: '#90E0EF'
+                  }} />
+              </View>
+            </TouchableOpacity>
+          }
           {showTitle &&
             <View style={styles.title}>
               <Text style={styles.titleText}>{game.name}</Text>
@@ -82,18 +99,18 @@ export default function GameDetails( { gameId, callback, setView } ) {
             </View>
           }
         </View>
-        <View style={styles.buttonsBar}>
+        <View style={styles.buttonsBar} onStartShouldSetResponder={() => true} >
           <TouchableOpacity onPress={() => callback(game)}>
             <View style={styles.button}>
               <Text style={{fontSize: 20, fontWeight: 'bold', fontColor: '#03045E'}}>Post Game +</Text>
             </View>
           </TouchableOpacity>
         </View>
-        <View style={styles.details}>
+        <View style={styles.details} onStartShouldSetResponder={() => true} >
           <Text style={{fontWeight: 'bold', marginBottom: 5, fontColor: ''}}>Game Description</Text>
           <Text>{game.description_raw}</Text>
         </View>
-        <View style={styles.details}>
+        <View style={styles.details} onStartShouldSetResponder={() => true} >
           <Text style={{fontWeight: 'bold', marginBottom: 5,}}>Game Details:</Text>
           <Text>{`Title: ${game.name}`}</Text>
           <Text>{`Release year: ${getYear(game.released)}`}</Text>
@@ -128,7 +145,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     // maxWidth: '90%',
     alignSelf: 'flex-start',
-    bottom: 80,
+    bottom: 20,
     right: 0,
     padding: 10,
     paddingRight: 20,
@@ -143,6 +160,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10
+  },
+  backButton: {
+    position: 'absolute',
+    // flex: 1,
+    // flexDirection: 'row',
+    top: 20,
+    left: 0,
+    paddingLeft: 20,
+    padding: 20,
+    fontWeight: 'bold',
+    fontColor: 'white',
+    backgroundColor: '#03045E',
+    color: '#90E0EF',
   },
   buttonsBar: {
     flex: 1,
