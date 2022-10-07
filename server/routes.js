@@ -16,8 +16,8 @@ router.put('/games/gameid', putGames)
 router.get('/trades', getTrades)
 router.get('/trades:userId', getTrades)
 router.get('/trades/:userId', getTrades)
-router.post('/trades')
-router.put('/trades')
+router.post('/trades', postGames)
+router.put('/trades', putTrades)
 
 // MESSAGES
 

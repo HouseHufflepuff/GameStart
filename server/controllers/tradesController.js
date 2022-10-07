@@ -27,7 +27,9 @@ const postTrades = async (req, res) => {
 
 const putTrades = async (req, res) => {
   try {
-    const result = await updateTradeStatus(req.body.userId, req.body.status);
+    console.log('hi')
+    await updateTradeStatus(req.body.tradeId, req.body.status);
+    console.log('bye')
     res.sendStatus(204)
   } catch (error) {
     res.sendStatus(404);

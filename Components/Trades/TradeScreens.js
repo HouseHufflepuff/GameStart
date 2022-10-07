@@ -9,7 +9,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#121212',
-    color: 'white'
+    color: 'white',
+    justifyContent: 'space-around',
+
   },
 
   item: {
@@ -55,6 +57,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     alignSelf: 'center',
     padding: 20,
+    fontSize: 18
   },
 
   Selected: {
@@ -66,6 +69,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderBottomWidth: 2,
     borderColor: '#90E0EF',
+    fontSize: 18
   },
 
   mainTrade: {
@@ -109,7 +113,8 @@ const styles = StyleSheet.create({
   tradeCard: {
     backgroundColor: '#252525',
     borderWidth: 0,
-    color: '#FFF'
+    color: '#FFF',
+    flex: 3
   },
 
   detailsCard: {
@@ -120,31 +125,49 @@ const styles = StyleSheet.create({
   },
 });
 
+const updateList = () => {
+
+}
+
 export const TradeList = ({ navigation }) => {
   const [trades, setTrades] = useState('incoming');
   const [incomingTrades, setIncomingTrades] = useState([]);
   const [outgoingTrades, setOutgoingTrades] = useState([]);
   const [locationData, setLocationData] = useState([]);
 
-  // need to define user who logged in
-  useEffect(() => {
+
+  const fetchData = () => {
     axios.get(`http://localhost:8000/api/trades/2`)
       .then((data) => {
-        setIncomingTrades(data.data.incoming)
-        setOutgoingTrades(data.data.outgoing)
-      })
+        let inc = data.data.incoming.filter(trade => trade.trade_status.toLowerCase() === 'pending' || trade.trade_status.toLowerCase() === 'accepted');
+        let out = data.data.outgoing.filter(trade => trade.trade_status.toLowerCase() === 'pending' || trade.trade_status.toLowerCase() === 'accepted');
+
+        setIncomingTrades(inc)
+        setOutgoingTrades(out)
+      });
+  }
+  // need to define user who logged in
+  useEffect(() => {
+    fetchData();
+      const willFocusSubscription = navigation.addListener('focus', () => {
+        fetchData();
+    });
+
+    return willFocusSubscription;
   }, [])
 
   const renderItem = ({ item }) => (
     <TouchableOpacity>
-    <ListItem bottomDivider containerStyle={styles.item} onPress={() => navigation.navigate('TradeView', {data: item, group: trades})}>
+    <ListItem bottomDivider containerStyle={styles.item} onPress={() => navigation.navigate('TradeView', {data: item, group: trades, trade_status: item.trade_status})}>
       <Avatar source={{uri: item.theirphotourl}} size={'large'} />
       <ListItem.Content>
         {trades === 'incoming' ? <Text style={styles.item}>User: {item.theirusername}</Text> : <Text style={styles.item}>Offering: {item.mygametitle}</Text>}
         {trades === 'incoming' ? <Text style={styles.item}>Offering: {item.theirgametitle}</Text> : <Text style={styles.item}>To User: {item.theirusername}</Text>}
         {trades === 'incoming' ? <Text style={styles.item}>For: {item.mygametitle}</Text> : <Text style={styles.item}>For: {item.theirgametitle}</Text>}
         {trades === 'incoming' ? <Text style={styles.item}>Status: {item.theirgamecondition}</Text> : <Text style={styles.item}>Status: {item.theirgamecondition}</Text>}
+        {trades === 'incoming' ? <Text style={styles.item}>Trade Status: {item.trade_status}</Text> : <Text style={styles.item}>Trade Status: {item.trade_status}</Text>}
       </ListItem.Content>
+      <ListItem.Chevron/>
     </ListItem>
     </TouchableOpacity>
   );
@@ -178,9 +201,7 @@ export const TradeList = ({ navigation }) => {
         keyExtractor={(item) => item.id + item.theirgametitle +item.theirid}
       /> : <Text style={styles.noItems}>You have no outgoing offers</Text>}
       </View>
-      {/* <View style={styles.navigationBar}>
-        <Text>Navigation Bar</Text>
-      </View> */}
+
       <StatusBar barStyle={'light-content'}/>
     </View>
   )
@@ -188,7 +209,8 @@ export const TradeList = ({ navigation }) => {
 
 export const TradeView = ({ navigation, route }) => {
   const [tradeData, setTradeData] = useState([]);
-  const [tradeGroup, setTradeGroup] = useState(route.params.group)
+  const [tradeGroup, setTradeGroup] = useState(route.params.group);
+  const [tradeStatus, setTradeStatus] = useState(route.params.trade_status)
 
   useEffect(() => {
     setTradeData(route.params.data)
@@ -214,12 +236,46 @@ export const TradeView = ({ navigation, route }) => {
         </Card>
       </View>
       <View style={styles.decision}>
-          {tradeGroup === 'incoming' ?
+          {tradeStatus === 'accepted' ?
           <React.Fragment>
-          <Button containerStyle={styles.decisionItem} title="Accept" color='#00B4d8'/>
-          <Button containerStyle={styles.decisionItem} title="Deny" color='error'/>
+            <Button containerStyle={styles.decisionItem} title="Message" color='#00B4d8'/>
+            <Button
+              containerStyle={styles.decisionItem}
+              title="Cancel"
+              color='error'
+              onPress={() => {
+              axios.put('http://localhost:8000/api/trades', {tradeId: tradeData.id, status: 'cancelled'})
+                .then(() => {
+                  {navigation.pop()}
+                });
+              }}/>
+          </React.Fragment>
+          :
+          tradeGroup === 'incoming' ?
+          <React.Fragment>
+            <Button containerStyle={styles.decisionItem} title="Accept" color='#00B4d8'/>
+            <Button
+              containerStyle={styles.decisionItem}
+              title="Deny"
+              color='error'
+              onPress={() => {
+                axios.put('http://localhost:8000/api/trades', {tradeId: tradeData.id, status: 'rejected'})
+                  .then(() => {
+                    {navigation.pop()}
+                  });
+              }}/>
           </React.Fragment> :
-          <Button containerStyle={styles.decisionItem} title="Cancel" color='error'/> }
+          <Button
+            containerStyle={styles.decisionItem}
+            title="Cancel Trade Offer"
+            color='error'
+            onPress={() => {
+              axios.put('http://localhost:8000/api/trades', {tradeId: tradeData.id, status: 'cancelled'})
+                .then(() => {
+                  {navigation.pop()}
+                });
+            }}/>
+          }
       </View>
       <View style={styles.tradingItem}>
       <Card containerStyle={styles.tradeCard}>
@@ -267,25 +323,17 @@ export const TradeDetails = ({ navigation, route }) => {
           </Text>
           <Card.Divider />
           <Button
-            icon={
-              <Icon
-                name="code"
-                color="#ffffff"
-                iconStyle={{ marginRight: 10 }}
-              />
-            }
             buttonStyle={{
               borderRadius: 0,
               marginLeft: 0,
               marginRight: 0,
               marginBottom: 0,
             }}
-            title="View Trader Profile"
+            title={`${gameData.username}'s Profile`}
           />
          <Avatar
-            containerStyle={{marginTop: 10, alignSelf: 'center', borderColor: 'white', borderWidth: 1}}
-            size={80}
-            rounded
+            containerStyle={{marginTop: 20, alignSelf: 'center', borderColor: 'white', borderWidth: 1}}
+            size={120}
             source={{uri: gameData.profilepic}}
             key={gameData.id}
             />
@@ -304,14 +352,9 @@ export const TradeHistory = ({ navigation, route }) => {
   useEffect(() => {
     axios.get(`http://localhost:8000/api/trades/2`)
       .then((data) => {
-        let history = [...data.data.incoming, ...data.data.outgoing];
-        history.filter(trades => {
-          if ((trades.trade_status.toLowerCase() === 'completed') &&
-            (trades.myid === 2)) {
-              return trades
-            }
-        });
-        setTradeData(history)
+        let inc = data.data.incoming.filter(trade => trade.trade_status.toLowerCase() === 'complete');
+        let out = data.data.outgoing.filter(trade => trade.trade_status.toLowerCase() === 'complete' && trade.theirownerid === 2);
+        setTradeData([...inc, ...out])
       })
   }, [])
 
