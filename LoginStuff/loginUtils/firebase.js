@@ -12,7 +12,14 @@ import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth"
 //   appId: Constants.manifest?.extra?.firebaseAppId,
 // };
 
-
+const firebaseConfig = {
+  apiKey: "AIzaSyBFqUwZG5RWsGwLYIgwnwo8ZOE-Qi5MfSw",
+  authDomain: "gamestart-7e50b.firebaseapp.com",
+  projectId: "gamestart-7e50b",
+  storageBucket: "gamestart-7e50b.appspot.com",
+  messagingSenderId: "507998609222",
+  appId: "1:507998609222:web:339df22d35f8f8bec3cf47"
+};
 
 
 // Initialize Firebase

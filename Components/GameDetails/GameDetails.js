@@ -5,16 +5,20 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 import { ListItem } from '@rneui/themed'
 import { LinearGradient } from 'expo-linear-gradient';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 let width = Dimensions.get('window').width; //full width
 
 const consoles = {
-  'PC': 'https://cdn.freebiesupply.com/logos/large/2x/microsoft-windows-22-logo-png-transparent.png',
-  'PlayStation': 'https://www.freepnglogos.com/uploads/playstation-png-logo/navy-playstation-png-logo-5.png',
-  'Xbox': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/1024px-Xbox_one_logo.svg.png',
-  'Nintendo': 'https://www.freepnglogos.com/uploads/nintendo-logo-png/file-micrologo-nintendo-n-logo-circle-18.png',
+  // 'PC': 'https://cdn.freebiesupply.com/logos/large/2x/microsoft-windows-22-logo-png-transparent.png',
+  // 'PlayStation': 'https://www.freepnglogos.com/uploads/playstation-png-logo/navy-playstation-png-logo-5.png',
+  // 'Xbox': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/1024px-Xbox_one_logo.svg.png',
+  // 'Nintendo': 'https://www.freepnglogos.com/uploads/nintendo-logo-png/file-micrologo-nintendo-n-logo-circle-18.png',
   // 'iOS': 'https://alchemyimmersive.com/wp-content/uploads/sites/4/2020/04/apple-logo-transparent.png',
   // 'Android': 'https://cdn.freebiesupply.com/logos/large/2x/android-logo-png-transparent.png',
+  'PlayStation': <MaterialCommunityIcons color='#CAF0F8' name="sony-playstation" size={20} />,
+  'Xbox': <MaterialCommunityIcons color='#CAF0F8' name="microsoft-xbox" size={20} />,
+  'Nintendo': <MaterialCommunityIcons color='#CAF0F8' name="nintendo-switch" size={20} />,
 }
 
 const getYear = (date) => {
@@ -25,7 +29,7 @@ const getYear = (date) => {
 const getPlatformIcons = (platforms) => {
   if(platforms) {
     return platforms.map((p, i) => {if(p.platform.name in consoles) {
-      return (<Image key={i} style={styles.consoleIcon} source={{uri: consoles[p.platform.name]}}/>)
+      return consoles[p.platform.name]
     }})
   }
   return ''
@@ -60,6 +64,21 @@ export default function GameDetails( { gameId, callback, setView } ) {
   return (
     <SafeAreaView >
       <ScrollView>
+        <View style={{backgroundColor: 'rgba(0,0,0,.7)', height: '5%', flex: 1, flexDirection: 'row', justifyContent: 'center', padding: 7}} onStartShouldSetResponder={() => true}>
+          <TouchableOpacity style={{position: 'absolute', left: 5, top: 0, bottom: 0}} onPress={() => setView('searchBar')}>
+            <View style={{position: 'absolute', left: 0, top: 0, bottom: 0, flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+              <Feather
+                name='chevron-left'
+                size={18}
+                style={{
+                  color: 'white'
+                }}
+              />
+              <Text style={{fontSize: 18, color: 'white'}}>Search</Text>
+            </View>
+          </TouchableOpacity>
+          <Text style={{fontSize: 18, color: 'white'}}>Game Overview</Text>
+        </View>
         <View style={{position: 'relative'}} onStartShouldSetResponder={() => true} >
           <Pressable
             onPress={() => {
@@ -76,7 +95,7 @@ export default function GameDetails( { gameId, callback, setView } ) {
                 uri: image ? game.background_image : game.background_image_additional
               }}/>
           </Pressable>
-          {showTitle &&
+          {/* {showTitle &&
             <LinearGradient style={styles.backButtonGradient} start={{x: 1, y: 0}} end={{x: 0, y: 0}} colors={['#CAF0F8', '#90e0EF', '#00B4D8', '#0077B6', '#03045E' ]}>
               <TouchableOpacity style={styles.backButton} onPress={() => setView('searchBar')}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
@@ -97,7 +116,7 @@ export default function GameDetails( { gameId, callback, setView } ) {
                 </View>
               </TouchableOpacity>
             </LinearGradient>
-          }
+          } */}
           {showTitle &&
             <LinearGradient style={styles.titleGradient} start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#CAF0F8', '#90e0EF', '#00B4D8', '#0077B6', '#03045E' ]}>
               <View style={styles.title}>

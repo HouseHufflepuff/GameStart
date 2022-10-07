@@ -13,15 +13,15 @@ import TradeModule from './TradeStack.js';
 import Login from './LoginStuff/loginComponents/Login.js';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
-  // const Stack = createNativeStackNavigator();
+  const Stack = createNativeStackNavigator();
 
   return (
     <>
-      {/* // <NavigationContainer>
-    //   <CreateStack />
-    // </NavigationContainer> */}
+    <NavigationContainer>
+      <CreateStack />
+    </NavigationContainer>
       {isLogin && < Login />}
 
       {
