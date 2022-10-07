@@ -124,6 +124,7 @@ export const TradeList = ({ navigation }) => {
   const [trades, setTrades] = useState('incoming');
   const [incomingTrades, setIncomingTrades] = useState([]);
   const [outgoingTrades, setOutgoingTrades] = useState([]);
+  const [locationData, setLocationData] = useState([]);
 
   // need to define user who logged in
   useEffect(() => {
@@ -177,9 +178,9 @@ export const TradeList = ({ navigation }) => {
         keyExtractor={(item) => item.id + item.theirgametitle +item.theirid}
       /> : <Text style={styles.noItems}>You have no outgoing offers</Text>}
       </View>
-      <View style={styles.navigationBar}>
+      {/* <View style={styles.navigationBar}>
         <Text>Navigation Bar</Text>
-      </View>
+      </View> */}
       <StatusBar barStyle={'light-content'}/>
     </View>
   )

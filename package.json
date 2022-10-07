@@ -23,21 +23,21 @@
     "expo-linear-gradient": "~11.4.0",
     "expo-location": "~14.3.0",
     "expo-status-bar": "~1.4.0",
-    "geolib": "^3.3.3",
     "express": "^4.18.1",
+    "geolib": "^3.3.3",
     "morgan": "^1.10.0",
     "path": "^0.12.7",
     "pg": "^8.8.0",
     "react": "18.0.0",
     "react-native": "0.69.6",
-    "react-native-google-places-autocomplete": "^2.4.1",
     "react-native-dotenv": "^3.3.1",
+    "react-native-google-places-autocomplete": "^2.4.1",
+    "react-native-ionicons": "^4.6.5",
     "react-native-maps": "0.31.1",
     "react-native-modal": "^13.0.1",
-    "react-native-ionicons": "^4.6.5",
-    "react-native-vector-icons": "^9.2.0",
     "react-native-safe-area-context": "4.3.1",
-    "react-native-screens": "~3.15.0"
+    "react-native-screens": "~3.15.0",
+    "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

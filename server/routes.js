@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { getTrades, postTrades, putTrades } = require('./controllers/tradesController');
 const { getGames, postGames, putGames } = require('./controllers/gamesController');
+const { getLocationsData } = require('./controllers/locationsController')
 
 // USERS
 
@@ -23,5 +24,8 @@ router.put('/trades')
 // FAVORITES
 
 // CONSOLES
+
+// LOCATIONS
+router.get('/locations', getLocationsData)
 
 module.exports = router

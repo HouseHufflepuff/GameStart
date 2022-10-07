@@ -62,7 +62,7 @@ function Main({ navigation }) {
               {
                 position: 'absolute',
                 backgroundColor: '#181818',
-                height: 65,
+                height: 100
               }
             ],
           }
