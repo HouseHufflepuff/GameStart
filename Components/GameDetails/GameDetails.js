@@ -229,7 +229,7 @@ export default function GameDetails( { gameId, callback, setView } ) {
             </View>
           </ListItem.Accordion>
         </View>
-        <Text style={{fontSize: 18, color: 'white', margin: 10, marginBottom: 30, marginTop: 20,}}>Game Listings In Your Area</Text>
+        <Text onStartShouldSetResponder={() => true} style={{fontSize: 18, color: 'white', margin: 10, marginBottom: 30, marginTop: 20,}}>Game Listings In Your Area</Text>
         <View >
           <ScrollView style={styles.scrollView} horizontal={true} showsHorizontalScrollIndicator={false}>
             {closeGames.map((item, index) => {
