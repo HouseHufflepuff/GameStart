@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import {
   View, Button, Text, StyleSheet, Image, ScrollView, SectionList,
-  SafeAreaView, Alert, TouchableOpacity,
+  SafeAreaView, Alert, TouchableOpacity, StatusBar
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -62,7 +62,7 @@ function Main({ navigation }) {
               {
                 position: 'absolute',
                 backgroundColor: '#181818',
-                height: 65
+                height: 85
               }
             ],
           }

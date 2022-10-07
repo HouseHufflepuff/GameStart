@@ -20,3 +20,10 @@ module.exports.newConversation = async (message) => {
   client.release();
   return res.rows;
 }
+
+module.exports.getConversationId = async (tradeId) => {
+  let client = await db.connect();
+  let res = await client.query(`SELECT * FROM conversations WHERE tradeid = ${tradeId}`);
+  client.release();
+  return res.rows;
+}

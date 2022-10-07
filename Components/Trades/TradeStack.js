@@ -4,10 +4,12 @@ import { StyleSheet, SafeAreaView, Text, View, TouchableWithoutFeedback, FlatLis
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TradeList, TradeView, TradeDetails, TradeHistory } from './TradeScreens.js';
+import Messaging from '../Messaging/Messaging.jsx'
 
 const TradeStack = createStackNavigator();
 
 function Trade () {
+
   return (
   <NavigationContainer independent={true}>
     <TradeStack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#121212' } }}>
@@ -75,6 +77,23 @@ function Trade () {
         component={TradeHistory}
         options={{
           title: 'Trade History',
+          headerStyle: {
+            backgroundColor: '#121212',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerBackTitleStyle: {
+            color: '#fff'
+          }
+        }}
+        />
+        <TradeStack.Screen
+        name="Messaging"
+        component={Messaging}
+        options={{
+          title: 'Messages',
           headerStyle: {
             backgroundColor: '#121212',
           },

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   View, Button, Text, StyleSheet, Image, ScrollView, SectionList,
-  SafeAreaView, Alert,
+  SafeAreaView, Alert, TouchableWithoutFeedback, StatusBar
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -164,41 +164,42 @@ function HomeScreen({ navigation }) {
       <Text style={styles.title}>Console Filter</Text>
 
       <View style={styles.consoleContainer}>
-        <Button
-          title="XBOX"
-          style={{ flex: ' 0 0 33.333333%' }}
-          onPress={() => alert('Simple Button pressed')}
-        />
-        <Button
-          title="PS5"
-          style={{ flex: ' 0 0 33.333333%' }}
-          onPress={() => alert('Simple Button pressed')}
-        />
-        <Button
-          title="XBOX"
-          style={{ flex: ' 0 0 33.333333%' }}
-          onPress={() => alert('Simple Button pressed')}
-        />
-        <Button
-          title="XBOX ONE"
-          style={{ flex: ' 0 0 33.333333%' }}
-          onPress={() => alert('Simple Button pressed')}
-        />
-
-        <Button
-          title="PS4"
-          style={{ flex: ' 0 0 33.333333%' }}
-          onPress={() => Alert.alert('Simple Button pressed')}
-        />
-
-        <Button
-          title="OTHER"
-          style={{ flex: ' 0 0 33.333333%' }}
-          onPress={() => Alert.alert('Simple Button pressed')}
-        />
-
-
+        <View style={styles.buttonRow}>
+        <TouchableWithoutFeedback>
+        <View style={styles.button}>
+          <Text style={styles.buttonTxt}>XBOX</Text>
+        </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback>
+        <View style={styles.button}>
+          <Text style={styles.buttonTxt}>PS5</Text>
+        </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback>
+          <View style={styles.button}>
+          <Text style={styles.buttonTxt}>SWITCH</Text>
+        </View>
+          </TouchableWithoutFeedback>
+        </View>
+        <View style={styles.buttonRow}>
+        <TouchableWithoutFeedback>
+        <View style={styles.button}>
+          <Text style={styles.buttonTxt}>XBOX ONE</Text>
+        </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback>
+        <View style={styles.button}>
+          <Text style={styles.buttonTxt}>PS4</Text>
+        </View>
+        </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback>
+        <View style={styles.button}>
+          <Text style={styles.buttonTxt}>OTHER</Text>
+        </View>
+        </TouchableWithoutFeedback>
+        </View>
       </View>
+      <StatusBar barStyle={'light-content'}/>
 
     </View>
   );
@@ -214,14 +215,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   consoleContainer: {
-    display: 'flex',
+    justifyContent: 'space-around'
+  },
+  buttonRow: {
+    width: 400,
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingLeft: 0,
+    justifyContent: 'space-around',
+    marginBottom: 20
   },
   title: {
     margin: 10,
-    fontSize: 20,
+    fontSize: 24,
+    fontWeight: 'bold',
     color: '#90E0EF',
   },
   scrollView: {
@@ -231,6 +236,19 @@ const styles = StyleSheet.create({
     marginRight: 4,
     flexShrink: 0,
   },
+  button: {
+    backgroundColor: '#00b4d8',
+    padding: 10,
+    width: 100,
+    marginLeft: 25,
+    marginRight: 25
+  },
+  buttonTxt: {
+    color: 'white',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold'
+  }
 });
 
 export default HomeScreen;

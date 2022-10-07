@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, StatusBar } from 'react-native';
 import axios from 'axios';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
@@ -181,6 +181,8 @@ export default function GameDetails( { gameId, callback, setView } ) {
           </ListItem.Accordion>
         </View>
       </ScrollView>
+      <StatusBar barStyle={'light-content'}/>
+
     </SafeAreaView>
 
   )

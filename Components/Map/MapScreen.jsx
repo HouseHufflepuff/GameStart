@@ -11,6 +11,7 @@ import {
   Dimensions,
   Platform,
   Button,
+  StatusBar
 } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, Callout, CalloutSubview } from 'react-native-maps';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -23,7 +24,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Modal from 'react-native-modal';
 
 const { width, height } = Dimensions.get("window");
-const CARD_HEIGHT = 200;
+const CARD_HEIGHT = 250;
 const CARD_WIDTH = width * 0.6;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
@@ -221,6 +222,7 @@ export default function MapScreen3() {
       </ScrollView>
 
 
+      <StatusBar barStyle={'light-content'}/>
 
     </View >
   )
@@ -233,7 +235,7 @@ const styles = StyleSheet.create({
   },
   searchBox: {
     position: 'absolute',
-    marginTop: 40,
+    marginTop: 60,
     flexDirection: "row",
     backgroundColor: '#fff',
     width: '90%',
@@ -248,7 +250,7 @@ const styles = StyleSheet.create({
   },
   chipsScrollView: {
     position: 'absolute',
-    top: 90,
+    top: 110,
     paddingHorizontal: 10
   },
   chipsIcon: {

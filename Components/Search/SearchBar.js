@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 // import { Card, Icon } from "@rneui/themed";
-import { StatusBar } from 'expo-status-bar';
-import { FlatList, Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+// import { StatusBar } from 'expo-status-bar';
+import { FlatList, Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View, StatusBar } from 'react-native';
 // import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 
@@ -119,7 +119,7 @@ export default function SearchBar( { console, callback } ) {
             }
           />
         }
-        <StatusBar style="auto" />
+      <StatusBar barStyle={'light-content'}/>
       </SafeAreaView>
     </TouchableWithoutFeedback>
   );
