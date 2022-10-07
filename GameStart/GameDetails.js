@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import axios from 'axios';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import Feather from 'react-native-vector-icons/Feather';
 
 let width = Dimensions.get('window').width; //full width
 
@@ -29,7 +27,7 @@ const getPlatformIcons = (platforms) => {
   return ''
 }
 
-export default function GameDetails( { gameId, callback, setView } ) {
+export default function GameDetails( { gameId, callback } ) {
   const [loading, setLoading] = useState(true)
   const [game, setGame] = useState({})
   const [image, setImage] = useState(true)
@@ -54,16 +52,16 @@ export default function GameDetails( { gameId, callback, setView } ) {
   }
 
   return (
-    <SafeAreaView >
-      <ScrollView >
-        <View style={{position: 'relative'}} onStartShouldSetResponder={() => true} >
+    <SafeAreaView>
+      <ScrollView>
+        <View style={{position: 'relative'}}>
           <Pressable
             onPress={() => {
               setImage(!image)
-              // setShowTitle(true)
+              setShowTitle(true)
             }}
             onLongPress={() => setShowTitle(false)}
-            onPressOut={() => setShowTitle(true)}
+            // onPressOut={() => setShowTitle(true)}
           >
             <Image
               style={styles.image}
@@ -73,51 +71,31 @@ export default function GameDetails( { gameId, callback, setView } ) {
               }}/>
           </Pressable>
           {showTitle &&
-            <TouchableOpacity style={styles.backButton} onPress={() => setView('searchBar')}>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Feather
-                  name='chevron-left'
-                  size={22}
-                  style={{
-                    color: '#90E0EF'
-                  }}
-                />
-                <Fontisto
-                  name='search'
-                  size={22}
-                  style={{
-                    marginLeft: 5,
-                    color: '#90E0EF'
-                  }} />
-              </View>
-            </TouchableOpacity>
-          }
-          {showTitle &&
             <View style={styles.title}>
               <Text style={styles.titleText}>{game.name}</Text>
               <View style={styles.consoles}>{getPlatformIcons(game.parent_platforms)}</View>
             </View>
           }
         </View>
-        <View style={styles.buttonsBar} onStartShouldSetResponder={() => true} >
+        <View style={styles.buttonsBar}>
           <TouchableOpacity onPress={() => callback(game)}>
             <View style={styles.button}>
               <Text style={{fontSize: 20, fontWeight: 'bold', fontColor: '#03045E'}}>Post Game +</Text>
             </View>
           </TouchableOpacity>
         </View>
-        <View style={styles.details} onStartShouldSetResponder={() => true} >
+        <View style={styles.details}>
           <Text style={{fontWeight: 'bold', marginBottom: 5, fontColor: ''}}>Game Description</Text>
           <Text>{game.description_raw}</Text>
         </View>
-        <View style={styles.details} onStartShouldSetResponder={() => true} >
+        <View style={styles.details}>
           <Text style={{fontWeight: 'bold', marginBottom: 5,}}>Game Details:</Text>
           <Text>{`Title: ${game.name}`}</Text>
           <Text>{`Release year: ${getYear(game.released)}`}</Text>
           <Text>{`Metacritic rating: ${game.metacritic ? game.metacritic+'%' : 'N/A'}`}</Text>
           <Text>{`Genres: ${game.genres ? game.genres.map(g => g.name).join(', ') : 'N/A'}`}</Text>
           <Text>{`Platforms: ${game.platforms ? game.platforms.map(p => p.platform.name).join(', ') : 'N/A'}`}</Text>
-          <Text>{`Publisher: ${game.publishers[0] ? game.publishers[0].name : 'N/A'}`}</Text>
+          <Text>{`Publisher: ${game.publishers[0].name}`}</Text>
           <Text>{`ESRB Rating: ${game.esrb_rating ? game.esrb_rating.name : 'N/A'}`}</Text>
 
         </View>
@@ -161,19 +139,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10
   },
-  backButton: {
-    position: 'absolute',
-    // flex: 1,
-    // flexDirection: 'row',
-    top: 20,
-    left: 0,
-    paddingLeft: 20,
-    padding: 20,
-    fontWeight: 'bold',
-    fontColor: 'white',
-    backgroundColor: '#03045E',
-    color: '#90E0EF',
-  },
   buttonsBar: {
     flex: 1,
     alignItems: 'center',
@@ -187,7 +152,7 @@ const styles = StyleSheet.create({
     // height: 40,
     // width: 100
     padding: 10,
-    // paddingHorizontal: 50,
+    paddingHorizontal: 50,
     backgroundColor: '#90E0EF',
     fontSize: 40,
     borderRadius: 10,

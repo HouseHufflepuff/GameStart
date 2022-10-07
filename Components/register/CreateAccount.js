@@ -46,7 +46,7 @@ export default function Register () {
 
     setLoading(true);
     //firebase auth (?)
-    axios.post('http://192.168.0.147:8000/api/users/register', data)
+    axios.post('http://localhost:8000/api/users/register', data)
     .then(() => {
       console.log('hitting here')
       setTimeOut(() => {
