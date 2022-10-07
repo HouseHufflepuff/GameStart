@@ -4,7 +4,7 @@ const axios = require('axios');
 
 module.exports = {
 
-  getGames: (req, res) => {
+  getGamesRawg: (req, res) => {
     if (req.query.hasOwnProperty('games')) {
       axios.get(`${process.env.API_BASE_URL}/games?key=${process.env.API_KEY}&search=${req.query.games}`)
       .then((games) => {
