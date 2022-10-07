@@ -31,6 +31,7 @@ function Trade () {
               onPress={() => navigation.navigate("TradeHistory", route)}
               title="History"
               color="#CCC"
+              style={{}}
               />
           )
         })}

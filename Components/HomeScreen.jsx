@@ -24,17 +24,8 @@ function HomeScreen({ navigation }) {
   useEffect(() => {
 
 
-    axios.get('https://localhost:8000/api/locations',
-      {
-        headers: {
-          "Content-type": "Application/json",
-        }
-      }
-    ).then((data) => {
-      console.log(data.data);
-    }).catch((err) => {
-      console.log(err);
-    })
+    getUsersData();
+
 
     // axios.get('https://localhost:8000/api/locations')
     //   .then((data) => {
@@ -73,9 +64,9 @@ function HomeScreen({ navigation }) {
   const getUsersData = async () => {
 
     try {
-      let response = await
+      let response = await axios.get('http://13.57.240.106:8000/api/locations');
 
-        console.log(response.data)
+      console.log(response.data)
     } catch (error) {
       console.log('err', error);
     }

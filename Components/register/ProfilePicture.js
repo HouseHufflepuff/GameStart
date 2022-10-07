@@ -4,9 +4,10 @@ import PictureCard from './PictureCard.js';
 import {LinearGradient} from 'expo-linear-gradient'
 import axios from 'axios';
 
-export default function ProfilePicture ({navigation}) {
+export default function ProfilePicture ({navigation, route}) {
   const [imageURL, setImageURL] = useState('');
   const [currentImage, setCurrentImage] = useState(0);
+  const {userID} = route.params;
 
   const profiles = [
     {id: 1, url: 'https://i.ibb.co/tspt9x6/animal-cross.png'},
@@ -37,7 +38,7 @@ export default function ProfilePicture ({navigation}) {
     })
     .then(() => {
       console.log('success')
-      navigation.navigate('complete')
+      navigation.navigate('complete', {userID: userID})
     })
     .catch((err) => {
       console.log('fail', err.response)
@@ -62,7 +63,7 @@ export default function ProfilePicture ({navigation}) {
     })}
       </View>
       {currentImage !== 0
-       ? <TouchableOpacity style={styles.button} onPress={() => submitImage(imageURL, 1)}>
+       ? <TouchableOpacity style={styles.button} onPress={() => submitImage(imageURL, userID)}>
           <Text style={{color: 'white', textAlign: 'center', fontWeight: '600', fontSize: 25, marginTop: 4}}> Choose Image </Text>
         </TouchableOpacity>
       : null}

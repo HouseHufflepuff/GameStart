@@ -65,8 +65,9 @@ module.exports = {
     //requires body w/ following keys and values assigned to that key
     //break down game object into smaller parts
     //what is game object
-    const {ownerid, id, name, background_image} = req.body
-    postGame(ownerid, id, name, background_image)
+    const {ownerid, gameid, gametitle, photourl} = req.body;
+    console.log(req.body);
+    postGame(ownerid, gameid, gametitle, photourl)
       .then(() => {
         res.sendStatus(201);
       })

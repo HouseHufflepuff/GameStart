@@ -62,6 +62,28 @@ export default function GameDetails( { gameId, callback, setView } ) {
       .catch((err) => console.log(err))
   }, [])
 
+  const addGame = (gameObj, userID) => {
+    //working on postman local server but not on deployed server...
+    //need to update?? not sure but should work
+    //need to just pass in userID to stack
+    //denature gameObj
+    const {id, name, background_image} = gameObj
+    console.log(userID, id, name, background_image)
+    //set data structure for server request
+    axios.post('http://13.57.240.106:8000/api/games/post', {
+      ownerid: userID,
+      gameid: id,
+      gametitle: name,
+      photourl: background_image
+    })
+      .then(() => {
+        alert('game successfully added for trade');
+      })
+      .catch((err) => {
+        console.log('game was unable to be added')
+      })
+  }
+
   if (loading) {
     return <View></View>
   }
@@ -132,7 +154,7 @@ export default function GameDetails( { gameId, callback, setView } ) {
           }
         </View>
         <View style={styles.buttonsBar} onStartShouldSetResponder={() => true} >
-          <TouchableOpacity onPress={() => callback(game)}>
+          <TouchableOpacity onPress={() => addGame(game, 11)}>
             <LinearGradient style={styles.button} start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#CAF0F8', '#90e0EF', '#00B4D8', '#0077B6', '#03045E' ]}>
               <Text style={{fontSize: 20, fontWeight: 'bold', fontColor: '#03045E'}}>Post Game +</Text>
             </LinearGradient>

@@ -4,9 +4,10 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
 
-export default function SetLocation ({navigation}) {
+export default function SetLocation ({navigation, route}) {
   const [isLoading, setLoading] = useState(false);
   const [location, setLocation] = useState('');
+  const {userID} = route.params;
 
   const GOOGLE_KEY = 'AIzaSyBX1mVE77vY6fsEYU__Pe2M83qKooIOhuk';
 
@@ -17,7 +18,7 @@ export default function SetLocation ({navigation}) {
     })
     .then(() => {
       console.log('success')
-      navigation.navigate('profile-picture')
+      navigation.navigate('profile-picture', {userID: userID})
     })
     .catch((err) => {
       console.log(err.response)
@@ -56,7 +57,7 @@ export default function SetLocation ({navigation}) {
           useOnPlatform: 'web',
         }}
       />
-      <Button title="Submit" titleStyle={{fontSize: 20, marginBottom: '10%'}} onPress={() => submitLocation(location, 5)}></Button>
+      <Button title="Submit" titleStyle={{fontSize: 20, marginBottom: '10%'}} onPress={() => submitLocation(location, userID)}></Button>
       </LinearGradient>
     </KeyboardAvoidingView>
   )
