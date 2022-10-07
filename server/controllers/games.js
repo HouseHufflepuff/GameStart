@@ -34,12 +34,12 @@ module.exports = {
 
   getGamesFromUser: (req, res) => {
     //requires a param w/ userID key and ID value
+    //tested
     const {userID} = req.query;
-    console.log('hitting here')
-    console.log(userID)
     getUsersGames(userID)
       .then((games) => {
-        res.send(games.rows);
+        console.log(games, 'this is games')
+        res.send(games);
       })
       .catch((err) => {
         console.log('error getGamesFromUser')
@@ -49,10 +49,11 @@ module.exports = {
 
   getGamesFromTrades: (req, res) => {
     //requires a query param with key game and title value
-    const {game} = req.params;
+    //EXACT MATCH
+    const {game} = req.query;
     getTradedGames(game)
       .then((games) => {
-        res.send(games.data);
+        res.send(games);
       })
       .catch((err) => {
         console.log('error getGamesFromTrades')
@@ -72,8 +73,8 @@ module.exports = {
       })
   },
 
+  //working
   getAllGames: (req, res) => {
-    console.log('hitting here')
     getAll()
       .then((games) => {
         res.send(games);

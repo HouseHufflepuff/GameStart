@@ -4,7 +4,7 @@ import PictureCard from './PictureCard.js';
 import {LinearGradient} from 'expo-linear-gradient'
 import axios from 'axios';
 
-export default function ProfilePicture ({authID}) {
+export default function ProfilePicture ({navigation}) {
   const [imageURL, setImageURL] = useState('');
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -37,9 +37,8 @@ export default function ProfilePicture ({authID}) {
       userID: userID
     })
     .then(() => {
-      //toggle loading to done
-      //change view to next step
       console.log('success')
+      navigation.navigate('location')
     })
     .catch((err) => {
       console.log('fail', err.response)
@@ -48,9 +47,14 @@ export default function ProfilePicture ({authID}) {
 
   return(
     <SafeAreaView style={styles.container}>
+       <LinearGradient
+        colors={['black', '#03045E', 'black']}
+        start={{x: 0, y: 0.5}}
+        end={{x: 1, y: 1}}>
       <Text style={styles.text}>
         Select your hero!
       </Text>
+      </LinearGradient>
       <View style={styles.imageContainer}>
       {profiles.map(image => {
       return(
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 50,
     borderColor: 'grey'
   }
 })

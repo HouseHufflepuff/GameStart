@@ -7,15 +7,20 @@ import CreateAccount from './Components/register/CreateAccount.js';
 import RegisterConsoles from './Components/register/RegisterConsoles.js';
 import ProfilePicture from './Components/register/ProfilePicture.js';
 import RegisterGames from './Components/register/RegisterGames.js';
+import SetLocation from './Components/register/SetLocation.js';
+import CreateStack from './Components/register/Main.js';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
-  const Stack = createNativeStackNavigator();
+  // const Stack = createNativeStackNavigator();
 
   return (
-    <>
-      {isLogin && <RegisterGames />}
+    //  <>
+    <NavigationContainer>
+      <CreateStack />
+    </NavigationContainer>
+       /* {isLogin && <RegisterGames />}
 
       {
         !isLogin && <NavigationContainer>
@@ -24,8 +29,8 @@ function App() {
           </Stack.Navigator>
         </NavigationContainer>
       }
-    </>
-  );
+    </> */
+  )
 }
 
 export default App;

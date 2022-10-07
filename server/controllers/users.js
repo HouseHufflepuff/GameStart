@@ -2,7 +2,9 @@ const { updateAddress, createUser, addConsoles, updateProfilePicture, getTradeAm
 
 module.exports = {
   insertAddress: (req, res) => {
+    //should work
     //requires body params {address: address, userID: userID}
+    console.log(req.body);
     const {address, userID} = req.body;
     updateAddress(address, userID)
       .then(() => {
@@ -14,7 +16,8 @@ module.exports = {
       })
   },
 
-  insertUser: async (req, res) => {
+  insertUser: (req, res) => {
+    console.log(req.body, 'this is req body')
     //requires body params {first_name: val, last_name: val, username: val, password: val, email_address: val}
     const userObj = req.body;
     createUser(userObj)
@@ -54,9 +57,11 @@ module.exports = {
 
   getTradeCounter: (req, res) => {
     //requires query params of {userID: val}
+    console.log('hitting here')
     const {userID} = req.query;
     getTradeAmount(userID)
       .then((tradeCount) => {
+        console.log(tradeCount)
         res.send(tradeCount);
       })
       .catch((err) => {

@@ -15,8 +15,10 @@ module.exports = {
 
   getTradedGames: (game) => {
     const queryStr = 'SELECT * FROM games WHERE gametitle = $1';
+    console.log(game)
     return pool.query(queryStr, [game])
       .then((games) => {
+        console.log(games);
         return games.rows;
       })
       .catch((err) => {
@@ -40,7 +42,8 @@ module.exports = {
     const queryStr = 'Select * from games';
     return pool.query(queryStr)
       .then((games) => {
-        return games;
+        console.log(games)
+        return games.rows;
       })
       .catch((err) => {
         console.log(err)
