@@ -19,9 +19,9 @@ function App() {
 
   return (
     <>
-    <NavigationContainer>
+    {/* <NavigationContainer>
       <CreateStack />
-    </NavigationContainer>
+    </NavigationContainer> */}
       {isLogin && < Login />}
 
       {

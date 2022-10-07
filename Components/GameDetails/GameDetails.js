@@ -6,6 +6,10 @@ import Feather from 'react-native-vector-icons/Feather';
 import { ListItem } from '@rneui/themed'
 import { LinearGradient } from 'expo-linear-gradient';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { getDistance, isPointWithinRadius } from 'geolib';
+
+import { users } from '../Map/mapHelpers/users.js';
+import GameCard from '../Map/GameCard.jsx';
 
 let width = Dimensions.get('window').width; //full width
 
@@ -42,6 +46,7 @@ export default function GameDetails( { gameId, callback, setView } ) {
   const [showTitle, setShowTitle] = useState(true)
   const [descriptionExpanded, setDescriptionExpanded] = useState(false)
   const [detailsExpanded, setDetailsExpanded] = useState(false)
+  const [closeGames, setCloseGames] = useState(users);
 
   useEffect(() => {
       axios.get(`https://api.rawg.io/api/games/${gameId}`, {
@@ -177,6 +182,31 @@ export default function GameDetails( { gameId, callback, setView } ) {
             </View>
           </ListItem.Accordion>
         </View>
+        <Text style={{fontSize: 18, color: 'white', margin: 10, marginBottom: 30, marginTop: 20,}}>Game Listings In Your Area</Text>
+        <View >
+          <ScrollView style={styles.scrollView} horizontal={true} showsHorizontalScrollIndicator={false}>
+            {closeGames.map((item, index) => {
+              if (isPointWithinRadius(item.coordinate, {
+                latitude: 37.783242,
+                longitude: -122.443055
+              }, 5000)) {
+                return (
+                    <GameCard
+                      key={index}
+                      style={{ height: 200}}
+                      title={item.title}
+                      img={item.img}
+                      console={item.console}
+                      coordinate={item.coordinate}
+                      state={item.state}
+                      miles={item.miles}
+                    />
+                )
+              }
+            })}
+          </ScrollView>
+        </View>
+        <View style={{height: 100}}></View>
       </ScrollView>
     </SafeAreaView>
 
@@ -277,5 +307,12 @@ const styles = StyleSheet.create({
     width: 20,
     resizeMode: 'contain',
     marginRight: 5,
+  },
+  scrollView: {
+    padding: 0,
+    flexGrow: 0,
+    height: 200,
+    marginRight: 4,
+    flexShrink: 0,
   },
 })
