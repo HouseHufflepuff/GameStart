@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import LinearGradient from 'react-native-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 // import { Card, Icon } from "@rneui/themed";
 import { StatusBar } from 'expo-status-bar';
 import { FlatList, Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
@@ -82,6 +82,7 @@ export default function SearchBar( { console, callback } ) {
         <TextInput
           style={styles.search}
           placeholder='Search games'
+          // placeholderTextColor='#ccc'
           onChangeText={newText => setText(newText)}
           defaultValue={text}
           clearButtonMode='while-editing'
@@ -92,14 +93,14 @@ export default function SearchBar( { console, callback } ) {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) =>
             <TouchableOpacity onPress={() => callback(item.id)}>
-              <View style={styles.item}>
+              <LinearGradient start={{x: 1, y: 0}} end={{x: 0, y: 0}} colors={['#CAF0F8', '#90e0EF', '#00B4D8', '#0077B6', '#03045E' ]} style={styles.item}>
                 <Image style={styles.image} source={{uri: item.background_image}}/>
                 <View style={styles.description}>
                   <Text style={styles.title}>{item.name}</Text>
                   <Text>{`Release year: ${getYear(item.released)}`}</Text>
                   <View style={styles.consoles}>{getPlatforms(item.parent_platforms)}</View>
                 </View>
-              </View>
+              </LinearGradient>
             </TouchableOpacity>
             }
           />
@@ -119,9 +120,15 @@ const styles = StyleSheet.create({
     width: '90%',
     fontSize: 30,
     borderWidth: '1px',
-    borderColor: 'black',
+    borderColor: 'white',
     borderRadius: 10,
     padding: 10,
+    backgroundColor: 'white',
+    shadowColor: '#ccc',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 10,
     // marginTop: 20,
     // marginBottom: 20
   },

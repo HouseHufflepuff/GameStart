@@ -3,6 +3,8 @@ import { Button, Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSh
 import axios from 'axios';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
+import { ListItem } from '@rneui/themed'
+import { LinearGradient } from 'expo-linear-gradient';
 
 let width = Dimensions.get('window').width; //full width
 
@@ -34,6 +36,8 @@ export default function GameDetails( { gameId, callback, setView } ) {
   const [game, setGame] = useState({})
   const [image, setImage] = useState(true)
   const [showTitle, setShowTitle] = useState(true)
+  const [descriptionExpanded, setDescriptionExpanded] = useState(false)
+  const [detailsExpanded, setDetailsExpanded] = useState(false)
 
   useEffect(() => {
       axios.get(`https://api.rawg.io/api/games/${gameId}`, {
@@ -55,7 +59,7 @@ export default function GameDetails( { gameId, callback, setView } ) {
 
   return (
     <SafeAreaView >
-      <ScrollView >
+      <ScrollView>
         <View style={{position: 'relative'}} onStartShouldSetResponder={() => true} >
           <Pressable
             onPress={() => {
@@ -73,53 +77,86 @@ export default function GameDetails( { gameId, callback, setView } ) {
               }}/>
           </Pressable>
           {showTitle &&
-            <TouchableOpacity style={styles.backButton} onPress={() => setView('searchBar')}>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Feather
-                  name='chevron-left'
-                  size={22}
-                  style={{
-                    color: '#90E0EF'
-                  }}
-                />
-                <Fontisto
-                  name='search'
-                  size={22}
-                  style={{
-                    marginLeft: 5,
-                    color: '#90E0EF'
-                  }} />
-              </View>
-            </TouchableOpacity>
+            <LinearGradient style={styles.backButtonGradient} start={{x: 1, y: 0}} end={{x: 0, y: 0}} colors={['#CAF0F8', '#90e0EF', '#00B4D8', '#0077B6', '#03045E' ]}>
+              <TouchableOpacity style={styles.backButton} onPress={() => setView('searchBar')}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                  <Feather
+                    name='chevron-left'
+                    size={22}
+                    style={{
+                      color: '#90E0EF'
+                    }}
+                  />
+                  <Fontisto
+                    name='search'
+                    size={22}
+                    style={{
+                      marginLeft: 5,
+                      color: '#90E0EF'
+                    }} />
+                </View>
+              </TouchableOpacity>
+            </LinearGradient>
           }
           {showTitle &&
-            <View style={styles.title}>
-              <Text style={styles.titleText}>{game.name}</Text>
-              <View style={styles.consoles}>{getPlatformIcons(game.parent_platforms)}</View>
-            </View>
+            <LinearGradient style={styles.titleGradient} start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#CAF0F8', '#90e0EF', '#00B4D8', '#0077B6', '#03045E' ]}>
+              <View style={styles.title}>
+                <Text style={styles.titleText}>{game.name}</Text>
+                <View style={styles.consoles}>{getPlatformIcons(game.parent_platforms)}</View>
+              </View>
+            </LinearGradient>
           }
         </View>
         <View style={styles.buttonsBar} onStartShouldSetResponder={() => true} >
           <TouchableOpacity onPress={() => callback(game)}>
-            <View style={styles.button}>
+            <LinearGradient style={styles.button} start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#CAF0F8', '#90e0EF', '#00B4D8', '#0077B6', '#03045E' ]}>
               <Text style={{fontSize: 20, fontWeight: 'bold', fontColor: '#03045E'}}>Post Game +</Text>
-            </View>
+            </LinearGradient>
           </TouchableOpacity>
         </View>
-        <View style={styles.details} onStartShouldSetResponder={() => true} >
-          <Text style={{fontWeight: 'bold', marginBottom: 5, fontColor: ''}}>Game Description</Text>
-          <Text>{game.description_raw}</Text>
+        <View onStartShouldSetResponder={() => true} >
+          <ListItem.Accordion
+            containerStyle={styles.accordian}
+            content={
+              <>
+                <ListItem.Content>
+                  <ListItem.Title style={{color: 'white'}}>Game Description</ListItem.Title>
+                </ListItem.Content>
+              </>
+            }
+            isExpanded={descriptionExpanded}
+            onPress={() => {setDescriptionExpanded(!descriptionExpanded)}}
+          >
+            <View style={{padding: 10, backgroundColor: '#242526', width: '95%', paddingBottom: 40,}}>
+              <Text style={{fontWeight: 'bold', marginBottom: 15, color: 'white'}}>Game Description</Text>
+              <Text style={{color: 'white'}}>{game.description_raw}</Text>
+            </View>
+          </ListItem.Accordion>
         </View>
-        <View style={styles.details} onStartShouldSetResponder={() => true} >
-          <Text style={{fontWeight: 'bold', marginBottom: 5,}}>Game Details:</Text>
-          <Text>{`Title: ${game.name}`}</Text>
-          <Text>{`Release year: ${getYear(game.released)}`}</Text>
-          <Text>{`Metacritic rating: ${game.metacritic ? game.metacritic+'%' : 'N/A'}`}</Text>
-          <Text>{`Genres: ${game.genres ? game.genres.map(g => g.name).join(', ') : 'N/A'}`}</Text>
-          <Text>{`Platforms: ${game.platforms ? game.platforms.map(p => p.platform.name).join(', ') : 'N/A'}`}</Text>
-          <Text>{`Publisher: ${game.publishers[0] ? game.publishers[0].name : 'N/A'}`}</Text>
-          <Text>{`ESRB Rating: ${game.esrb_rating ? game.esrb_rating.name : 'N/A'}`}</Text>
-
+        <View onStartShouldSetResponder={() => true} >
+          <ListItem.Accordion
+            containerStyle={styles.accordian}
+            content={
+              <>
+                <ListItem.Content >
+                  <ListItem.Title style={{color: 'white'}}>Game Details</ListItem.Title>
+                </ListItem.Content>
+              </>
+            }
+            isExpanded={detailsExpanded}
+            onPress={() => {setDetailsExpanded(!detailsExpanded)}}
+          >
+            <View style={{padding: 10, backgroundColor: '#242526', width: '95%', paddingBottom: 40,}}>
+              <Text style={{fontWeight: 'bold', marginBottom: 15, color: 'white'}}>Game Details:</Text>
+              <Text style={{color: 'white'}}>{`Title: ${game.name}`}</Text>
+              <Text style={{color: 'white'}}>{`Release year: ${getYear(game.released)}`}</Text>
+              <Text style={{color: 'white'}}>{`Metacritic rating: ${game.metacritic ? game.metacritic+'%' : 'N/A'}`}</Text>
+              <Text style={{color: 'white'}}>{`Genres: ${game.genres ? game.genres.map(g => g.name).join(', ') : 'N/A'}`}</Text>
+              <Text style={{color: 'white'}}>{`Platforms: ${game.platforms ? game.platforms.map(p => p.platform.name).join(', ') : 'N/A'}`}</Text>
+              <Text style={{color: 'white'}}>{`Publisher: ${game.publishers[0] ? game.publishers[0].name : 'N/A'}`}</Text>
+              <Text style={{color: 'white'}}>{`ESRB Rating: ${game.esrb_rating ? game.esrb_rating.name : 'N/A'}`}</Text>
+            </View>
+          </ListItem.Accordion>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -140,18 +177,22 @@ const styles = StyleSheet.create({
     height: width,
     backgroundColor: 'rgba(0,0,0,.7)',
   },
-  title: {
-    // flex: 1,
+  titleGradient: {
     position: 'absolute',
-    // maxWidth: '90%',
-    alignSelf: 'flex-start',
+    minWidth: '40%',
     bottom: 20,
     right: 0,
-    padding: 10,
+    padding: 5,
+  },
+  title: {
+    flex: 1,
+    width: '100%',
+    alignSelf: 'flex-start',
+    padding: 5,
     paddingRight: 20,
     paddingLeft: 20,
     fontWeight: 'bold',
-    backgroundColor: '#03045E'
+    backgroundColor: '#03045E',
   },
   titleText: {
     flex: 1,
@@ -159,47 +200,58 @@ const styles = StyleSheet.create({
     color: '#90E0EF',
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10
+    marginBottom: 5,
+    shadowColor: '#CAF0F8',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 10,
+  },
+  backButtonGradient: {
+    position: 'absolute',
+    top: 20,
+    left: -30,
+    padding: 5,
+    borderRadius: 100,
   },
   backButton: {
-    position: 'absolute',
-    // flex: 1,
-    // flexDirection: 'row',
-    top: 20,
-    left: 0,
-    paddingLeft: 20,
+    paddingLeft: 30,
     padding: 20,
     fontWeight: 'bold',
-    fontColor: 'white',
     backgroundColor: '#03045E',
     color: '#90E0EF',
+    borderRadius: 100,
   },
   buttonsBar: {
     flex: 1,
+    minWidth: '100%',
+    flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 30,
-    paddingTop: 30
+    marginTop: 30,
+    marginBottom: 30,
   },
   button: {
     flex: 1,
+    minWidth: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    // height: 40,
-    // width: 100
     padding: 10,
-    // paddingHorizontal: 50,
     backgroundColor: '#90E0EF',
     fontSize: 40,
-    borderRadius: 10,
+    // borderRadius: 10,
   },
-  details: {
-    flex: 1,
-    padding: 30,
+  accordian: {
+    backgroundColor: '#121212',
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 5,
+    width: '95%',
+    marginBottom: 5,
   },
   consoles: {
     flex: 1,
     flexDirection: 'row',
-    gap: 20,
+    alignSelf: 'flex-end'
   },
   consoleIcon: {
     height: 20,
