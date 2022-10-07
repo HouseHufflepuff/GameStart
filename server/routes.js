@@ -3,6 +3,7 @@ const { getTrades, postTrades, putTrades } = require('./controllers/tradesContro
 const { getGames, postGames, putGames } = require('./controllers/gamesController');
 const {insertAddress, insertUser, insertConsoles, changeProfilePic, getTradeCounter} = require('./controllers/users.js');
 const {getGamesRawg, getGamesFromUser, getGamesFromTrades, addGame, getAllGames} = require('./controllers/games.js');
+const {postFavorites, getFavoriteGames} = require('./controllers/favorites.js');
 
 // USERS
 router.post('/users/register', insertUser);
@@ -32,7 +33,8 @@ router.put('/trades')
 // MESSAGES
 
 // FAVORITES
-
+router.post('/favorites', postFavorites)
+router.get('/favorites', getFavoriteGames)
 // CONSOLES
 
 module.exports = router
