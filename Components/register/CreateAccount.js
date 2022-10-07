@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback, StatusBar} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
 
@@ -50,26 +50,26 @@ export default function Register ({navigation}) {
       email_address: email
     }
 
-    setLoading(true);
+    // setLoading(true);
     //firebase auth (?)
-    axios.post('http://13.57.240.106:8000/api/users/register', data)
-    .then(() => {
-      axios.get(`http://13.57.240.106.8000/api/users/:${user}`)
-      .then((id) => {
-        setUserID(id)
-        console.log('hitting here')
-        setTimeout(() => {
-          setLoading(false);
-          console.log('set time out done')
+    // axios.post('http://13.57.240.106:8000/api/users/register', data)
+    // .then(() => {
+    //   axios.get(`http://13.57.240.106.8000/api/users/:${user}`)
+    //   .then((id) => {
+    //     setUserID(id)
+    //     console.log('hitting here')
+    //     setTimeout(() => {
+    //       setLoading(false);
+    //       console.log('set time out done')
           navigation.navigate('register-consoles', {userID: userID})
-        }, 500)
-      })
-    })
-    .catch((err) => {
-      alert('error registering')
-      console.log(err.response)
-      setLoading(false);
-    })
+    //     }, 500)
+    //   })
+    // })
+    // .catch((err) => {
+    //   alert('error registering')
+    //   console.log(err.response)
+    //   setLoading(false);
+    // })
 
   }
     //what are states? (setState{user: user, password: password, email: email, consoles: consoles, }), {isLoading},
@@ -160,7 +160,6 @@ export default function Register ({navigation}) {
       </View>
       </TouchableWithoutFeedback>
       {/* </LinearGradient> */}
-      <StatusBar barStyle={'light-content'}/>
     </KeyboardAvoidingView>
   )
 }
@@ -198,9 +197,10 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     height: 120,
+    width: 380,
     textAlign: 'justify',
     color: 'white',
-    padding: 25,
+    padding: 15,
     fontSize: 18
   },
   nameForms: {

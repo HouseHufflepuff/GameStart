@@ -51,7 +51,8 @@ export default function Messaging({navigation, route}) {
   return (
     <KeyboardAvoidingView
     behavior={Platform.OS === "ios" ? "padding" : "height"}
-    style={styles.container}>
+    style={styles.container}
+    >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.container}>
         <Header otherUser={userData}/>

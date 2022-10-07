@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image, TouchableWithoutFeedback, Keyboard, SafeAreaView, ImageBackground, Button } from 'react-native';
-import logo from './assets/gamestartneon2.png'
-import { auth } from './firebase'
+import logo from '../../assets/logo.png'
+import { auth } from '../loginUtils/firebase.js'
 import {signInWithEmailAndPassword, updateProfile, signOut} from 'firebase/auth'
 import React, {useState} from 'react'
-import { useAuth } from './loginUtils/useAuth.js';
+import { useAuth } from '../loginUtils/useAuth.js';
 
 
 

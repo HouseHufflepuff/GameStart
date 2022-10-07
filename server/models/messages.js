@@ -2,7 +2,7 @@ const db = require('../connection.js');
 
 module.exports.getConversation = async (conversationId) => {
   let client = await db.connect();
-  let res = await client.query(`SELECT * FROM messages WHERE conversationID=${conversationId} order by created_at desc`);
+  let res = await client.query(`SELECT * FROM messages WHERE conversationID=${conversationId} order by id desc`);
   client.release();
   return res.rows;
 };

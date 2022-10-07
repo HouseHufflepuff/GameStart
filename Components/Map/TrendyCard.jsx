@@ -14,7 +14,7 @@ function TrendyCard({ title, img, count }) {
         <Image style={styles.imageStyle} source={{ uri: img }} resizeMode='cover' />
         <View style={styles.infoStyle}>
           <Text style={styles.titleStyle}>{title}</Text>
-          <Text style={styles.bold}> <Text style={styles.countStyle}>{count}</Text> times has been traded</Text>
+          <Text style={styles.bold}>Times Traded: </Text><Text style={styles.countStyle}>{count}</Text>
         </View>
       </View>
     </View>
@@ -23,7 +23,7 @@ function TrendyCard({ title, img, count }) {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    width: '10%',
+    width: 150,
     backgroundColor: '#06283D',
     color: 'white',
     marginRight: 10,
@@ -41,8 +41,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 10,
-    width: '100%',
+    fontSize: 14,
     fontWeight: '800',
   },
   infoStyle: {
@@ -62,14 +61,14 @@ const styles = StyleSheet.create({
   },
   bold: {
     textAlign: 'center',
-    fontSize: 8,
+    fontSize: 12,
     color: 'white',
     fontWeight: 'bold',
   },
   countStyle: {
     textAlign: 'center',
     color: '#90E0EF',
-    fontSize: 9,
+    fontSize: 25,
   }
 });
 
