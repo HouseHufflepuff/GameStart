@@ -3,8 +3,9 @@ import ConfettiCannon from 'react-native-confetti-cannon';
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, SafeAreaView, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
 
-export default function AccountComplete ({navigation}) {
+export default function AccountComplete ({navigation, route}) {
 
+  const {userID} = route.params;
 
   return(
     <SafeAreaView style={styles.container}>

@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Butt
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
 
-export default function Register ({navigation, routes}) {
+export default function Register ({navigation}) {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -12,6 +12,10 @@ export default function Register ({navigation, routes}) {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [userID, setUserID] = useState(0)
+
+  useEffect(() => {
+    console.log(userID);
+  }, [userID])
 
   //validation functions
   const validate = (email) => {
@@ -50,14 +54,14 @@ export default function Register ({navigation, routes}) {
     //firebase auth (?)
     axios.post('http://13.57.240.106:8000/api/users/register', data)
     .then(() => {
-      axios.get('htttp://13.57.240.106.8000/api/users/', {params: {username: user}})
+      axios.get(`http://13.57.240.106.8000/api/users/:${user}`)
       .then((id) => {
         setUserID(id)
         console.log('hitting here')
         setTimeout(() => {
           setLoading(false);
           console.log('set time out done')
-          navigation.navigate('register-consoles')
+          navigation.navigate('register-consoles', {userID: userID})
         }, 500)
       })
     })

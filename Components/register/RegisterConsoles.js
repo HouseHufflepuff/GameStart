@@ -4,8 +4,9 @@ import axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
 import CardTiles from './CardTiles.js';
 
-export default function RegisterConsoles ({navigation}) {
+export default function RegisterConsoles ({navigation, route}) {
   const [consoles, setConsoles] = useState([]);
+  const {userID} = route.params;
   const [list, setList] = useState({Xbox: false, Playstation: false, NintendoSwitch: false, Pc: false});
 
   const systemImg = [{system: 'Xbox', url: 'https://i.ibb.co/m6m40rj/xbox-logo.png'}, {system: 'Playstation', url: 'https://i.ibb.co/myLWzfJ/Play-Station-Logo-wine.png'}, {system: 'NintendoSwitch', url: 'https://i.ibb.co/pZdYnzh/8ad56e93021d1d5a33af4a54f7ab1e3f.jpg'}, {system: 'Pc', url: 'https://i.ibb.co/sRDyNYV/PC.png'}];
@@ -34,7 +35,7 @@ export default function RegisterConsoles ({navigation}) {
       })
       .then(() => {
         console.log('success')
-        navigation.navigate('location')
+        navigation.navigate('location', {userID: userID})
       })
       .catch((err) => {
         console.log(err.response)
@@ -58,7 +59,7 @@ export default function RegisterConsoles ({navigation}) {
           )
         })}
       </View>
-      <TouchableOpacity style={styles.button} onPress={() => submitConsoles(consoles, 5)}>
+      <TouchableOpacity style={styles.button} onPress={() => submitConsoles(consoles, userID)}>
         <Text style={{marginTop: '2%',textAlign: 'center', fontSize: 30, fontWeight: '500', color: 'white'}}>
           Proceed
         </Text>

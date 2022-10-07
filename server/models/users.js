@@ -76,6 +76,7 @@ module.exports = {
     const queryStr = "Select id from users where username = $1;";
     return pool.query(queryStr, [username])
       .then((id) => {
+        console.log(id.rows)
         return id.rows;
       })
       .catch((err) => {
