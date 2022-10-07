@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const router = require('./routes/router.js');
+const router = require('./routes');
 const cors = require('cors');
 const morgan = require('morgan');
 
@@ -18,5 +18,3 @@ app.use('/api', router);
 app.listen(8000, () => {
   console.log('server started on port 8000')
 });
-
-//localhost:8000/api/users/trade
