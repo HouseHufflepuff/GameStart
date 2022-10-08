@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'react-native';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image, TouchableWithoutFeedback, Keyboard, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import logo from '../../assets/logo.png'
@@ -43,69 +43,63 @@ export default function Login( {navigation}) {
 
 
   return (
-
-
-    <KeyboardAvoidingView
-    style={styles.container}
-    behavior="padding"
-  >
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeAreaView style={styles.inputContainer}>
-   <Image source={logo} style={styles.logo}/>
+      <Image source={logo} style={styles.logo}/>
 
-    <View >
-      <TextInput
-        placeholder="Username"
-        style={styles.input}
-        value={email}
-        onChangeText={text => setEmail(text)}
-      />
-      <TextInput
-        placeholder="Password"
-        style={styles.input}
-        value={password}
-        onChangeText={text => setPassword(text)}
-        secureTextEntry
-      />
+      <View >
+        <TextInput
+          placeholder="Username"
+          style={styles.input}
+          value={email}
+          onChangeText={text => setEmail(text)}
+        />
+        <TextInput
+          placeholder="Password"
+          style={styles.input}
+          value={password}
+          onChangeText={text => setPassword(text)}
+          secureTextEntry
+        />
+      </View>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleLogin}
+          >
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+
+        </View>
+
+        <Text style={styles.textLink}>Forgot Password?</Text>
+
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View style={{flex: 1, height: 1, backgroundColor: 'white'}} />
+      <View>
+        <Text style={{width: 50, textAlign: 'center', color: 'white'}}>OR</Text>
+      </View>
+      <View style={{flex: 1, height: 1, backgroundColor: 'white'}} />
     </View>
 
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleLogin}
-      >
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+    <View style={styles.iconsContainer}>
+            <Image source={apple} style={styles.icons} />
+            <Image source={twitter} style={styles.icons}/>
+            <Image source={fb} style={styles.icons} />
+            <Image source={google} style={styles.icons} />
+        </View>
 
+    <View style={{marginTop:20, marginBottom:20}}>
+    <Text style={{textAlign: 'center', color: '#999999'}}>Don't have an account?
+    <Text style={styles.textLink} onPress={() => navigation.navigate('register')}> Sign up</Text>
+    </Text>
     </View>
 
-    <Text style={styles.textLink}>Forgot Password?</Text>
-
-    <View style={{flexDirection: 'row', alignItems: 'center'}}>
-  <View style={{flex: 1, height: 1, backgroundColor: 'white'}} />
-  <View>
-    <Text style={{width: 50, textAlign: 'center', color: 'white'}}>OR</Text>
-  </View>
-  <View style={{flex: 1, height: 1, backgroundColor: 'white'}} />
-</View>
-
-<View style={styles.iconsContainer}>
-        <Image source={apple} style={styles.icons} />
-        <Image source={twitter} style={styles.icons}/>
-        <Image source={fb} style={styles.icons} />
-        <Image source={google} style={styles.icons} />
-    </View>
-
-<View style={{marginTop:20, marginBottom:20}}>
-<Text style={{textAlign: 'center', color: '#999999'}}>Don't have an account?
-<Text style={styles.textLink} onPress={() => navigation.navigate('register')}> Sign up</Text>
-</Text>
-</View>
-
-</SafeAreaView>
-</TouchableWithoutFeedback>
-
+    </SafeAreaView>
+    </TouchableWithoutFeedback>
+    <StatusBar barStyle={'light-content'}/>
   </KeyboardAvoidingView>
 )
 }
@@ -115,7 +109,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#181818',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
   inputContainer: {
@@ -167,21 +161,19 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   iconsContainer:{
-    flex: 2,
+    flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    position: 'relative',
     justifyContent: 'space-evenly',
-    marginBottom:40,
-    marginTop: 20
+    marginBottom: 100,
+    marginTop: 20,
+    marginRight: 15
   },
   icons:{
-    marginLeft: 5
+    marginLeft: 10
   },
   logo: {
-    marginTop: 15,
     height: 250,
-    width: 400,
-    marginBottom: 10
+    width: 350,
+    marginBottom: 40
   }
 })

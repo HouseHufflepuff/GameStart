@@ -27,28 +27,29 @@ const handleLogout = function () {
 
   return (
     <View style={styles.container}>
-    <Image source={profilePic ? profilePic : { uri: "https://www.jokesforfunny.com/wp-content/uploads/2021/06/0596bdb89b60fe771acd2f5972a9d3e3-905x1200.jpg" }} style={{ width: 200, height: 200, marginTop:20 }} />
-      <Text style={styles.text}>Welcome, {user.displayName ? user.displayName : user.email}!</Text>
-      <View >
-      <Text style={styles.text}>You have completed {trades ? trades : 5} trades!</Text>
-      <Text style={styles.text}>Your description goes here</Text>
-      {/* <TextInput
-        placeholder="Add a description"
-        style={styles.input}
-        value={description}
-        onChangeText={text => setDescription(text)}
-      /> */}
+      <Image source={profilePic ? profilePic : { uri: "https://www.jokesforfunny.com/wp-content/uploads/2021/06/0596bdb89b60fe771acd2f5972a9d3e3-905x1200.jpg" }} style={{ width: 200, height: 200, marginTop:20 }} />
+        <Text style={styles.text}>Welcome, {user.displayName ? user.displayName : user.email}!</Text>
+        <View >
+        <Text style={styles.text}>You have completed {trades ? trades : 5} trades!</Text>
+        <Text style={styles.text}>Your description goes here</Text>
+        {/* <TextInput
+          placeholder="Add a description"
+          style={styles.input}
+          value={description}
+          onChangeText={text => setDescription(text)}
+        /> */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleLogout}
+        >
+          <Text style={styles.buttonText}>Sign Out</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.navi}></View>
+      </View>
     </View>
 
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleLogout}
-      >
-        <Text style={styles.buttonText}>Sign Out</Text>
-      </TouchableOpacity>
-    </View>
-    </View>
 
   )
   }
@@ -62,7 +63,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonContainer: {
-    flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginTop: 8,
@@ -121,4 +121,7 @@ const styles = StyleSheet.create({
     margin: 8,
     width:244
   },
+  navi: {
+    flex: 1,
+  }
 })
