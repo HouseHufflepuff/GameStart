@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, StatusBar } from 'react-native';
 import axios from 'axios';
-import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 import { ListItem } from '@rneui/themed'
 import { LinearGradient } from 'expo-linear-gradient';
@@ -49,11 +48,13 @@ export default function GameDetails( { gameId, callback, setView } ) {
   const [detailsExpanded, setDetailsExpanded] = useState(false)
   const [closeGames, setCloseGames] = useState(users);
 
+  const key = process.env.APIKEY
+
   const getData = async () => {
     try {
       let gameData = await axios.get(`https://api.rawg.io/api/games/${gameId}`, {
         params: {
-          key: '2a79010bc4f244649e73a1fcc6658773'
+          key: key
         }
       });
       setGame(gameData.data);
