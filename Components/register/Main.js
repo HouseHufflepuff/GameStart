@@ -6,7 +6,7 @@ import RegisterConsoles from './RegisterConsoles.js';
 import SetLocation from './SetLocation.js';
 import AccountComplete from './AccountComplete.js'
 import {NavigationContainer} from '@react-navigation/native'
-import Login from '/Users/dg/rfp2207/GameStart/LoginStuff/loginComponents/Login.js'
+import Login from '../../LoginStuff/loginComponents/Login.js'
 
 export default function MyStack({navigation}) {
 

@@ -10,8 +10,11 @@ import RegisterGames from './Components/register/RegisterGames.js';
 import SetLocation from './Components/register/SetLocation.js';
 import CreateStack from './Components/register/Main.js';
 import Login from './LoginStuff/loginComponents/Login.js';
-import MyStack from '/Users/dg/rfp2207/GameStart/Components/register/Main.js'
+import MyStack from './Components/register/Main.js'
 import { useAuth } from './LoginStuff/loginUtils/useAuth.js';
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 function App() {
 
@@ -35,7 +38,6 @@ function App() {
             <Stack.Screen name='register' component={CreateStack} />
           </Stack.Navigator>
         </NavigationContainer>
-
   )
 }
 

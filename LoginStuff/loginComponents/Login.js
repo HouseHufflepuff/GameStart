@@ -9,7 +9,7 @@ import twitter from '../../assets/twitter_login.png'
 import { auth } from '../loginUtils/firebase'
 import {signInWithEmailAndPassword, updateProfile, getAuth, signInWithPopup,signInWithRedirect, GoogleAuthProvider} from 'firebase/auth'
 import React, {useState} from 'react'
-import MyStack from '/Users/dg/rfp2207/GameStart/Components/register/Main.js'
+import MyStack from '../../Components/register/Main.js'
 
 
 

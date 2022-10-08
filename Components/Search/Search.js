@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback, View, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import GameDetails from '../GameDetails/GameDetails.js';
 import SearchBar from './SearchBar.js'
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 function Search() {
   const[view, setView] = useState('searchBar')
