@@ -8,7 +8,7 @@
 
 # Introduction
 This project was a 1-week sprint where our team built a Game Trading mobile app for iOS.
-Built with a focus on local community, empowering the secondhand market, and to reduce e-waste.
+Built with a focus on local community, empowering the secondhand market, and reducing reduce e-waste.
 
 ## What does the app do?
 * GameStart connects local gamers so they may trade games amongst the community.
