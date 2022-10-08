@@ -12,7 +12,7 @@ export default function SetLocation ({navigation, route}) {
   const GOOGLE_KEY = 'AIzaSyBX1mVE77vY6fsEYU__Pe2M83qKooIOhuk';
 
   const submitLocation = (address, userID) => {
-    axios.put('http://13.57.240.106:8000/users/api/address', {
+    axios.put('http://localhost:8000/api/users/address', {
       address: address,
       userID: userID
     })

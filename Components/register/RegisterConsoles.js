@@ -43,6 +43,7 @@ export default function RegisterConsoles ({navigation, route}) {
     })
   }
 
+  console.log(route.params)
 
   return(
     <View style={styles.container} >

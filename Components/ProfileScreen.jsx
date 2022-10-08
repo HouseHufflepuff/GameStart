@@ -15,7 +15,7 @@ function ProfileScreen({ navigation }) {
       flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#181818',
       color: '#fff',
     }}>
-      <Text style={{ color: 'white' }}>Profile Screen</Text>
+      <Text style={{ color: 'white' }}>update?</Text>
     </View>
   );
 }
