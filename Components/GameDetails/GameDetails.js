@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Dimensions, Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, StatusBar } from 'react-native';
 import axios from 'axios';
-import Fontisto from 'react-native-vector-icons/Fontisto';
 import Feather from 'react-native-vector-icons/Feather';
 import { ListItem } from '@rneui/themed'
 import { LinearGradient } from 'expo-linear-gradient';
@@ -47,22 +46,21 @@ export default function GameDetails( { gameId, callback, setView } ) {
   const [showTitle, setShowTitle] = useState(true)
   const [descriptionExpanded, setDescriptionExpanded] = useState(false)
   const [detailsExpanded, setDetailsExpanded] = useState(false)
-  const [closeGames, setCloseGames] = useState([]);
+  const [closeGames, setCloseGames] = useState(users);
+
+  const key = process.env.APIKEY
 
   const getData = async () => {
     try {
       let gameData = await axios.get(`https://api.rawg.io/api/games/${gameId}`, {
         params: {
-          key: '2a79010bc4f244649e73a1fcc6658773'
+          key: key
         }
       });
       setGame(gameData.data);
-      let listingData = await axios.get('http://13.57.240.106:8000/api/locations');
-      // console.log('listingdata =====================================', listingData.data[0].gameid);
-      // console.log('gamedataid =====================================', gameData.data.id);
-      let filteredListingData = listingData.data.filter((listing) => listing.gameid === gameData.data.id)
-      // console.log('filteredListingData =====================================', filteredListingData);
-      setCloseGames(filteredListingData);
+      // let listingData = await axios.get('http://13.57.240.106:8000/api/locations');
+      // let filteredListingData = listingData.data.filter((listing) => listing.gameid === gameData.data.id)
+      // setCloseGames(filteredListingData);
       setLoading(false)
     } catch (error) {
       console.log('err', error)
@@ -72,20 +70,6 @@ export default function GameDetails( { gameId, callback, setView } ) {
   useEffect(() => {
     getData()
   }, [])
-
-  // useEffect(() => {
-  //     axios.get(`https://api.rawg.io/api/games/${gameId}`, {
-  //       params: {
-  //         key: '2a79010bc4f244649e73a1fcc6658773'
-  //       }
-  //     })
-  //     .then((response) => {
-  //       setGame(response.data)
-  //       setLoading(false)
-  //       // console.log('success!')
-  //     })
-  //     .catch((err) => console.log(err))
-  // }, [])
 
   const addGame = (gameObj, userID) => {
     //working on postman local server but not on deployed server...
@@ -147,28 +131,6 @@ export default function GameDetails( { gameId, callback, setView } ) {
                 uri: image ? game.background_image : game.background_image_additional
               }}/>
           </Pressable>
-          {/* {showTitle &&
-            <LinearGradient style={styles.backButtonGradient} start={{x: 1, y: 0}} end={{x: 0, y: 0}} colors={['#CAF0F8', '#90e0EF', '#00B4D8', '#0077B6', '#03045E' ]}>
-              <TouchableOpacity style={styles.backButton} onPress={() => setView('searchBar')}>
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                  <Feather
-                    name='chevron-left'
-                    size={22}
-                    style={{
-                      color: '#90E0EF'
-                    }}
-                  />
-                  <Fontisto
-                    name='search'
-                    size={22}
-                    style={{
-                      marginLeft: 5,
-                      color: '#90E0EF'
-                    }} />
-                </View>
-              </TouchableOpacity>
-            </LinearGradient>
-          } */}
           {showTitle &&
             <LinearGradient style={styles.titleGradient} start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#CAF0F8', '#90e0EF', '#00B4D8', '#0077B6', '#03045E' ]}>
               <View style={styles.title}>
@@ -233,19 +195,19 @@ export default function GameDetails( { gameId, callback, setView } ) {
         <View >
           <ScrollView style={styles.scrollView} horizontal={true} showsHorizontalScrollIndicator={false}>
             {closeGames.map((item, index) => {
-              if (isPointWithinRadius({latitude: item.latitude, longitude: item.longitude}, {
-                latitude: 33.804474,
-                longitude: -118.03948
+              if (isPointWithinRadius(item.coordinate, {
+                latitude: 37.783242,
+                longitude: -122.443055
               }, 5000)) {
                 return (
                   <GameCard
                     key={index}
                     style={{ height: 200}}
-                    title={item.gametitle}
-                    img={item.photourl}
-                    console={item.consoleicon}
-                    coordinate={{latitude: item.latitude, longitude: item.longitude}}
-                    state={item.gamecondition}
+                    title={item.title}
+                    img={item.img}
+                    console={item.console}
+                    coordinate={item.coordinate}
+                    state={item.state}
                     miles={item.miles}
                   />
                 )
@@ -336,7 +298,6 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#90E0EF',
     fontSize: 40,
-    // borderRadius: 10,
   },
   accordian: {
     backgroundColor: '#121212',
