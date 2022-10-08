@@ -1,6 +1,25 @@
+<p align="center">
+  <img width="315" height="367.5" src="https://user-images.githubusercontent.com/8671938/194720258-f2c5d5c6-909b-4ce5-9f78-63342c299703.png">
+</p>
+
 # __GameStart__ 
 ### *Gaming Never Stops*
 ---
+
+# Introduction
+This project was a 1-week sprint where our team built a Game Trading mobile app for iOS.
+Built with a focus on local community, empowering the secondhand market, and to reduce e-waste.
+
+## What does the app do?
+* GameStart connects local gamers so they may trade games amongst the community.
+* Encourages users to give games multiple lives and reduce waste.
+* Connect with your favorite social networks.
+* Search for games in your local area.
+* Make and recieve trade offers for games in your area.
+* Barter and negotiate with users via Messaging.
+* Map functionality for quick and easy visual search.
+
+# Demo
 
 # Contributors
 
@@ -40,20 +59,8 @@
 <a href="https://www.linkedin.com/in/danielczweig" rel="nofollow"><img src="https://camo.githubusercontent.com/7e1a1a039c75a7c4d2a91d7f97bf0a1c2adcf7cb49b7dbbfc02963a4f9fdaca4/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c696e6b6564696e2d2532333030373742352e7376673f7374796c653d666f722d7468652d6261646765266c6f676f3d6c696e6b6564696e266c6f676f436f6c6f723d7768697465" alt="Linkedin" data-canonical-src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&amp;logo=linkedin&amp;logoColor=white" style="max-width: 100%;"></a>
 </p>
 
-# Introduction
-This project was a 1-week sprint where our team built a Game Trading mobile app for iOS.
-Built with a focus on local community, empowering the secondhand market, and to reduce e-waste.
-
-## What does the app do?
-* GameStart connects local gamers so they may trade games amongst the community.
-* Encourages users to give games multiple lives and reduce waste.
-* Connect with your favorite social networks.
-* Search for games in your local area.
-* Make and recieve trade offers for games in your area.
-* Barter and negotiate with users via Messaging.
-* Map functionality for quick and easy visual search.
-
 ### Tech stack 
+---
 <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/6a6614429c47793bc6a43652f0fb25821712e990eea1377265683f7eb6720d94/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f416d617a6f6e204157532d4646393930303f7374796c653d666f722d7468652d6261646765266c6f676f3d616d617a6f6e617773266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/6a6614429c47793bc6a43652f0fb25821712e990eea1377265683f7eb6720d94/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f416d617a6f6e204157532d4646393930303f7374796c653d666f722d7468652d6261646765266c6f676f3d616d617a6f6e617773266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/Amazon AWS-FF9900?style=for-the-badge&amp;logo=amazonaws&amp;logoColor=white" style="max-width: 100%;"></a>
 <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/d2c041c2ec88b418917d45baa64070001b68c814fb67d13d6688499e5d194908/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4578706f2d3142314632333f7374796c653d666f722d7468652d6261646765266c6f676f3d6578706f266c6f676f436f6c6f723d464646464646"><img src="https://camo.githubusercontent.com/d2c041c2ec88b418917d45baa64070001b68c814fb67d13d6688499e5d194908/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4578706f2d3142314632333f7374796c653d666f722d7468652d6261646765266c6f676f3d6578706f266c6f676f436f6c6f723d464646464646" data-canonical-src="https://img.shields.io/badge/Expo-1B1F23?style=for-the-badge&amp;logo=expo&amp;logoColor=FFFFFF" style="max-width: 100%;"></a>
 <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/84e40cc1b235376f4c7442551fecc84e99bbb6736ef470f7d8e7f9655393e2e1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f457870726573732532306a732d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d65787072657373266c6f676f436f6c6f723d7768697465"><img src="https://camo.githubusercontent.com/84e40cc1b235376f4c7442551fecc84e99bbb6736ef470f7d8e7f9655393e2e1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f457870726573732532306a732d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d65787072657373266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&amp;logo=express&amp;logoColor=white" style="max-width: 100%;" title=""></a>
