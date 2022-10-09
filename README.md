@@ -7,10 +7,8 @@
 ---
 
 ## Screen gifs
-# Login
-![Preview](/login.gif)
-# Sign Up
-![Preview](/signup.gif)
+# Login & Sign Up
+<img src="https://github.com/HouseHufflepuff/GameStart/blob/main/login.gif" width="48">
 # Map
 ![Preview](/map.gif)
 # Trades
