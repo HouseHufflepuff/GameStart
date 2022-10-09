@@ -7,8 +7,14 @@
 ---
 
 ## Screen gifs
-# Login - Sign Up - Map - Trade
-<img src="https://github.com/HouseHufflepuff/GameStart/blob/main/login.gif" width="200"> - <img src="https://github.com/HouseHufflepuff/GameStart/blob/main/signup.gif" width="200"> - <img src="https://github.com/HouseHufflepuff/GameStart/blob/main/map.gif" width="200"> - <img src="https://github.com/HouseHufflepuff/GameStart/blob/main/trade.gif" width="200">
+# Login
+<img src="https://github.com/HouseHufflepuff/GameStart/blob/main/login.gif" width="250">
+# Sign Up
+<img src="https://github.com/HouseHufflepuff/GameStart/blob/main/signup.gif" width="250">
+# Map 
+<img src="https://github.com/HouseHufflepuff/GameStart/blob/main/map.gif" width="250">
+# Trade
+<img src="https://github.com/HouseHufflepuff/GameStart/blob/main/trade.gif" width="250">
 
 # Introduction
 This project was a 1-week sprint where our team built a Game Trading mobile app for iOS.
