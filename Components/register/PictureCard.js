@@ -51,12 +51,10 @@ const styles = StyleSheet.create({
     margin: 10,
     backgroundColor: '#03045E',
     borderWidth: 1,
-    borderRadius: 4,
     borderColor: 'white'
   },
   cardSelected: {
     borderWidth: 4,
-    borderRadius: 4,
     borderColor: 'green',
     width: '28%',
     height: '22%',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, ImageBackground} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, ImageBackground, StatusBar} from 'react-native';
 import axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
 import CardTiles from './CardTiles.js';
@@ -29,7 +29,7 @@ export default function RegisterConsoles ({navigation, route}) {
 
   const submitConsoles = (consoles, userID) => {
     consoles.forEach(system => {
-      axios.post('http://13.57.240.106:8000/api/users/consoles', {
+      axios.post('http://localhost:8000/api/users/consoles', {
         system: system,
         userID: userID
       })
@@ -51,7 +51,7 @@ export default function RegisterConsoles ({navigation, route}) {
         colors={['black', '#03045E', 'black']}
         start={{x: 0, y: 0.5}}
         end={{x: 1, y: 1}}>
-      <ImageBackground source={require('./icons/gamestart.png')} imageStyle={{opacity: 0.25, height: '70%', width: '100%', justifyContent: 'center'}}>
+      <ImageBackground source={require('./icons/gamestart.png')} imageStyle={{opacity: 0.35, height: '70%', width: '100%', justifyContent: 'center'}}>
       <Text style={styles.statement}> Choose your equipment! </Text>
       <View style={styles.cardContainer}>
         {systemImg.map((image, index) => {
@@ -61,12 +61,13 @@ export default function RegisterConsoles ({navigation, route}) {
         })}
       </View>
       <TouchableOpacity style={styles.button} onPress={() => submitConsoles(consoles, userID)}>
-        <Text style={{marginTop: '2%',textAlign: 'center', fontSize: 30, fontWeight: '500', color: 'white'}}>
+        <Text style={{marginTop:10, textAlign: 'center', fontSize: 25, fontWeight: '300', color: 'white', borderRadius: 5, overflow: 'hidden'}}>
           Proceed
         </Text>
       </TouchableOpacity>
       </ImageBackground>
       </LinearGradient>
+      <StatusBar barStyle={'light-content'}/>
     </View>
 
   )
@@ -101,13 +102,12 @@ const styles = StyleSheet.create({
   },
   button: {
     color: 'white',
-    borderWidth: 2,
-    borderRadius: 5,
     width: '40%',
     height: '7%',
     marginBottom: '-35%',
     backgroundColor: '#0077B6',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    borderRadius: 15
   }
 
 })

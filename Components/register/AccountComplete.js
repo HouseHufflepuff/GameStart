@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ConfettiCannon from 'react-native-confetti-cannon';
-import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, SafeAreaView, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, SafeAreaView, Image, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
 
 export default function AccountComplete ({navigation, route}) {
@@ -19,17 +19,18 @@ export default function AccountComplete ({navigation, route}) {
       <Text style={styles.text}> You're ready for your journey! </Text>
       <ConfettiCannon count={200} origin={{x: -10, y: 0}} />
       <View style={styles.buttonContainer}>
-        <LinearGradient
+        {/* <LinearGradient
           colors={['#03045E', 'green', 'black']}
           start={{x: 0, y: 0.5}}
           end={{x: 1, y: 1}}
-          style={styles.button}>
+          style={styles.button}> */}
           <Text style={{color: 'white', textAlign: 'center', fontWeight: '600', fontSize: 25, marginTop: 15}} onPress={() => navigation.navigate('main')}> Dive into GameStart </Text>
         <TouchableOpacity style={styles.button}>
         </TouchableOpacity>
-        </LinearGradient>
+        {/* </LinearGradient> */}
       </View>
       </LinearGradient>
+      <StatusBar barStyle={'light-content'}/>
     </SafeAreaView>
   )
 }
@@ -57,10 +58,13 @@ const styles = StyleSheet.create({
 
   buttonContainer: {
     width: '60%',
-    height: '25%',
+    height: 50,
     marginTop: '15%',
-    borderRadius: 5,
-    alignItems: 'center'
+    borderRadius: 10,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    padding: 5,
+    backgroundColor: '#0077B6'
   },
 
   buttonText: {

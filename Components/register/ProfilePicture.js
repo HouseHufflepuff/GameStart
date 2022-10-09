@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, ImageBackground, SafeAreaView, Image} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, ImageBackground, SafeAreaView, Image, StatusBar} from 'react-native';
 import PictureCard from './PictureCard.js';
 import {LinearGradient} from 'expo-linear-gradient'
 import axios from 'axios';
@@ -32,7 +32,7 @@ export default function ProfilePicture ({navigation, route}) {
   }
 
   const submitImage = (imageURL, userID) => {
-    axios.put('http://13.57.240.106:8000/api/users/profilepic', {
+    axios.put('http://localhost:8000/api/users/profilepic', {
       imageURL: imageURL,
       userID: userID
     })
@@ -48,12 +48,12 @@ export default function ProfilePicture ({navigation, route}) {
   return(
     <View style={styles.container}>
        <LinearGradient
-        style={{width: '100%', height: '100%', borderWidth: 1, borderColor: 'pink'}}
+        style={{flex: 1}}
         colors={['black', '#03045E', 'black']}
         start={{x: 0, y: 0.5}}
         end={{x: 1, y: 1}}>
       <Text style={styles.text}>
-        Select your hero!
+        Select your profile avatar!
       </Text>
       <View style={styles.imageContainer}>
       {profiles.map(image => {
@@ -64,10 +64,11 @@ export default function ProfilePicture ({navigation, route}) {
       </View>
       {currentImage !== 0
        ? <TouchableOpacity style={styles.button} onPress={() => submitImage(imageURL, userID)}>
-          <Text style={{color: 'white', textAlign: 'center', fontWeight: '600', fontSize: 25, marginTop: 4}}> Choose Image </Text>
+          <Text style={{color: 'white', textAlign: 'center', fontWeight: '300', fontSize: 20, marginTop: 10}}> Submit </Text>
         </TouchableOpacity>
       : null}
       </LinearGradient>
+      <StatusBar barStyle={'light-content'}/>
     </View>
   )
 }
@@ -75,10 +76,7 @@ export default function ProfilePicture ({navigation, route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
-    paddingTop: 100,
-    width: '100%',
-    height: '100%',
+    paddingTop: 20,
     backgroundColor: 'black',
 
   },
@@ -118,8 +116,6 @@ const styles = StyleSheet.create({
     marginTop: '5%',
     alignSelf: 'center',
     borderRadius: 50,
-    borderWidth: 1,
-    borderColor: 'pink',
     backgroundColor: '#0077B6'
   }
 })

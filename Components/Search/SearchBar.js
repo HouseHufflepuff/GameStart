@@ -131,9 +131,9 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   search: {
-    height: 60,
+    height: 40,
     width: '90%',
-    fontSize: 30,
+    fontSize: 20,
     borderWidth: '1px',
     borderColor: 'white',
     borderRadius: 10,

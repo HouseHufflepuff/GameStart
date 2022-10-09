@@ -58,9 +58,9 @@ export default function GameDetails( { gameId, callback, setView } ) {
         }
       });
       setGame(gameData.data);
-      // let listingData = await axios.get('http://13.57.240.106:8000/api/locations');
-      // let filteredListingData = listingData.data.filter((listing) => listing.gameid === gameData.data.id)
-      // setCloseGames(filteredListingData);
+      let listingData = await axios.get('http://localhost:8000/api/locations');
+      let filteredListingData = listingData.data.filter((listing) => listing.gameid === gameData.data.id)
+      setCloseGames(filteredListingData);
       setLoading(false)
     } catch (error) {
       console.log('err', error)
@@ -79,7 +79,7 @@ export default function GameDetails( { gameId, callback, setView } ) {
     const {id, name, background_image} = gameObj
     console.log(userID, id, name, background_image)
     //set data structure for server request
-    axios.post('http://13.57.240.106:8000/api/games/post', {
+    axios.post('http://localhost:8000/api/games/post', {
       ownerid: userID,
       gameid: id,
       gametitle: name,

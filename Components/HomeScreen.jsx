@@ -54,7 +54,7 @@ function HomeScreen({ navigation }) {
 
   const getTrendyData = async () => {
     try {
-      let response = await axios.get('http://13.57.240.106:8000/api/locations/games');
+      let response = await axios.get('http://localhost:8000/api/locations/games');
 
       let sorted = response.data.slice();
       sorted = sorted.sort(function (a, b) {
@@ -69,7 +69,7 @@ function HomeScreen({ navigation }) {
 
   const getUsersData = async () => {
     try {
-      let response = await axios.get('http://13.57.240.106:8000/api/locations');
+      let response = await axios.get('http://localhost:8000/api/locations');
 
       response.data.forEach((item) => {
         let data = getDistance(

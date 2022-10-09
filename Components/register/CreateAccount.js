@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback, StatusBar} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
 import { auth } from '../../LoginStuff/loginUtils/firebase'
@@ -119,75 +119,77 @@ const handleSignUp =  (email, pass) => {
         end={{x: 0, y: 0}}> */}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{alignItems: 'center'}}>
-      <ImageBackground
-        style={styles.logo}
-        source={require('./icons/gamestart.png')}
-      />
-      <Text style={styles.statement}>
-        Join a community of gamers and streamers trading games to give life to second-hand games. Start trading games today!
-      </Text>
-      <View style={styles.guideContainer}>
-        <Text style={styles.firstNameGuide}>
-          First Name
-        </Text>
-        <Text style={styles.nameGuide}>
-          Last Name
-        </Text>
-      </View>
-        <View style={styles.guideContainer}>
-        <TextInput
-          style={styles.nameForms}
-          id='first_name'
-          placeholder='First'
-          placeholderTextColor="gray"
-          onChangeText={(name) => setFirstName(name)}
-        />
-        <TextInput
-          style={styles.nameForms}
-          id='last_name'
-          placeholder='Last'
-        placeholderTextColor="gray"
-          onChangeText={(lastName) => setLastName(lastName)}
-        />
-        </View>
-        <Text style={styles.formGuide}> Username </Text>
-        <TextInput
-          style={styles.forms}
-          id='username'
-          placeholder='Username'
-        placeholderTextColor="gray"
-          onChangeText={(username) => setUsername(username)}
-        />
-        <Text style={styles.formGuide}> Password </Text>
-        <TextInput
-          style={styles.forms}
-          id='password'
-          secureTextEntry="true"
-          placeholder='Password'
-        placeholderTextColor="gray"
-          onChangeText={(password) => setPassword(password)}
-        />
-        <Text style={styles.formGuide}> Email </Text>
-        <TextInput
-          style={styles.forms}
-          id='email'
-          placeholder='Email'
-        placeholderTextColor="gray"
-          onChangeText={(email) => setEmail(email)}
-        />
-      <Text style={styles.terms}>
-        By registering, you agree to GameStart's Terms of Service.
-      </Text>
-      {loading
-      ? <Button
-      style={styles.registerBtn} title="Creating account..." />
-      : <Button
-      style={styles.registerBtn}
-      color='white' title="Register" onPress={handleRegister} /> //Darryl changed this
-      }
-      </View>
+          <ImageBackground
+            style={styles.logo}
+            source={require('./icons/gamestart.png')}
+          />
+          <Text style={styles.statement}>
+            Join a community of gamers and streamers trading games to give life to second-hand games. Start trading games today!
+          </Text>
+          <View style={styles.guideContainer}>
+            <Text style={styles.firstNameGuide}>
+              First Name
+            </Text>
+            <Text style={styles.nameGuide}>
+              Last Name
+            </Text>
+          </View>
+            <View style={styles.guideContainer}>
+            <TextInput
+              style={styles.nameForms}
+              id='first_name'
+              placeholder='First'
+              placeholderTextColor="gray"
+              onChangeText={(name) => setFirstName(name)}
+            />
+            <TextInput
+              style={styles.nameForms}
+              id='last_name'
+              placeholder='Last'
+            placeholderTextColor="gray"
+              onChangeText={(lastName) => setLastName(lastName)}
+            />
+            </View>
+            <Text style={styles.formGuide}> Username </Text>
+            <TextInput
+              style={styles.forms}
+              id='username'
+              placeholder='Username'
+            placeholderTextColor="gray"
+              onChangeText={(username) => setUsername(username)}
+            />
+            <Text style={styles.formGuide}> Password </Text>
+            <TextInput
+              style={styles.forms}
+              id='password'
+              secureTextEntry="true"
+              placeholder='Password'
+            placeholderTextColor="gray"
+              onChangeText={(password) => setPassword(password)}
+            />
+            <Text style={styles.formGuide}> Email </Text>
+            <TextInput
+              style={styles.forms}
+              id='email'
+              placeholder='Email'
+            placeholderTextColor="gray"
+              onChangeText={(email) => setEmail(email)}
+            />
+          <Text style={styles.terms}>
+            By registering, you agree to GameStart's Terms of Service.
+          </Text>
+          {loading
+          ? <TouchableWithoutFeedback style={styles.registerBtn}>
+                        <Text style={{color: 'white'}}>Register</Text>
+            </TouchableWithoutFeedback>
+          :
+            <TouchableWithoutFeedback style={styles.registerBtn} onPress={handleRegister}>
+                <Text style={{color: 'white', backgroundColor: '#0077B6', padding: 10, paddingLeft: 20,
+                  paddingRight: 20, borderRadius: 10, overflow: 'hidden', marginTop: 30}}>Register</Text>
+            </TouchableWithoutFeedback>}
+          </View>
       </TouchableWithoutFeedback>
-      {/* </LinearGradient> */}
+      <StatusBar barStyle={'light-content'}/>
     </KeyboardAvoidingView>
   )
 }
@@ -195,30 +197,23 @@ const handleSignUp =  (email, pass) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-    width: '100%',
-    height: '100%',
-    flexShrink: 1,
-    backgroundColor: '#121212'
+    backgroundColor: '#181818'
   },
 
   firstNameGuide: {
     color: 'white',
-    alignSelf: 'flex-start',
+    textAlign: 'left',
+    width: 150
   },
   nameGuide: {
     color: 'white',
-    alignSelf: 'flex-start',
-    marginLeft: '18%',
-    flexGrow: .25
+    width: 150
   },
   formGuide: {
     color: 'white',
-    alignSelf: 'flex-start',
-    marginLeft: 70
+    width: 300,
   },
   statement: {
     justifyContent: 'center',
@@ -232,7 +227,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   nameForms: {
-    marginBottom: 30,
+    marginBottom: 10,
     fontSize: 18,
     borderWidth: 1,
     padding: 10,
@@ -243,7 +238,7 @@ const styles = StyleSheet.create({
 
   },
   forms: {
-    marginBottom: 30,
+    marginBottom: 10,
     fontSize: 18,
     borderWidth: 1,
     padding: 10,
@@ -257,9 +252,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   terms: {
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    flexDirection: 'column',
     height: 50,
     width: 200,
     color: 'white'
@@ -269,16 +261,13 @@ const styles = StyleSheet.create({
     width: 150
   },
   registerBtn: {
-    backgroundColor: '#pink',
-    borderRadius: 10,
     borderColor: '#0077B6',
     borderWidth: 1,
-    fontSize: 30
   },
   logo: {
     marginTop: 15,
     height: 250,
-    width: 400,
+    width: 350,
     marginBottom: 10
   }
 })
