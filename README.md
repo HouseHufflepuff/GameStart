@@ -7,12 +7,9 @@
 ---
 
 ## Screen gifs
-# Login & Sign Up
-<img src="https://github.com/HouseHufflepuff/GameStart/blob/main/login.gif" width="300"><img src="https://github.com/HouseHufflepuff/GameStart/blob/main/signup.gif" width="300">
-# Map
-![Preview](/map.gif)
-# Trades
-![Preview](/trade.gif)
+# Login - Sign Up - Map - Trade
+<img src="https://github.com/HouseHufflepuff/GameStart/blob/main/login.gif" width="300"> - <img src="https://github.com/HouseHufflepuff/GameStart/blob/main/signup.gif" width="300"> - <img src="https://github.com/HouseHufflepuff/GameStart/blob/main/map.gif" width="300"> - <img src="https://github.com/HouseHufflepuff/GameStart/blob/main/trade.gif" width="300">
+
 # Introduction
 This project was a 1-week sprint where our team built a Game Trading mobile app for iOS.
 Built with a focus on local community, empowering the secondhand market, and reducing e-waste.
