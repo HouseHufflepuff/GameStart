@@ -26,12 +26,12 @@ const handleLogout = function () {
 }
 
   return (
-    <View style={styles.container}>
-      <Image source={profilePic ? profilePic : { uri: "https://www.jokesforfunny.com/wp-content/uploads/2021/06/0596bdb89b60fe771acd2f5972a9d3e3-905x1200.jpg" }} style={{ width: 200, height: 200, marginTop:20 }} />
-        <Text style={styles.text}>Welcome, {user.displayName ? user.displayName : user.email}!</Text>
+    <SafeAreaView style={styles.container}>
         <View >
+        <Image source={profilePic ? profilePic : { uri: "https://www.jokesforfunny.com/wp-content/uploads/2021/06/0596bdb89b60fe771acd2f5972a9d3e3-905x1200.jpg" }} style={{ alignSelf: 'center', marginTop:20, width: 300, height: 300 }} />
+        <Text style={styles.text}>Welcome, {user.displayName ? user.displayName : user.email}!</Text>
         <Text style={styles.text}>You have completed {trades ? trades : 5} trades!</Text>
-        <Text style={styles.text}>Your description goes here</Text>
+        <Text style={styles.text}>Here are your games listed: </Text>
         {/* <TextInput
           placeholder="Add a description"
           style={styles.input}
@@ -48,7 +48,8 @@ const handleLogout = function () {
       </View>
       <View style={styles.navi}></View>
       </View>
-    </View>
+      <StatusBar barStyle={'light-content'}/>
+    </SafeAreaView>
 
 
   )
@@ -63,6 +64,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonContainer: {
+    flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
     marginTop: 8,

@@ -58,7 +58,7 @@ export default function MapScreen3() {
 
   const getUsersData = async () => {
     try {
-      let response = await axios.get('http://13.57.240.106:8000/api/locations');
+      let response = await axios.get('http://localhost:8000/api/locations');
       if (response.data) console.log('yes');
       setCurrentUsers(response.data);
       setUsersData(response.data);
@@ -271,7 +271,7 @@ export default function MapScreen3() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 40,
+    marginBottom: 50,
   },
   searchBox: {
     position: 'absolute',

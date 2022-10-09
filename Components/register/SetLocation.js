@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, ImageBackground, SafeAreaView, FlatList} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, ImageBackground, SafeAreaView, FlatList, StatusBar} from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { LinearGradient } from 'expo-linear-gradient';
 import axios from 'axios';
@@ -57,8 +57,12 @@ export default function SetLocation ({navigation, route}) {
           useOnPlatform: 'web',
         }}
       />
-      <Button title="Submit" titleStyle={{fontSize: 20, marginBottom: '10%'}} onPress={() => submitLocation(location, userID)}></Button>
+      <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', width: '100%', marginBottom: 100}} >
+      <Text style={{color: 'white', backgroundColor: '#0077B6', padding: 10, paddingLeft: 20,
+        paddingRight: 20, borderRadius: 12, overflow: 'hidden'}} onPress={() => submitLocation(location, userID)}>Submit</Text>
+      </TouchableOpacity>
       </LinearGradient>
+      <StatusBar barStyle={'light-content'}/>
     </KeyboardAvoidingView>
   )
 }
@@ -121,5 +125,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
     marginLeft: '5%',
+    marginBottom: 20
   }
 })

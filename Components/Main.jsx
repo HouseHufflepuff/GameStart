@@ -58,6 +58,7 @@ function Main({ navigation }) {
     >
 
       <Tab.Navigator
+        initialRouteName={homeName}
         screenOptions={
           {
             headerShown: false,
@@ -67,7 +68,7 @@ function Main({ navigation }) {
               {
                 position: 'absolute',
                 backgroundColor: '#181818',
-                height: 85
+                height: 100
               }
             ],
           }

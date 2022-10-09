@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, ImageBackground} from 'react-native';
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, Keyboard, Button, TouchableOpacity, ImageBackground, StatusBar} from 'react-native';
 import axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
 import CardTiles from './CardTiles.js';
@@ -67,6 +67,7 @@ export default function RegisterConsoles ({navigation, route}) {
       </TouchableOpacity>
       </ImageBackground>
       </LinearGradient>
+      <StatusBar barStyle={'light-content'}/>
     </View>
 
   )

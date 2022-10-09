@@ -79,7 +79,7 @@ export default function GameDetails( { gameId, callback, setView } ) {
     const {id, name, background_image} = gameObj
     console.log(userID, id, name, background_image)
     //set data structure for server request
-    axios.post('http://13.57.240.106:8000/api/games/post', {
+    axios.post('http://localhost:8000/api/games/post', {
       ownerid: userID,
       gameid: id,
       gametitle: name,
