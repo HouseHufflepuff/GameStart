@@ -6,6 +6,15 @@
 ### *Gaming Never Stops*
 ---
 
+## Screen gifs
+# Login
+![Preview](/login.gif)
+# Sign Up
+![Preview](/signup.gif)
+# Map
+![Preview](/map.gif)
+# Trades
+![Preview](/trade.gif)
 # Introduction
 This project was a 1-week sprint where our team built a Game Trading mobile app for iOS.
 Built with a focus on local community, empowering the secondhand market, and reducing e-waste.
