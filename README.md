@@ -19,7 +19,7 @@ Built with a focus on local community, empowering the secondhand market, and red
 * Map functionality for quick and easy visual search.
 
 # Demo
-<img src="https://github.com/HouseHufflepuff/GameStart/blob/main/login.gif" width="300"><img src="https://github.com/HouseHufflepuff/GameStart/blob/main/signup.gif" width="300"><img src="https://github.com/HouseHufflepuff/GameStart/blob/main/map.gif" width="300"><img src="https://github.com/HouseHufflepuff/GameStart/blob/main/trade.gif" width="300">
+<img src="https://github.com/HouseHufflepuff/GameStart/blob/main/login.gif" width="350"><img src="https://github.com/HouseHufflepuff/GameStart/blob/main/signup.gif" width="350"><img src="https://github.com/HouseHufflepuff/GameStart/blob/main/map.gif" width="350"><img src="https://github.com/HouseHufflepuff/GameStart/blob/main/trade.gif" width="350">
 
 
 # Contributors
