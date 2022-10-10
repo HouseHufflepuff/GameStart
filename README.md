@@ -6,7 +6,7 @@
 ### *Gaming Never Stops*
 ---
 # Introduction
-This project was a 1-week sprint where our team built a Game Trading mobile app for iOS.
+This project was a 1-week sprint where our team built a Game Trading cross-platform mobile app.
 Built with a focus on local community, empowering the secondhand market, and reducing e-waste.
 
 ## What does the app do?
