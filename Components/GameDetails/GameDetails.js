@@ -14,12 +14,6 @@ import { getDefaultAppConfig } from '@firebase/util';
 let width = Dimensions.get('window').width; //full width
 
 const consoles = {
-  // 'PC': 'https://cdn.freebiesupply.com/logos/large/2x/microsoft-windows-22-logo-png-transparent.png',
-  // 'PlayStation': 'https://www.freepnglogos.com/uploads/playstation-png-logo/navy-playstation-png-logo-5.png',
-  // 'Xbox': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/1024px-Xbox_one_logo.svg.png',
-  // 'Nintendo': 'https://www.freepnglogos.com/uploads/nintendo-logo-png/file-micrologo-nintendo-n-logo-circle-18.png',
-  // 'iOS': 'https://alchemyimmersive.com/wp-content/uploads/sites/4/2020/04/apple-logo-transparent.png',
-  // 'Android': 'https://cdn.freebiesupply.com/logos/large/2x/android-logo-png-transparent.png',
   'PlayStation': <MaterialCommunityIcons color='#CAF0F8' name="sony-playstation" size={20} />,
   'Xbox': <MaterialCommunityIcons color='#CAF0F8' name="microsoft-xbox" size={20} />,
   'Nintendo': <MaterialCommunityIcons color='#CAF0F8' name="nintendo-switch" size={20} />,
@@ -48,19 +42,17 @@ export default function GameDetails( { gameId, callback, setView } ) {
   const [detailsExpanded, setDetailsExpanded] = useState(false)
   const [closeGames, setCloseGames] = useState(users);
 
-  const key = process.env.APIKEY
-
   const getData = async () => {
     try {
       let gameData = await axios.get(`https://api.rawg.io/api/games/${gameId}`, {
         params: {
-          key: key
+          key: '2a79010bc4f244649e73a1fcc6658773'
         }
       });
       setGame(gameData.data);
-      let listingData = await axios.get('http://localhost:8000/api/locations');
-      let filteredListingData = listingData.data.filter((listing) => listing.gameid === gameData.data.id)
-      setCloseGames(filteredListingData);
+      // let listingData = await axios.get('http://localhost:8000/api/locations');
+      // let filteredListingData = listingData.data.filter((listing) => listing.gameid === gameData.data.id)
+      // setCloseGames(filteredListingData);
       setLoading(false)
     } catch (error) {
       console.log('err', error)
@@ -72,10 +64,6 @@ export default function GameDetails( { gameId, callback, setView } ) {
   }, [])
 
   const addGame = (gameObj, userID) => {
-    //working on postman local server but not on deployed server...
-    //need to update?? not sure but should work
-    //need to just pass in userID to stack
-    //denature gameObj
     const {id, name, background_image} = gameObj
     console.log(userID, id, name, background_image)
     //set data structure for server request
