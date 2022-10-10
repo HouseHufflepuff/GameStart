@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { LinearGradient } from 'expo-linear-gradient';
-// import { Card, Icon } from "@rneui/themed";
 import { StatusBar } from 'expo-status-bar';
 import { FlatList, Image, Keyboard, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
 
 const consoles = {
-  // 'PC': 'https://cdn.freebiesupply.com/logos/large/2x/microsoft-windows-22-logo-png-transparent.png',
-  // 'PlayStation': 'https://www.freepnglogos.com/uploads/playstation-png-logo/navy-playstation-png-logo-5.png',
-  // 'Xbox': 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/1024px-Xbox_one_logo.svg.png',
-  // 'Nintendo': 'https://www.freepnglogos.com/uploads/nintendo-logo-png/file-micrologo-nintendo-n-logo-circle-18.png',
-  // 'iOS': 'https://alchemyimmersive.com/wp-content/uploads/sites/4/2020/04/apple-logo-transparent.png',
-  // 'Android': 'https://cdn.freebiesupply.com/logos/large/2x/android-logo-png-transparent.png',
   'PlayStation': <MaterialCommunityIcons color='white' name="sony-playstation" size={20} />,
   'Xbox': <MaterialCommunityIcons color='white' name="microsoft-xbox" size={20} />,
   'Nintendo': <MaterialCommunityIcons color='white' name="nintendo-switch" size={20} />,
@@ -47,15 +39,6 @@ const getYear = (date) => {
   const newDate = new Date(date)
   return newDate.getFullYear()
 }
-
-// const getPlatforms = (platforms) => {
-//   if(platforms) {
-//     return platforms.map((p, i) => {if(p.platform.name in consoles) {
-//       return (<Image key={i} style={styles.consoleIcon} source={{uri: consoles[p.platform.name]}}/>)
-//     }})
-//   }
-//   return ''
-// }
 
 const getPlatforms = (platforms) => {
   if(platforms) {
@@ -144,12 +127,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 10,
-    // marginTop: 20,
-    // marginBottom: 20
   },
   item: {
     flexDirection: 'row',
-    // flexWrap: 'wrap',
     left: 10,
     right: 10,
     width: '90%',
@@ -169,12 +149,8 @@ const styles = StyleSheet.create({
   description: {
     padding: 5,
     width: '60%',
-    // borderColor: 'red',
-    // borderWidth: 1,
   },
   title: {
-    // borderColor: 'red',
-    // borderWidth: 1,
     flexWrap: 'wrap',
     fontSize: 20,
     fontWeight: 'bold',
